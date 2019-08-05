@@ -71,10 +71,15 @@
         & > .footer {
             flex-grow: 0;
         }
-        margin-left: 325px;
+
+        @include respond-above($collapse-breakpoint) {
+            margin-left: 325px;
+            max-width: calc(100% - 325px);
+        }
 
         @include respond-below($collapse-breakpoint) {
             margin-left: 0;
+            max-width: 100%;
         }
     }
 
