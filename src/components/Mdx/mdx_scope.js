@@ -1,12 +1,14 @@
 import React from "react";
 import Icon from "components/Icon";
 import Container from "components/Container";
+import Route from "components/Route";
 import Link from "components/Link";
 import createHeading from "components/Heading";
 
 const components = {
   Icon,
   Container,
+  Route,
   a: Link,
   h1: createHeading({ component: "h1" }),
   h2: createHeading({ component: "h2" }),

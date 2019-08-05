@@ -40,7 +40,7 @@
 
                 position: sticky !important;
                 top: 5.5rem;
-                padding-left: 1.5em;
+                padding-left: 2em;
                 padding-top: 0.35em !important;
                 z-index: 10;
                 max-height: calc(100vh - 11rem);
@@ -50,7 +50,8 @@
 
     .docs-content {
         h1 {
-            font-size: 2.7rem;
+            font-size: 3.1rem;
+            font-weight: 200;
         }
 
         h2 {
@@ -70,7 +71,7 @@
 
         h5 {
             font-size: 0.95rem;
-            margin-top: 1.6rem;
+            margin-top: 1.7rem;
             color: rgba($-dark, 0.65);
             letter-spacing: 1px;
             text-transform: uppercase;
@@ -89,9 +90,13 @@
             color: $-dark;
             font-size: 18px;
             font-weight: 600;
-            height: 40px;
+            height: 44px;
             border-bottom: none;
             z-index: 2;
+        }
+
+        p {
+            color: rgba($-dark, 0.75);
         }
 
         .anchor-wrapper {
@@ -101,6 +106,10 @@
                 position: absolute;
                 left: 0px;
                 top: -85px;
+            }
+
+            & + .gatsby-highlight {
+                margin-top: -1rem;
             }
         }
 

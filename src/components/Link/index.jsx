@@ -147,17 +147,18 @@ function RouterLinkWrapper({
   ...rest
 }) {
   const getProps = useCallback(
-    ({ isPartiallyCurrent, isCurrent }) => {
+    ({ isPartiallyCurrent, isCurrent, href, location }) => {
+      const isActive = isCurrent || `${href}/` === location.pathname;
       if (treatPartiallyActiveAsActive) {
         return {
           className: classNames(className, {
-            [activeClassName]: isCurrent || isPartiallyCurrent
+            [activeClassName]: isActive || isPartiallyCurrent
           })
         };
       } else {
         return {
           className: classNames(className, {
-            [activeClassName]: isCurrent,
+            [activeClassName]: isActive,
             [partiallyActiveClassName]: isPartiallyCurrent
           })
         };
