@@ -16,7 +16,7 @@
   - [Develop branch web app](https://develop.archit.us/)
   - [Netlify deploys](https://app.netlify.com/sites/architus/deploys)
 
-## 📚 Getting Started
+## 🚀 Getting Started
 
 ### Setup
 
@@ -44,7 +44,7 @@ shortTitle: (Optional; defaults to title). Name that appears in the title bar & 
 See external guides for specifics on Markdown syntax
 ```
 
-## 🚀 Development Server
+## 📡 Development Server
 
 Similar to the frontend web dashboard, there are two options to preview the app while developing: a **hot reload-enabled development server** *(recommended)* and a **statically-generated site preview**.
 
