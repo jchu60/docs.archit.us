@@ -9,7 +9,9 @@ function createHeading({ component: Component, rightLink = false }) {
   return ({ children, id, ...rest }) => {
     const link = (
       <a
-        className={classNames("heading-link", { right: rightLink })}
+        className={classNames("heading-link", `heading-${Component}`, {
+          right: rightLink
+        })}
         href={`#${id}`}
       >
         <Icon name="link" />
@@ -17,7 +19,9 @@ function createHeading({ component: Component, rightLink = false }) {
     );
     return (
       <div className="anchor-wrapper">
-        <a className="anchor" name={id}> </a>
+        <a className="anchor" name={id}>
+          {" "}
+        </a>
         <Component {...rest}>
           {children}
           {link}
