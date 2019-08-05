@@ -1,5 +1,6 @@
 import { isNil, isDefined } from "./object";
 import zip from "lodash/zip";
+import flatten from "lodash/flatten";
 
 const externalRegex = /^(?:(?:http|https):\/\/(?!(?:www\.)?gamefest.gg)[\w./=?#-_]+)|(?:mailto:.+)$/;
 export function isExternal(href) {
@@ -41,9 +42,7 @@ export function capitalize(string) {
 export function splitFragments(string, regex) {
   const excludedFragments = string.split(regex);
   const matchedFragments = allMatches(string, regex);
-  return zip(excludedFragments, matchedFragments)
-    .flat()
-    .filter(isDefined);
+  return flatten(zip(excludedFragments, matchedFragments)).filter(isDefined);
 }
 
 export function remakeRegex(source) {
