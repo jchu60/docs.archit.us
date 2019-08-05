@@ -99,6 +99,18 @@
             color: rgba($-dark, 0.75);
         }
 
+        blockquote {
+            background-color: rgba($-primary, 0.1);
+            padding: 1.5rem 1.75rem 1.5rem;
+            margin-top: 2.5rem;
+            margin-bottom: 2.5rem;
+            border-left: 0.5rem solid rgba($-primary, 0.2);
+
+            p {
+                margin-bottom: 0;
+            }
+        }
+
         .anchor-wrapper {
             position: relative;
 
