@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import { Row, Col, Card } from "react-bootstrap";
 import Header from "components/Header";
 import Icon from "components/Icon";
+import Link from "components/Link";
 
 import "./style.scss";
 
@@ -24,12 +25,13 @@ function Footer() {
           </Col>
           <Col sm={6} lg={2} xl={3}>
             <FooterPanel header="Links">
-              <a href="https://github.com/architus">
+              <Link href="https://github.com/architus">
                 <Icon name="github" className="icon" />
                 Github
-              </a>
-              <a href="https://status.archit.us/">Status</a>
-              <a href="https://docs.archit.us/">Docs</a>
+              </Link>
+              <Link href="https://status.archit.us/">Status</Link>
+              <Link href="https://docs.archit.us/">Docs</Link>
+              <Link href="https://discord.gg/svrRrSe">Discord Server</Link>
             </FooterPanel>
           </Col>
           <Col sm={6} lg={4} xl={3}>
