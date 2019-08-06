@@ -51,7 +51,11 @@ function DocsPageTemplate({ data, pageContext, location }) {
 
   return (
     <Layout title={isDefined(shortTitle) ? shortTitle : title}>
-      <article className="container docs-root--content">
+      <article
+        className={classNames("container docs-root--content", {
+          "with-toc": !noTOC
+        })}
+      >
         {!noBreadcrumb ? <Breadcrumb location={location} /> : null}
         <h1>{title}</h1>
         <div

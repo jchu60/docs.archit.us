@@ -35,6 +35,12 @@ module.exports = {
             options: {}
           },
           "gatsby-remark-smartypants",
+          {
+            resolve: "gatsby-remark-embed-snippet",
+            options: {
+              directory: `${__dirname}/docs/`
+            }
+          },
           "gatsby-remark-slug",
           {
             resolve: `gatsby-remark-prismjs`,
@@ -58,6 +64,12 @@ module.exports = {
           {
             resolve: "gatsby-remark-slug",
             options: {}
+          },
+          {
+            resolve: "gatsby-remark-embed-snippet",
+            options: {
+              directory: `${__dirname}/docs/`
+            }
           },
           {
             resolve: "gatsby-remark-images",

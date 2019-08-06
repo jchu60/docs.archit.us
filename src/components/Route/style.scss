@@ -9,10 +9,10 @@
     }
 
     code {
-        background-color: transparent;
+        padding: 0 !important;
+        background-color: transparent !important;
         border: none;
         font-size: 1.3rem;
-        padding: 0;
     }
 
     &--path {
