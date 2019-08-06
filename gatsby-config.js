@@ -27,7 +27,8 @@ module.exports = {
             resolve: "gatsby-remark-images",
             options: {
               maxWidth: 800,
-              showCaptions: ["title"]
+              showCaptions: ["title"],
+              linkImagesToOriginal: true
             }
           },
           {
@@ -42,6 +43,7 @@ module.exports = {
             }
           },
           "gatsby-remark-slug",
+          "gatsby-remark-copy-linked-files",
           {
             resolve: `gatsby-remark-prismjs`,
             options: {
@@ -66,6 +68,10 @@ module.exports = {
             options: {}
           },
           {
+            resolve: "gatsby-remark-copy-linked-files",
+            options: {}
+          },
+          {
             resolve: "gatsby-remark-embed-snippet",
             options: {
               directory: `${__dirname}/docs/`
@@ -77,7 +83,7 @@ module.exports = {
               maxWidth: 1500,
               withWebp: true,
               backgroundColor: bgColor,
-              linkImagesToOriginal: false
+              linkImagesToOriginal: true
             }
           },
           {

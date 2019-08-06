@@ -24,6 +24,7 @@
     "gatsby-plugin-sass": "^2.1.0",
     "gatsby-plugin-sharp": "^2.2.8",
     "gatsby-plugin-sitemap": "^2.2.1",
+    "gatsby-remark-copy-linked-files": "^2.1.4",
     "gatsby-remark-embed-snippet": "^4.1.2",
     "gatsby-remark-images": "^3.1.6",
     "gatsby-remark-prismjs": "^3.3.4",
