@@ -31,7 +31,7 @@
               ],
               "cli": {
                 "name": "Gulag Severity",
-                "emote": "🔨",
+                "emoji": "🔨",
                 "message": "🔨 This is the number of minutes a member will be confined to gulag. Half again per extra vote. Enter a number to modify it:",
                 "input_mode": "replace"
               }
@@ -53,15 +53,15 @@
               ],
               "cli": {
                 "name": "Gulag Threshold",
-                "emote": "⚒️",
+                "emoji": "⚒️",
                 "message": "⚒️ This is the number of reacts a gulag vote must get to be pass. Enter a number to modify it:",
                 "input_mode": "replace"
               }
             },
             {
-              "key": "gulag_emote",
-              "label": "Emote",
-              "help_tooltip": "The emote used for gulagging. Use either a :shortcode: or an emote ID",
+              "key": "gulag_emoji",
+              "label": "Emoji",
+              "help_tooltip": "The emoji used for gulagging. Use either a :shortcode: or an emoji ID",
               "input_type": "string_auto-complete",
               "default": "",
               "value": "",
@@ -133,10 +133,10 @@
               "key": "gulag_vote_format",
               "label": "Vote Message Format",
               "input_type": "string_highlighted",
-              "default": "%{count} more %{emote}'s to gulag %{user}",
-              "value": "%{count} more %{emote}'s to gulag %{user}",
+              "default": "%{count} more %{emoji}'s to gulag %{user}",
+              "value": "%{count} more %{emoji}'s to gulag %{user}",
               "properties": {
-                "tokens": ["%{count}", "%{emote}", "%{user}"]
+                "tokens": ["%{count}", "%{emoji}", "%{user}"]
               }
             },
             {
@@ -172,7 +172,7 @@
               ],
               "cli": {
                 "name": "Starboard Threshold",
-                "emote": "⭐",
+                "emoji": "⭐",
                 "message": "⭐ This is the number of reacts a message must get to be starboarded. Enter a number to modify it:",
                 "input_mode": "replace"
               }
@@ -186,7 +186,7 @@
               "validation_steps": ["isBoolean"],
               "cli": {
                 "name": "Repost Deleted Messages",
-                "emote": "🗑️",
+                "emoji": "🗑️",
                 "message": "🗑️ If true, deleted messages will be reposted immediately. Enter true or false to modify it:",
                 "input_mode": "replace"
               }
@@ -215,7 +215,7 @@
               ],
               "cli": {
                 "name": "Bot Commands Channels",
-                "emote": "🤖",
+                "emoji": "🤖",
                 "message": "🤖 Some verbose commands are limited to these channels. Mention channels to toggle them:",
                 "input_mode": "array_toggle"
               }
@@ -264,9 +264,9 @@
                 }
               ],
               "cli": {
-                "name": "",
-                "emote": "",
-                "message": "New members will be automatically moved into this role. Enter a role id (`!roleids`) to change:"
+                "name": "Default Role",
+                "emoji": "🛡",
+                "message": "🛡 New members will be automatically moved into this role. Enter a role id (`!roleids`) to change:"
               }
             },
             {
@@ -301,7 +301,7 @@
               ],
               "cli": {
                 "name": "Joinable Roles",
-                "emote": "⚔️",
+                "emoji": "⚔️",
                 "message": "⚔️ These are the roles that any member can join at will. Enter a list of role ids (`!roleids`) to toggle. Optionally enter a nickname for the role in the format `nickname::roleid` if the role's name is untypable:",
                 "input_mode": "array_toggle"
               }
@@ -374,7 +374,7 @@
               ],
               "cli": {
                 "name": "Architus admins",
-                "emote": "🔐",
+                "emoji": "🔐",
                 "message": "🔐 These members have access to more bot functions such as `!purge` and setting longer commands. Mention a member to toggle:",
                 "input_mode": "array_toggle"
               }
