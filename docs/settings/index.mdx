@@ -46,6 +46,7 @@ Each card is configured individually, representing a collection of individual se
 | -------- | ------------------------------------------- | ------------------------------------------------------------------------------------ |
 | title    | string                                      | title string that appears at the top of the card once rendered                       |
 | settings | array of [setting](#setting-object) objects | individual settings fields that are listed once rendered, ordered from top to bottom |
+| width?   | integer                                     | relative width of the card, must be in the interval [0, 200]                         |
 
 ##### Card Example
 
@@ -172,7 +173,7 @@ Validating the data is important on both the backend (for data safeguarding) and
 
 #### Discord-specific Validation Functions
 
-Each of the following functions works with Discord entities, and examines whether they exist in the context of the current guild. The objects can be resolved by either their [snowflake ID](https://discordapp.com/developers/docs/reference#snowflakes) or their serialized forms *(see below)*
+Each of the following functions works with Discord entities, and examines whether they exist in the context of the current guild. The objects can be resolved by either their [snowflake ID](https://discordapp.com/developers/docs/reference#snowflakes) or their serialized forms _(see below)_
 
 - `isRole(current: string)`
   - Serialized form: `@{name}`

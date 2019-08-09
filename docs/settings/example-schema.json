@@ -4,6 +4,7 @@
       "cards": [
         {
           "title": "Gulag",
+          "width": 50,
           "settings": [
             {
               "key": "gulag_command",
@@ -152,6 +153,7 @@
         },
         {
           "title": "Miscellaneous",
+          "width": 50,
           "settings": [
             {
               "key": "starboard_threshold",
@@ -222,6 +224,7 @@
         },
         {
           "title": "Roles",
+          "width": 60,
           "settings": [
             {
               "key": "default_role",
@@ -306,41 +309,8 @@
           ]
         },
         {
-          "title": "Permissions",
-          "settings": [
-            {
-              "key": "architus_admins",
-              "label": "Architus Admins",
-              "input_type": "array_auto-complete",
-              "default": [],
-              "value": [],
-              "properties": {
-                "auto-complete-type": "user-mention"
-              },
-              "validation_steps": [
-                "isArray",
-                {
-                  "key": "allPass",
-                  "steps": [
-                    {
-                      "key": "matchesRegex",
-                      "regex": "(?:^@.+$)|(?:^[0-9]{7,20}$)"
-                    },
-                    "isUser"
-                  ]
-                }
-              ],
-              "cli": {
-                "name": "Architus admins",
-                "emote": "🔐",
-                "message": "🔐 These members have access to more bot functions such as `!purge` and setting longer commands. Mention a member to toggle:",
-                "input_mode": "array_toggle"
-              }
-            }
-          ]
-        },
-        {
           "title": "Modules",
+          "width": 40,
           "settings": [
             {
               "key": "module_auto_responses",
@@ -373,6 +343,41 @@
               "default": true,
               "value": true,
               "validation_steps": ["isBoolean"]
+            }
+          ]
+        },
+        {
+          "title": "Permissions",
+          "width": 60,
+          "settings": [
+            {
+              "key": "architus_admins",
+              "label": "Architus Admins",
+              "input_type": "array_auto-complete",
+              "default": [],
+              "value": [],
+              "properties": {
+                "auto-complete-type": "user-mention"
+              },
+              "validation_steps": [
+                "isArray",
+                {
+                  "key": "allPass",
+                  "steps": [
+                    {
+                      "key": "matchesRegex",
+                      "regex": "(?:^@.+$)|(?:^[0-9]{7,20}$)"
+                    },
+                    "isUser"
+                  ]
+                }
+              ],
+              "cli": {
+                "name": "Architus admins",
+                "emote": "🔐",
+                "message": "🔐 These members have access to more bot functions such as `!purge` and setting longer commands. Mention a member to toggle:",
+                "input_mode": "array_toggle"
+              }
             }
           ]
         }
