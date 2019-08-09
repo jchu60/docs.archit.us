@@ -4,7 +4,7 @@
       "cards": [
         {
           "title": "Gulag",
-          "width": 50,
+          "width": 5,
           "settings": [
             {
               "key": "gulag_command",
@@ -153,7 +153,7 @@
         },
         {
           "title": "Miscellaneous",
-          "width": 50,
+          "width": 5,
           "settings": [
             {
               "key": "starboard_threshold",
@@ -224,7 +224,7 @@
         },
         {
           "title": "Roles",
-          "width": 60,
+          "width": 6,
           "settings": [
             {
               "key": "default_role",
@@ -310,7 +310,7 @@
         },
         {
           "title": "Modules",
-          "width": 40,
+          "width": 4,
           "settings": [
             {
               "key": "module_auto_responses",
@@ -348,7 +348,7 @@
         },
         {
           "title": "Permissions",
-          "width": 60,
+          "width": 6,
           "settings": [
             {
               "key": "architus_admins",
