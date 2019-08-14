@@ -36,10 +36,10 @@ Breadcrumb.defaultName = "Breadcrumb";
 // ? =================
 
 function BreadcrumbEntry({ text, path }) {
-  return isDefined(href) ? (
+  return isDefined(path) ? (
     <Link
       className="docs-breadcrumb--entry"
-      href={isDefined(path) ? href : undefined}
+      href={isDefined(path) ? path : undefined}
     >
       {text}
     </Link>
