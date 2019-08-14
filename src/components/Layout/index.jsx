@@ -17,7 +17,8 @@ function Layout({
   headerProps,
   footerProps,
   footer,
-  navRoot
+  navRoot,
+  noDrawer
 }) {
   // Nav drawer logic
   const [showDrawer, setShowDrawer] = useState(false);
@@ -39,9 +40,11 @@ function Layout({
         }
       />
       <div className={classNames("docs-root", { "show-drawer": showDrawer })}>
-        <div className="docs-root--nav">
-          <SideNav navRoot={navRoot} />
-        </div>
+        {noDrawer ? null : (
+          <div className="docs-root--nav">
+            <SideNav navRoot={navRoot} />
+          </div>
+        )}
         <button className="docs-root--overlay-button" onClick={closeDrawer} />
         <main className="docs-root--main">
           <div children={children} />
@@ -67,12 +70,14 @@ Layout.propTypes = {
     PropTypes.node,
     PropTypes.arrayOf(PropTypes.node)
   ]),
-  navRoot: PropTypes.object
+  navRoot: PropTypes.object,
+  noDrawer: PropTypes.bool
 };
 
 Layout.defaultProps = {
   headerProps: {},
-  footerProps: {}
+  footerProps: {},
+  noDrawer: false
 };
 
 Layout.displayName = "Layout";

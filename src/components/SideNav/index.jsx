@@ -37,7 +37,7 @@ function SideNav({ navRoot }) {
 export default SideNav;
 
 SideNav.propTypes = {
-  navRoot: PropTypes.object
+  navRoot: PropTypes.object.isRequired
 };
 
 SideNav.displayName = "SideNav";
