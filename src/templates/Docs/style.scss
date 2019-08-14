@@ -1,6 +1,7 @@
 @import "../../scss/colors";
 @import "../../scss/media";
 @import "../../scss/theme";
+@import "../../scss/fonts";
 
 @media (min-width: 1500px) {
     .container.with-toc {
@@ -11,6 +12,10 @@
 .docs-root--content {
     padding-top: 3rem;
     padding-bottom: 4rem;
+
+    h1 {
+        font-weight: 600 !important;
+    }
 
     a:not(.btn) {
         color: $link-color;
@@ -78,27 +83,22 @@
             }
         }
 
-        h1 {
-            font-size: 3.1rem;
-            font-weight: 200;
-        }
-
         h2 {
-            font-size: 1.9rem;
+            font-size: 1.8rem;
             margin-top: 1.75rem;
         }
 
         p + .anchor-wrapper h3 {
-            margin-top: 1.6rem;
+            margin-top: 1.5rem;
         }
 
         h3 {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             margin-top: 1.75rem;
         }
 
         h4 {
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             margin-top: 1.6rem;
         }
 
@@ -127,6 +127,7 @@
             height: 44px;
             border-bottom: none;
             z-index: 2;
+            font-family: $font-family-sans-serif;
         }
 
         p {

@@ -24,14 +24,14 @@ $very-dark-primary: darken($-primary, 20%);
     h5 {
         padding-left: 1.75rem;
         padding-right: 1.5rem;
-        padding-top: 2rem;
+        padding-top: 2.25rem;
         padding-bottom: 1rem;
 
-        color: rgba($-dark, 0.6);
-        font-size: 1rem;
+        color: rgba($-dark, 0.75);
+        font-size: 0.95rem;
         font-weight: normal;
         text-transform: uppercase;
-        letter-spacing: 0.075em;
+        letter-spacing: 0.1em;
         margin: 0px;
     }
 

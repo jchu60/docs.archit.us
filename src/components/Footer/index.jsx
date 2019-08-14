@@ -3,7 +3,6 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 
 import { Row, Col, Card } from "react-bootstrap";
-import Header from "components/Header";
 import Icon from "components/Icon";
 import Link from "components/Link";
 
@@ -14,7 +13,7 @@ function Footer() {
     <div className="footer">
       <div className="footer--inner">
         <Row>
-          <Col sm={12} lg={6} className="mb-4 mb-lg-0">
+          <Col sm={12} lg={6}>
             <FooterPanel header="About" className="about">
               <p>
                 Architus is a multipurpose Discord bot empowering both admins
@@ -23,21 +22,20 @@ function Footer() {
               </p>
             </FooterPanel>
           </Col>
-          <Col sm={6} lg={2} xl={3}>
+          <Col sm={6} lg={3}>
             <FooterPanel header="Links">
+              <Link href="https://status.archit.us/">Status</Link>
+              <Link href="/">Docs</Link>
+            </FooterPanel>
+          </Col>
+          <Col sm={6} lg={3}>
+            <FooterPanel header="Connect">
               <Link href="https://github.com/architus">
                 <Icon name="github" className="icon" />
                 Github
               </Link>
-              <Link href="https://status.archit.us/">Status</Link>
-              <Link href="/">Docs</Link>
               <Link href="https://discord.gg/svrRrSe">Discord Server</Link>
             </FooterPanel>
-          </Col>
-          <Col sm={6} lg={4} xl={3}>
-            <Card>
-              <Header.Brand />
-            </Card>
           </Col>
         </Row>
       </div>

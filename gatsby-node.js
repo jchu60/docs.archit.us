@@ -40,15 +40,10 @@ exports.sourceNodes = ({ actions, reporter }) => {
       noBreadcrumb: Boolean
       links: [Link]
     }
-    type MarkdownRemark implements Node {
-      frontmatter: Frontmatter!
-      html: String
-    }
     type Mdx implements Node {
       frontmatter: Frontmatter!
     }
     type File implements Node {
-      childMarkdownRemark: MarkdownRemark
       childMdx: Mdx
     }
     type DataYaml implements Node {
@@ -90,12 +85,6 @@ exports.createPages = ({ graphql, actions, reporter }) => {
           edges {
             node {
               relativePath
-              childMarkdownRemark {
-                id
-                frontmatter {
-                  ${frontmatterFragment}
-                }
-              }
               childMdx {
                 id
                 frontmatter {
@@ -114,20 +103,6 @@ exports.createPages = ({ graphql, actions, reporter }) => {
       throw result.errors;
     }
 
-    // Flatmap function that tags whether a node is md or mdx while validating
-    // that it has content at all
-    const tagOrCull = ({ childMarkdownRemark: md, childMdx: mdx, ...rest }) => {
-      const isMd = isDefined(md);
-      const isMdx = isDefined(mdx);
-      const { id, frontmatter } = isMdx ? mdx : md;
-      if (isMd || isMdx) return { ...rest, isMdx, id, ...frontmatter };
-      else {
-        // Log error and cull by returning empty array
-        reporter.error(`node ${rest.name} has no valid md or mdx content`);
-        return [];
-      }
-    };
-
     activity.end();
     activity = reporter.activityTimer(`walking navigation tree`);
     activity.start();
@@ -141,9 +116,22 @@ exports.createPages = ({ graphql, actions, reporter }) => {
       isRoot: true,
       invisible: true
     };
-    result.data.allFile.edges
-      .flatMap(({ node }) => tagOrCull(node))
-      .forEach(node => walkTree(node, navTree));
+    result.data.allFile.edges.forEach(
+      ({
+        node: {
+          relativePath,
+          childMdx: { frontmatter, id }
+        }
+      }) =>
+        walkTree(
+          {
+            relativePath,
+            id,
+            ...frontmatter
+          },
+          navTree
+        )
+    );
 
     activity.end();
     activity = reporter.activityTimer(`adding defaults to nav tree nodes`);
@@ -194,7 +182,7 @@ exports.onCreateWebpackConfig = ({ actions }) => {
     // Allow relative imports like "import Foo from 'components/Foo'"
     resolve: {
       modules: [path.resolve(__dirname, "src"), "node_modules"],
-      extensions: [".js", ".jsx", ".json", ".mdx"]
+      extensions: [".js", ".jsx", ".json", ".mdx", ".md"]
     }
   });
 };

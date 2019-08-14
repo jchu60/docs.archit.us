@@ -28,44 +28,9 @@ module.exports = {
       }
     },
     {
-      resolve: "gatsby-transformer-remark",
-      options: {
-        plugins: [
-          {
-            resolve: "gatsby-remark-images",
-            options: {
-              maxWidth: 800,
-              showCaptions: ["title"],
-              linkImagesToOriginal: true
-            }
-          },
-          {
-            resolve: "gatsby-remark-responsive-iframe",
-            options: {}
-          },
-          "gatsby-remark-smartypants",
-          {
-            resolve: "gatsby-remark-embed-snippet",
-            options: {
-              directory: `${__dirname}/docs/`
-            }
-          },
-          "gatsby-remark-slug",
-          "gatsby-remark-copy-linked-files",
-          {
-            resolve: `gatsby-remark-prismjs`,
-            options: {
-              classPrefix: "language-",
-              inlineCodeMarker: null,
-              aliases: {}
-            }
-          }
-        ]
-      }
-    },
-    {
       resolve: `gatsby-plugin-mdx`,
       options: {
+        extensions: [`.mdx`, `.md`],
         gatsbyRemarkPlugins: [
           {
             resolve: "gatsby-remark-smartypants",
@@ -100,6 +65,18 @@ module.exports = {
               classPrefix: "language-",
               inlineCodeMarker: null,
               aliases: {}
+            }
+          }
+        ],
+        // ! remove plugins when https://github.com/gatsbyjs/gatsby/issues/16242 gets merged
+        plugins: [
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 1500,
+              withWebp: true,
+              backgroundColor: bgColor,
+              linkImagesToOriginal: true
             }
           }
         ]

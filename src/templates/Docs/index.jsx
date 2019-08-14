@@ -19,10 +19,6 @@ export const pageQuery = graphql`
       body
       tableOfContents(maxDepth: 4)
     }
-    markdownRemark(id: { eq: $id }) {
-      html
-      tableOfContents(maxDepth: 4)
-    }
     site {
       siteMetadata {
         githubRoot
@@ -34,7 +30,6 @@ export const pageQuery = graphql`
 function DocsPageTemplate({
   data,
   pageContext: {
-    isMdx,
     breadcrumb,
     title,
     shortTitle,
@@ -49,7 +44,7 @@ function DocsPageTemplate({
 }) {
   const { githubRoot } = data.site.siteMetadata;
   const showOverview = (isOrphan || overview) && children.length > 0;
-  const contentRoot = isMdx ? data.mdx : data.markdownRemark;
+  const contentRoot = data.mdx;
   return (
     <Layout title={shortTitle} navRoot={navRoot}>
       <article
@@ -62,16 +57,13 @@ function DocsPageTemplate({
         <ContentWrapper
           noTOC={!!noTOC}
           tableOfContents={
-            !noTOC &&
-            isDefined(contentRoot) &&
-            (isMdx ? contentRoot.tableOfContents : contentRoot.tableOfContents)
+            !noTOC && isDefined(contentRoot)
+              ? contentRoot.tableOfContents
+              : null
           }
         >
           {!isOrphan && isDefined(contentRoot) && (
-            <DocsContent
-              isMdx={!!isMdx}
-              content={isMdx ? contentRoot.body : contentRoot.html}
-            />
+            <Mdx content={contentRoot.body} />
           )}
           {showOverview && (
             <>
@@ -146,24 +138,9 @@ function ContentWrapper({ noTOC, children, tableOfContents }) {
 
 ContentWrapper.propTypes = {
   noTOC: PropTypes.bool.isRequired,
-  tableOfContents: PropTypes.array,
+  tableOfContents: PropTypes.object,
   children: PropTypes.oneOfType([
     PropTypes.node,
     PropTypes.arrayOf(PropTypes.node)
   ]).isRequired
 };
-
-function DocsContent({ isMdx, content }) {
-  return isMdx ? (
-    <Mdx content={content} />
-  ) : (
-    <div dangerouslySetInnerHTML={{ __html: content }} />
-  );
-}
-
-DocsContent.propTypes = {
-  isMdx: PropTypes.bool.isRequired,
-  content: PropTypes.string
-};
-
-DocsContent.displayName = "DocsContent";

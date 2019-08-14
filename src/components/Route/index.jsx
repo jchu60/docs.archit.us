@@ -16,7 +16,7 @@ function Route({ method, path, auth }) {
     </span>
   ));
   return (
-    <h4 className="route">
+    <p className="route">
       <code>
         <span className="route--method">{method}</span>
         <span className="route--path">{formattedPath}</span>
@@ -24,7 +24,7 @@ function Route({ method, path, auth }) {
       {auth ? (
         <span className="route--auth">Requires authentication</span>
       ) : null}
-    </h4>
+    </p>
   );
 }
 
