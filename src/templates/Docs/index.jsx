@@ -33,14 +33,14 @@ function DocsPageTemplate({
     title,
     shortTitle,
     isOrphan,
-    root,
+    navRoot,
     noTOC,
     noBreadcrumb,
     children
   }
 }) {
   return (
-    <Layout title={shortTitle} navRoot={root}>
+    <Layout title={shortTitle} navRoot={navRoot}>
       <article
         className={classNames("container docs-root--content", {
           "with-toc": !noTOC
@@ -72,7 +72,7 @@ DocsPageTemplate.propTypes = {
     title: PropTypes.string,
     shortTitle: PropTypes.string,
     isOrphan: PropTypes.bool,
-    root: PropTypes.object,
+    navRoot: PropTypes.object,
     noTOC: PropTypes.bool,
     noBreadcrumb: PropTypes.bool,
     children: PropTypes.array
