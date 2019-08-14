@@ -47,6 +47,8 @@ function Footer() {
 
 export default Footer;
 
+Footer.displayName = "Footer";
+
 const FooterPanel = ({ children, header, className }) => (
   <div className={classNames("footer--panel", className)}>
     <h3>{header}</h3>
@@ -67,3 +69,5 @@ FooterPanel.propTypes = {
   ]),
   className: PropTypes.string
 };
+
+FooterPanel.displayName = "FooterPanel";

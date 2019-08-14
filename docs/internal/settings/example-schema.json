@@ -62,11 +62,11 @@
               "key": "gulag_emoji",
               "label": "Emoji",
               "help_tooltip": "The emoji used for gulagging. Use either a :shortcode: or an emoji ID",
-              "input_type": "string_auto-complete",
+              "input_type": "string_auto_complete",
               "default": "",
               "value": "",
               "properties": {
-                "auto-complete-type": "emoji_shortcode",
+                "auto_complete_type": "emoji_shortcode",
                 "append": ["emoji_display"]
               },
               "validation_steps": [
@@ -94,11 +94,11 @@
               "key": "gulag_role",
               "label": "Role",
               "help_tooltip": "The role added to gulagged users",
-              "input_type": "string_auto-complete",
+              "input_type": "string_auto_complete",
               "default": "",
               "value": "@kulak",
               "properties": {
-                "auto-complete-type": "role-mention",
+                "auto_complete_type": "role-mention",
                 "append": [
                   {
                     "key": "color_display",
@@ -194,11 +194,11 @@
             {
               "key": "bot_commands_channels",
               "label": "Bot Commands Channels",
-              "input_type": "string-array_auto-complete",
+              "input_type": "string_array_auto_complete",
               "default": [],
               "value": [],
               "properties": {
-                "auto-complete-type": "channel-mention"
+                "auto_complete_type": "channel-mention"
               },
               "validation_steps": [
                 "isArray",
@@ -229,11 +229,11 @@
             {
               "key": "default_role",
               "label": "Default Role",
-              "input_type": "string_auto-complete",
+              "input_type": "string_auto_complete",
               "default": "",
               "value": "",
               "properties": {
-                "auto-complete-type": "role-mention",
+                "auto_complete_type": "role-mention",
                 "append": [
                   {
                     "key": "color_display",
@@ -272,11 +272,11 @@
             {
               "key": "joinable_roles",
               "label": "Joinable Roles",
-              "input_type": "string-array_auto-complete",
+              "input_type": "string_array_auto_complete",
               "default": [],
               "value": [],
               "properties": {
-                "auto-complete-type": "role-mention",
+                "auto_complete_type": "role-mention",
                 "extensions": [
                   {
                     "key": "color_display",
@@ -353,11 +353,11 @@
             {
               "key": "architus_admins",
               "label": "Architus Admins",
-              "input_type": "string-array_auto-complete",
+              "input_type": "string_array_auto_complete",
               "default": [],
               "value": [],
               "properties": {
-                "auto-complete-type": "user-mention"
+                "auto_complete_type": "user-mention"
               },
               "validation_steps": [
                 "isArray",

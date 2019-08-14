@@ -138,12 +138,7 @@ function SEO({ description, lang, meta, title }) {
   );
 }
 
-SEO.defaultProps = {
-  lang: `en`,
-  meta: [],
-  description: ``,
-  title: null
-};
+export default SEO;
 
 SEO.propTypes = {
   description: PropTypes.string,
@@ -152,4 +147,11 @@ SEO.propTypes = {
   title: PropTypes.string
 };
 
-export default SEO;
+SEO.defaultProps = {
+  lang: `en`,
+  meta: [],
+  description: ``,
+  title: null
+};
+
+SEO.displayName = "SEO";

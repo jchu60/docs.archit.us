@@ -6,7 +6,7 @@ import Icon from "components/Icon";
 import "./style.scss";
 
 function createHeading({ component: Component, rightLink = false }) {
-  return ({ children, id, ...rest }) => {
+  const heading = ({ children, id, ...rest }) => {
     const link = (
       <a
         className={classNames("heading-link", `heading-${Component}`, {
@@ -29,6 +29,8 @@ function createHeading({ component: Component, rightLink = false }) {
       </div>
     );
   };
+  heading.displayName = `Heading-${Component}`;
+  return heading;
 }
 
 export default createHeading;

@@ -25,6 +25,8 @@ TableOfContents.propTypes = {
   headers: PropTypes.object
 };
 
+TableOfContents.displayName = "TableOfContents";
+
 // ? =================
 // ? Helper components
 // ? =================
@@ -46,3 +48,5 @@ function TocItems({ items }) {
 TocItems.propTypes = {
   items: PropTypes.arrayOf(PropTypes.object)
 };
+
+TocItems.displayName = "TocItems";

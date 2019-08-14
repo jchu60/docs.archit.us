@@ -12,60 +12,49 @@ import TableOfContents from "components/TableOfContents";
 import "./style.scss";
 
 export const pageQuery = graphql`
-  fragment PageData on Frontmatter {
-    title
-    shortTitle
-    noTOC
-    noBreadcrumb
-  }
-  query($id: String!) {
+  query($id: String) {
     mdx(id: { eq: $id }) {
-      frontmatter {
-        ...PageData
-      }
       body
       tableOfContents(maxDepth: 4)
     }
     markdownRemark(id: { eq: $id }) {
-      frontmatter {
-        ...PageData
-      }
       html
       tableOfContents(maxDepth: 4)
     }
   }
 `;
 
-function DocsPageTemplate({ data, pageContext, location }) {
-  const { isMdx } = pageContext;
-  const root = isMdx ? data.mdx : data.markdownRemark;
-  const { title, shortTitle, noTOC, noBreadcrumb } = root.frontmatter;
-  const content = isMdx ? root.body : root.html;
-  const tableOfContents = root.tableOfContents;
-  const docContent = isMdx ? (
-    <Mdx content={content} />
-  ) : (
-    <div dangerouslySetInnerHTML={{ __html: content }} />
-  );
-  const toc = !noTOC ? <TableOfContents headers={tableOfContents} /> : null;
-
+// TODO Edit on github, In this section
+function DocsPageTemplate({
+  data,
+  pageContext: {
+    isMdx,
+    breadcrumb,
+    title,
+    shortTitle,
+    isOrphan,
+    root,
+    noTOC,
+    noBreadcrumb,
+    children
+  }
+}) {
   return (
-    <Layout title={isDefined(shortTitle) ? shortTitle : title}>
+    <Layout title={shortTitle} navRoot={root}>
       <article
         className={classNames("container docs-root--content", {
           "with-toc": !noTOC
         })}
       >
-        {!noBreadcrumb ? <Breadcrumb location={location} /> : null}
+        {!noBreadcrumb ? <Breadcrumb data={breadcrumb} /> : null}
         <h1>{title}</h1>
-        <div
-          className={classNames("docs-content--wrapper", {
-            "with-toc": !noTOC
-          })}
-        >
-          <div className="docs-content">{docContent}</div>
-          <div>{toc}</div>
-        </div>
+        {!isOrphan ? (
+          <DocsContent
+            contentRoot={isMdx ? data.mdx : data.markdownRemark}
+            noTOC={noTOC}
+            isMdx={isMdx}
+          />
+        ) : null}
       </article>
     </Layout>
   );
@@ -75,6 +64,60 @@ export default DocsPageTemplate;
 
 DocsPageTemplate.propTypes = {
   data: PropTypes.object.isRequired,
-  pageContext: PropTypes.shape({ isMdx: PropTypes.boolean }).isRequired,
-  location: PropTypes.object.isRequired
+  pageContext: PropTypes.shape({
+    isMdx: PropTypes.boolean,
+    breadcrumb: PropTypes.arrayOf(
+      PropTypes.shape({ text: PropTypes.string, path: PropTypes.string })
+    ),
+    title: PropTypes.string,
+    shortTitle: PropTypes.string,
+    isOrphan: PropTypes.bool,
+    root: PropTypes.object,
+    noTOC: PropTypes.bool,
+    noBreadcrumb: PropTypes.bool,
+    children: PropTypes.array
+  }).isRequired
 };
+
+DocsPageTemplate.displayName = "DocsPageTemplate";
+
+// ? ==============
+// ? Sub-components
+// ? ==============
+
+function DocsContent({ isMdx, noTOC, contentRoot }) {
+  const content = isMdx ? contentRoot.body : contentRoot.html;
+  const tableOfContents = contentRoot.tableOfContents;
+  return (
+    <div
+      className={classNames("docs-content--wrapper", {
+        "with-toc": !noTOC
+      })}
+    >
+      <div className="docs-content">
+        {isMdx ? (
+          <Mdx content={content} />
+        ) : (
+          <div dangerouslySetInnerHTML={{ __html: content }} />
+        )}
+      </div>
+      <div>{!noTOC ? <TableOfContents headers={tableOfContents} /> : null}</div>
+    </div>
+  );
+}
+
+DocsContent.propTypes = {
+  isMdx: PropTypes.bool.isRequired,
+  noTOC: PropTypes.bool.isRequired,
+  contentRoot: PropTypes.shape({
+    body: PropTypes.string,
+    html: PropTypes.string,
+    tableOfContents: PropTypes.shape({
+      headers: PropTypes.shape({
+        items: PropTypes.array
+      })
+    })
+  })
+};
+
+DocsContent.displayName = "DocsContent";

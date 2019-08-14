@@ -51,3 +51,5 @@ Collapse.propTypes = {
 Collapse.defaultProps = {
   noUnwrap: false
 };
+
+Collapse.displayName = "Collapse";

@@ -1,47 +1,17 @@
-import React, { useMemo, Fragment } from "react";
+import React, { Fragment } from "react";
 import PropTypes from "prop-types";
-import { splitPath, useDocsPages, isDefined, capitalize } from "utility";
+import { isDefined } from "utility";
 
 import Icon from "components/Icon";
 import Link from "components/Link";
 
 import "./style.scss";
 
-function Breadcrumb({ location }) {
-  const docsPages = useDocsPages(true);
-  const fragments = useMemo(() => splitPath(location.pathname), [
-    location.pathname
-  ]);
-
-  const breadcrumbEntries = useMemo(() => {
-    let entries = [];
-    let currentPath = "/";
-    for (let i = -1; i < fragments.length; ++i) {
-      // Build the current path as we iterate
-      if (i === 0) currentPath += fragments[0];
-      else if (i > 0) currentPath += `/${fragments[i]}`;
-      const page = docsPages.find(page => page.path === currentPath);
-      if (isDefined(page)) {
-        // Don't link the last page
-        entries.push({
-          href: i === fragments.length - 1 ? undefined : page.path,
-          text: isDefined(page.shortTitle) ? page.shortTitle : page.title
-        });
-      } else {
-        if (i === -1) {
-          entries.push({ text: "Root" });
-        } else {
-          entries.push({ text: capitalize(fragments[i]) });
-        }
-      }
-    }
-    return entries;
-  }, [fragments]);
-
-  const length = breadcrumbEntries.length;
+function Breadcrumb({ data }) {
+  const length = data.length;
   return (
     <div className="docs-breadcrumb">
-      {breadcrumbEntries.map((entry, index) => (
+      {data.map((entry, index) => (
         <Fragment key={`${entry.text}=>${entry.href}`}>
           <BreadcrumbEntry {...entry} />
           {index !== length - 1 ? (
@@ -56,16 +26,21 @@ function Breadcrumb({ location }) {
 export default Breadcrumb;
 
 Breadcrumb.propTypes = {
-  location: PropTypes.object
+  data: PropTypes.array
 };
+
+Breadcrumb.defaultName = "Breadcrumb";
 
 // ? =================
 // ? Helper components
 // ? =================
 
-function BreadcrumbEntry({ text, href }) {
+function BreadcrumbEntry({ text, path }) {
   return isDefined(href) ? (
-    <Link className="docs-breadcrumb--entry" href={href}>
+    <Link
+      className="docs-breadcrumb--entry"
+      href={isDefined(path) ? href : undefined}
+    >
       {text}
     </Link>
   ) : (
@@ -75,5 +50,7 @@ function BreadcrumbEntry({ text, href }) {
 
 BreadcrumbEntry.propTypes = {
   text: PropTypes.string.isRequired,
-  href: PropTypes.string
+  path: PropTypes.string
 };
+
+BreadcrumbEntry.defaultName = "BreadcrumbEntry";

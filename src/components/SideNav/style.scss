@@ -84,7 +84,7 @@ $very-dark-primary: darken($-primary, 20%);
             }
         }
 
-        &.active-link:not(.is-masquerade) {
+        &.active-link {
             &::after {
                 opacity: 1;
                 width: 100px;

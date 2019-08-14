@@ -11,7 +11,14 @@ import { Navbar } from "react-bootstrap";
 import "scss/main.scss";
 import "./style.scss";
 
-function Layout({ title, children, headerProps, footerProps, footer }) {
+function Layout({
+  title,
+  children,
+  headerProps,
+  footerProps,
+  footer,
+  navRoot
+}) {
   // Nav drawer logic
   const [showDrawer, setShowDrawer] = useState(false);
   const expandClick = useCallback(() => setShowDrawer(!showDrawer), [
@@ -33,7 +40,7 @@ function Layout({ title, children, headerProps, footerProps, footer }) {
       />
       <div className={classNames("docs-root", { "show-drawer": showDrawer })}>
         <div className="docs-root--nav">
-          <SideNav />
+          <SideNav navRoot={navRoot} />
         </div>
         <button className="docs-root--overlay-button" onClick={closeDrawer} />
         <main className="docs-root--main">
@@ -59,10 +66,13 @@ Layout.propTypes = {
   footer: PropTypes.oneOfType([
     PropTypes.node,
     PropTypes.arrayOf(PropTypes.node)
-  ])
+  ]),
+  navRoot: PropTypes.object
 };
 
 Layout.defaultProps = {
   headerProps: {},
   footerProps: {}
 };
+
+Layout.displayName = "Layout";

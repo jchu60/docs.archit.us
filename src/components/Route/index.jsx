@@ -39,3 +39,5 @@ Route.propTypes = {
 Route.defaultProps = {
   auth: false
 };
+
+Route.displayName = "Route";

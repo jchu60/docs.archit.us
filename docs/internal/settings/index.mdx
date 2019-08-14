@@ -46,7 +46,7 @@ Each card is configured individually, representing a collection of individual se
 | -------- | ------------------------------------------- | ------------------------------------------------------------------------------------ |
 | title    | string                                      | title string that appears at the top of the card once rendered                       |
 | settings | array of [setting](#setting-object) objects | individual settings fields that are listed once rendered, ordered from top to bottom |
-| width?   | integer                                     | relative width of the card, must be in the interval [0, 20]                          |
+| width?   | integer                                     | relative width of the card, must be in the interval [1, 10]                          |
 
 ##### Card Example
 
@@ -78,7 +78,7 @@ In order to be consumed on both the backend and the frontend, each Setting objec
 | ----------------- | ---------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | key               | string                                                           | internal **unique** key used to access the setting across the application                                                                                                                                                                                   |
 | label             | string                                                           | display text shown to the left of each setting _(Fewer than 25 characters)_                                                                                                                                                                                 |
-| input_type        | string enum                                                      | type of input component used on the frontend. One of `["string", "numeric", "string_auto-complete", "string_highlighted", "switch", "string-array_auto-complete"]`                                                                                                 |
+| input_type        | string enum                                                      | type of input component used on the frontend. One of `["string", "numeric", "string_auto_complete", "string_highlighted", "switch", "string_array_auto_complete"]`                                                                                                 |
 | default           | any                                                              | initial value of the setting used for newly initialized guilds                                                                                                                                                                                              |
 | value             | any                                                              | current value of the setting                                                                                                                                                                                                                                |
 | help_tooltip?     | string                                                           | text content of an optional [HelpTooltip](https://storybook.archit.us/?path=/story/helptooltip--basic) component                                                                                                                                            |
@@ -200,6 +200,6 @@ Each of the following functions works with Discord entities, and examines whethe
 
 <Collapse>
 
-`embed:settings/example-schema.json`
+`embed:internal/settings/example-schema.json`
 
 </Collapse>

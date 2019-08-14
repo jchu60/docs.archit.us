@@ -96,6 +96,8 @@ Link.propTypes = {
   partiallyActive: PropTypes.bool
 };
 
+Link.displayName = "Link";
+
 // Predefined onClick action map
 export const actions = {
   back: () => {
@@ -139,6 +141,8 @@ function LinkContent({ text, icon }) {
   );
 }
 
+LinkContent.displayName = "LinkContent";
+
 function RouterLinkWrapper({
   className,
   activeClassName,
@@ -168,3 +172,5 @@ function RouterLinkWrapper({
   );
   return <RouterLink getProps={getProps} {...rest} />;
 }
+
+RouterLinkWrapper.displayName = "RouterLinkWrapper";

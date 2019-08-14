@@ -1,0 +1,8 @@
+links:
+  - href: "/"
+    text: Docs
+  - href: "/internal"
+    text: Implementation Docs
+  - href: "https://archit.us/"
+    newTab: false
+    text: Main App
