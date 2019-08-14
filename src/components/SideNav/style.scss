@@ -133,6 +133,10 @@ $very-dark-primary: darken($-primary, 20%);
             background-color: rgba($-primary, 0.08);
         }
 
+        &.is-last {
+            border-bottom: 1px solid rgba($-dark, 0.15);
+        }
+
         & > div > a.with-children {
             border-top: 1px solid rgba($-dark, 0.15);
             text-transform: uppercase;

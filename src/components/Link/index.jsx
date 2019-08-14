@@ -23,7 +23,6 @@ function Link({
   const useAnchor =
     external ||
     isFile(href) ||
-    isDefined(onClick) ||
     newTab ||
     href.indexOf("#") !== -1 ||
     href.indexOf("?") !== -1;
@@ -66,15 +65,6 @@ function Link({
 
 export default Link;
 
-Link.defaultProps = {
-  disabled: false,
-  href: "",
-  icon: "",
-  text: "",
-  download: false,
-  partiallyActive: true
-};
-
 Link.propTypes = {
   // Props from schema
   href: PropTypes.string,
@@ -94,6 +84,15 @@ Link.propTypes = {
     PropTypes.arrayOf(PropTypes.node)
   ]),
   partiallyActive: PropTypes.bool
+};
+
+Link.defaultProps = {
+  disabled: false,
+  href: "",
+  icon: "",
+  text: "",
+  download: false,
+  partiallyActive: true
 };
 
 Link.displayName = "Link";

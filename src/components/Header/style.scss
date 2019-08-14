@@ -14,21 +14,31 @@
         height: 68px;
     }
 
+    .container-fluid {
+        justify-content: flex-start !important;
+    }
+
     .nav-link {
         transition: all 0.25s;
         color: $-light;
         outline: none !important;
         border-radius: $border-radius-sm;
+        margin-right: 1rem;
 
         &:hover,
         &:active {
             opacity: 0.8;
+            background-color: rgba(white, 0.1);
         }
-        &.active {
+        &:active {
+            background-color: rgba(white, 0.2);
+        }
+        &.active-link {
             font-weight: 600;
+            color: $-light !important;
         }
         &:focus {
-            @include highlight-shadow($-light, 0.4);
+            background-color: rgba(white, 0.05);
         }
     }
 

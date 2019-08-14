@@ -10,26 +10,36 @@ import "./style.scss";
 
 function SideNav({ navRoot }) {
   function generateNav(node) {
-    return node.children.length > 0 ? (
-      <CollapsibleNavLink href={node.path} label={node.navTitle}>
-        <ul>{node.children.map(generateNav)}</ul>
-      </CollapsibleNavLink>
-    ) : (
-      <li key={node.slug}>
-        <Link
-          className="side-nav--link no-children"
-          href={node.path}
-          children={node.navTitle}
-          partiallyActive={false}
-        />
-      </li>
+    const { children } = node;
+    return children.map((child, i) =>
+      child.children.length > 0 ? (
+        <CollapsibleNavLink
+          href={child.path}
+          label={child.navTitle}
+          key={child.slug}
+          isLast={
+            i !== children.length - 1 && children[i + 1].children.length === 0
+          }
+        >
+          <ul>{generateNav(child)}</ul>
+        </CollapsibleNavLink>
+      ) : (
+        <li key={child.slug}>
+          <Link
+            className="side-nav--link no-children"
+            href={child.path}
+            children={child.navTitle}
+            partiallyActive={false}
+          />
+        </li>
+      )
     );
   }
 
   return (
     <div className="side-nav">
       <h5>{navRoot.navTitle}</h5>
-      <ul>{navRoot.children.map(generateNav)}</ul>
+      <ul>{generateNav(navRoot)}</ul>
     </div>
   );
 }
@@ -46,16 +56,16 @@ SideNav.displayName = "SideNav";
 // ? Helper components
 // ? =================
 
-function CollapsibleNavLink({ href, label, children }) {
+function CollapsibleNavLink({ href, label, children, isLast }) {
   const { location } = useLocation();
   const isPartiallyActive = location.pathname.startsWith(href);
   const [open, setOpen] = useState(isPartiallyActive);
   const onClick = useCallback(() => setOpen(!open), [open]);
   return (
     <li
-      key={label}
       className={classNames({
-        "partially-active": isPartiallyActive
+        "partially-active": isPartiallyActive,
+        "is-last": isLast
       })}
     >
       <div className="side-nav--expander-outer">
@@ -85,7 +95,8 @@ CollapsibleNavLink.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.node,
     PropTypes.arrayOf(PropTypes.node)
-  ])
+  ]),
+  isLast: PropTypes.bool
 };
 
 CollapsibleNavLink.displayName = "CollapsibleNavLink";

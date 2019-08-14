@@ -8,7 +8,8 @@ module.exports = {
     author: `architus`,
     siteUrl: `https://docs.archit.us`,
     themeColor,
-    msTileColor: "#2b5797"
+    msTileColor: "#2b5797",
+    githubRoot: "https://github.com/architus/docs.archit.us/tree/master/docs"
   },
   pathPrefix: "/",
   plugins: [

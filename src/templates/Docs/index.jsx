@@ -8,6 +8,8 @@ import Breadcrumb from "components/Breadcrumb";
 import Layout from "components/Layout";
 import Mdx from "components/Mdx";
 import TableOfContents from "components/TableOfContents";
+import Link from "components/Link";
+import Icon from "components/Icon";
 
 import "./style.scss";
 
@@ -21,10 +23,14 @@ export const pageQuery = graphql`
       html
       tableOfContents(maxDepth: 4)
     }
+    site {
+      siteMetadata {
+        githubRoot
+      }
+    }
   }
 `;
 
-// TODO Edit on github, In this section
 function DocsPageTemplate({
   data,
   pageContext: {
@@ -36,9 +42,14 @@ function DocsPageTemplate({
     navRoot,
     noTOC,
     noBreadcrumb,
+    originalPath,
+    overview,
     children
   }
 }) {
+  const { githubRoot } = data.site.siteMetadata;
+  const showOverview = (isOrphan || overview) && children.length > 0;
+  const contentRoot = isMdx ? data.mdx : data.markdownRemark;
   return (
     <Layout title={shortTitle} navRoot={navRoot}>
       <article
@@ -48,13 +59,42 @@ function DocsPageTemplate({
       >
         {!noBreadcrumb ? <Breadcrumb data={breadcrumb} /> : null}
         <h1>{title}</h1>
-        {!isOrphan ? (
-          <DocsContent
-            contentRoot={isMdx ? data.mdx : data.markdownRemark}
-            noTOC={noTOC}
-            isMdx={isMdx}
-          />
-        ) : null}
+        <ContentWrapper
+          noTOC={!!noTOC}
+          tableOfContents={
+            !noTOC &&
+            isDefined(contentRoot) &&
+            (isMdx ? contentRoot.tableOfContents : contentRoot.tableOfContents)
+          }
+        >
+          {!isOrphan && isDefined(contentRoot) && (
+            <DocsContent
+              isMdx={!!isMdx}
+              content={isMdx ? contentRoot.body : contentRoot.html}
+            />
+          )}
+          {showOverview && (
+            <>
+              <h2>In this section</h2>
+              <ul>
+                {children.map(({ title, path, slug }) => (
+                  <li key={slug}>
+                    <Link href={path}>{title}</Link>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+          {!isOrphan && (
+            <>
+              <hr />
+              <Link href={`${githubRoot}/${originalPath}`}>
+                <Icon name="pencil-alt" className="mr-2" />
+                Edit this page on GitHub
+              </Link>
+            </>
+          )}
+        </ContentWrapper>
       </article>
     </Layout>
   );
@@ -75,7 +115,9 @@ DocsPageTemplate.propTypes = {
     navRoot: PropTypes.object,
     noTOC: PropTypes.bool,
     noBreadcrumb: PropTypes.bool,
-    children: PropTypes.array
+    children: PropTypes.array,
+    originalPath: PropTypes.string,
+    overview: PropTypes.bool
   }).isRequired
 };
 
@@ -85,39 +127,43 @@ DocsPageTemplate.displayName = "DocsPageTemplate";
 // ? Sub-components
 // ? ==============
 
-function DocsContent({ isMdx, noTOC, contentRoot }) {
-  const content = isMdx ? contentRoot.body : contentRoot.html;
-  const tableOfContents = contentRoot.tableOfContents;
+function ContentWrapper({ noTOC, children, tableOfContents }) {
   return (
     <div
       className={classNames("docs-content--wrapper", {
         "with-toc": !noTOC
       })}
     >
-      <div className="docs-content">
-        {isMdx ? (
-          <Mdx content={content} />
-        ) : (
-          <div dangerouslySetInnerHTML={{ __html: content }} />
-        )}
-      </div>
-      <div>{!noTOC ? <TableOfContents headers={tableOfContents} /> : null}</div>
+      <div className="docs-content">{children}</div>
+      {!noTOC && !!tableOfContents && (
+        <div>
+          <TableOfContents headers={tableOfContents} />
+        </div>
+      )}
     </div>
+  );
+}
+
+ContentWrapper.propTypes = {
+  noTOC: PropTypes.bool.isRequired,
+  tableOfContents: PropTypes.array,
+  children: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.arrayOf(PropTypes.node)
+  ]).isRequired
+};
+
+function DocsContent({ isMdx, content }) {
+  return isMdx ? (
+    <Mdx content={content} />
+  ) : (
+    <div dangerouslySetInnerHTML={{ __html: content }} />
   );
 }
 
 DocsContent.propTypes = {
   isMdx: PropTypes.bool.isRequired,
-  noTOC: PropTypes.bool.isRequired,
-  contentRoot: PropTypes.shape({
-    body: PropTypes.string,
-    html: PropTypes.string,
-    tableOfContents: PropTypes.shape({
-      headers: PropTypes.shape({
-        items: PropTypes.array
-      })
-    })
-  })
+  content: PropTypes.string
 };
 
 DocsContent.displayName = "DocsContent";

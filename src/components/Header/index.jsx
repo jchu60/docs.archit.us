@@ -1,15 +1,14 @@
 import React from "react";
 import { graphql, useStaticQuery } from "gatsby";
 import PropTypes from "prop-types";
-import classNames from "classnames";
 
-import { Navbar, Container } from "react-bootstrap";
+import { Navbar, Container, Nav } from "react-bootstrap";
 import Link from "components/Link";
 
 import LogoSvg from "assets/logo.svg";
 import "./style.scss";
 
-function Header({ sticky, children, leftChildren, ...rest }) {
+function Header({ sticky, leftChildren, ...rest }) {
   const links = useStaticQuery(graphql`
     query HeaderLinks {
       file(name: { eq: "header" }, extension: { in: ["yaml", "yml"] }) {
@@ -21,6 +20,7 @@ function Header({ sticky, children, leftChildren, ...rest }) {
       }
     }
   `).file.childDataYaml.links;
+
   return (
     <Navbar
       bg="primary"
@@ -33,18 +33,20 @@ function Header({ sticky, children, leftChildren, ...rest }) {
       <Container fluid>
         {leftChildren}
         <Brand />
-        <ul className="navbar-nav mr-auto">
-          <li className="nav-item">
-            {links.map(({ href, className, ...rest }) => (
-              <Link
-                key={href}
-                className={classNames(className, "nav-link")}
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="mr-auto">
+            {links.map(({ href, ...rest }) => (
+              <Nav.Link
+                as={Link}
+                href={href}
                 {...rest}
+                key={href}
+                partiallyActive={false}
               />
             ))}
-          </li>
-        </ul>
-        <div className="header-children">{children}</div>
+          </Nav>
+        </Navbar.Collapse>
       </Container>
     </Navbar>
   );
@@ -56,10 +58,6 @@ Header.displayName = "Header";
 
 Header.propTypes = {
   leftChildren: PropTypes.oneOfType([
-    PropTypes.node,
-    PropTypes.arrayOf(PropTypes.node)
-  ]),
-  children: PropTypes.oneOfType([
     PropTypes.node,
     PropTypes.arrayOf(PropTypes.node)
   ]),

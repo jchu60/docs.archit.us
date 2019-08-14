@@ -36,6 +36,7 @@ exports.sourceNodes = ({ actions, reporter }) => {
       overrideNav: String
       noTOC: Boolean
       isRoot: Boolean
+      overview: Boolean
       noBreadcrumb: Boolean
       links: [Link]
     }
@@ -72,7 +73,9 @@ exports.createPages = ({ graphql, actions, reporter }) => {
     overrideBreadcrumb
     overrideNav
     noBreadcrumb
+    noTOC
     isRoot
+    overview
   `;
   return graphql(
     `

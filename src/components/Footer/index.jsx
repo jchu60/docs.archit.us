@@ -30,7 +30,7 @@ function Footer() {
                 Github
               </Link>
               <Link href="https://status.archit.us/">Status</Link>
-              <Link href="https://docs.archit.us/">Docs</Link>
+              <Link href="/">Docs</Link>
               <Link href="https://discord.gg/svrRrSe">Discord Server</Link>
             </FooterPanel>
           </Col>
