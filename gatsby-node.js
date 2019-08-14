@@ -38,6 +38,7 @@ exports.sourceNodes = ({ actions, reporter }) => {
       isRoot: Boolean
       overview: Boolean
       noBreadcrumb: Boolean
+      childrenOrder: [String]
       links: [Link]
     }
     type Mdx implements Node {
@@ -71,6 +72,7 @@ exports.createPages = ({ graphql, actions, reporter }) => {
     noTOC
     isRoot
     overview
+    childrenOrder
   `;
   return graphql(
     `
@@ -147,6 +149,11 @@ exports.createPages = ({ graphql, actions, reporter }) => {
     activity = reporter.activityTimer(`assembling breadcrumbs`);
     activity.start();
     roots.forEach(root => assembleBreadcrumbs(root, []));
+
+    activity.end();
+    activity = reporter.activityTimer(`ordering children`);
+    activity.start();
+    roots.forEach(root => orderChildren(root, 0));
 
     activity.end();
     activity = reporter.activityTimer(`dynamically generating docs pages`);
@@ -313,4 +320,36 @@ function assembleBreadcrumbs(subtree, currentBreadcrumb) {
   subtree.children.forEach(child =>
     assembleBreadcrumbs(child, [...currentBreadcrumb])
   );
+}
+
+function compareNodes(a, b) {
+  return a.navTitle
+    .toLocaleLowerCase()
+    .localeCompare(b.navTitle.toLocaleLowerCase());
+}
+
+function orderChildren(subtree, depth) {
+  function defaultSort(nodes) {
+    const childless = nodes.filter(node => node.children.length === 0);
+    const parent = nodes.filter(node => node.children.length !== 0);
+    childless.sort(compareNodes);
+    parent.sort(compareNodes);
+    return depth === 0 ? [...childless, ...parent] : [...parent, ...childless];
+  }
+
+  if (subtree.childrenOrder != null) {
+    // Custom sort order
+    let custom = [];
+    subtree.childrenOrder.forEach(slug => {
+      const node = subtree.children.find(node => node.slug === slug);
+      if (node != null) custom.push(node);
+    });
+    const fallback = subtree.children.filter(
+      node => !subtree.childrenOrder.includes(node.slug)
+    );
+    subtree.children = [...custom, ...fallback];
+  } else {
+    subtree.children = defaultSort(subtree.children);
+  }
+  subtree.children.forEach(node => orderChildren(node, depth + 1));
 }
