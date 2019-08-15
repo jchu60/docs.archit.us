@@ -19,8 +19,6 @@ const debug = (reporter, text, mode = "info") =>
     }[mode](text))
   );
 
-const isDefined = obj => !(obj == null);
-
 // Define custom graphql schema to enforce rigid type structures
 exports.sourceNodes = ({ actions, reporter }) => {
   activity = reporter.activityTimer("implementing custom graphql schema");
@@ -198,13 +196,17 @@ exports.onCreateWebpackConfig = ({ actions }) => {
 // ? Navigation tree processing
 // ? ==========================
 
+function addTrailingSlash(path) {
+  return path.charAt(path.length - 1) === "/" ? path : `${path}/`;
+}
+
 function walkTree(node, navTree) {
   const path = trimMarkdownPath(node.relativePath);
 
   // If root, replace default root node with this one
   if (path === "/") {
     Object.assign(navTree, node, {
-      path,
+      path: addTrailingSlash(path),
       isOrphan: false,
       invisible: false
     });
@@ -226,7 +228,7 @@ function walkTree(node, navTree) {
           children: [],
           title: capitalize(fragments[i]),
           slug: fragments[i],
-          path: `/${fragments.slice(0, i + 1).join("/")}`,
+          path: addTrailingSlash(`/${fragments.slice(0, i + 1).join("/")}`),
           isOrphan: true,
           invisible: false
         };
@@ -237,7 +239,7 @@ function walkTree(node, navTree) {
       // Current node: merge page into
       if (i === fragments.length - 1) {
         Object.assign(subtree, node, {
-          path,
+          path: addTrailingSlash(path),
           isOrphan: false
         });
       }
