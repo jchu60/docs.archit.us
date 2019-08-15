@@ -1,32 +1,50 @@
 ---
 title: Commands
-noTOC: true
 ---
 
 ## Auto Responses
-* set
-* remove
+
+* `set` - Sets a custom command
+* `remove` - Remove a user command
+
 ## Emoji Manager
-* emojis
+
+* `emojis` - List currently cached emojis
+
 ## Events
-* schedule
-* poll
+
+* `schedule` - Start an event poll
+* `poll` - Starts a poll with some pretty formatting
+
 ## Gulag
-* gulag
+
+* `gulag` - Starts a vote to move a member to the gulag
+
 ## Music
-* play
-* skip
-* clear
-* queue
+
+* `play` - Add a song to the music queue
+* `skip` - Skip a song
+* `clear` - Clear all songs from queue
+* `queue`  - List songs in queue
+
 ## Roles
-* roles
+
+* `roles` - See all joinable roles
+* `role` - Assign yourself a role
+
 ## Statistics
-* messagecount
-* spellcheck
+
+* `messagecount` - Count the total messages a user has sent in the server
+* `spellcheck` - Checks the spelling of a user
+
 ## Settings
-* settings
+
+* `settings` - Open an interactive settings dialog
+
 ## Misc
-* ajax
-* 8ball
-* purge
-* quote
+
+* `ajax` - Tells you if Ajax is in masters or not
+* `8ball` - Answers from the beyond
+* `purge` - Purge a channel of a user's messages
+* `quote` - Quotes a previous message in a pretty format. Use url or id
+* `help` - Displays in-app help text for each command
