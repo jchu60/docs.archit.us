@@ -70,6 +70,14 @@ hr {
     border: 1px solid rgba($-dark, 0.25);
 }
 
+nav.noscript-alert.navbar {
+    background-color: scale-color(
+        $-primary,
+        $lightness: -32.5%,
+        $saturation: -12.5%
+    ) !important;
+}
+
 button,
 [type="button"],
 [type="reset"],

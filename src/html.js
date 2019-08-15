@@ -20,11 +20,19 @@ export default function HTML(props) {
         {props.preBodyComponents}
         {/* Custom no-script content */}
         <noscript>
-          <Navbar bg="primary" className="noscript-alert">
-            <div className="container py-1">
+          <Navbar
+            bg="primary"
+            className="noscript-alert text-light"
+            style={{ height: "auto", zIndex: "4000" }}
+          >
+            <div>
               <span
                 className="mr-3"
-                style={{ fontSize: "1.5rem", marginTop: "-8px" }}
+                style={{
+                  fontSize: "1.1rem",
+                  top: "-2px",
+                  position: "relative"
+                }}
               >
                 <Icon name="info-circle" />{" "}
               </span>
