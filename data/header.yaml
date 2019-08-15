@@ -1,7 +1,7 @@
 links:
   - href: "/"
     text: Docs
-  - href: "/internal"
+  - href: "/internal/"
     text: Implementation Docs
   - href: "https://archit.us/"
     newTab: false

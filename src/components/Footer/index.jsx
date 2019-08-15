@@ -34,7 +34,10 @@ function Footer() {
                 <Icon name="github" className="icon" />
                 Github
               </Link>
-              <Link href="https://discord.gg/svrRrSe">Discord Server</Link>
+              <Link href="https://discord.gg/svrRrSe">
+                <Icon name="discord" className="icon" />
+                Discord Server
+              </Link>
             </FooterPanel>
           </Col>
         </Row>
