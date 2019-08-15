@@ -57,7 +57,7 @@ function DocsPageTemplate({
         <ContentWrapper
           noTOC={!!noTOC}
           tableOfContents={
-            !noTOC && isDefined(contentRoot)
+            !noTOC && !isOrphan && isDefined(contentRoot)
               ? contentRoot.tableOfContents
               : null
           }
