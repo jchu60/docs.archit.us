@@ -5,6 +5,7 @@ import { globalHistory } from "@reach/router";
 // Repository is licensed under MIT
 // https://github.com/reach/router/issues/203
 
+// Gets current location from global history as a hook
 export function useLocation() {
   const initialState = {
     location: globalHistory.location,
@@ -26,6 +27,15 @@ export function useLocation() {
   return state;
 }
 
+// Runs an effect hook once, simulating componentDidMount/componentWillUnmount
 export function useEffectOnce(effectFunc) {
   useEffect(effectFunc, []);
+}
+
+// Returns true only if the current render
+// (useful for ensuring SSR/client hydration symmetry)
+export function useInitialRender() {
+  const [isInitial, setIsInitial] = useState(true);
+  useEffectOnce(() => setIsInitial(false));
+  return isInitial;
 }

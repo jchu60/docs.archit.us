@@ -37,7 +37,9 @@ yarn install
 
 ## 📝 Authoring Documentation
 
-To edit documentation or add new pages, add `.md` or `.mdx` (preferred) files to the `docs/` folder in the repository root. Any files automatically result in generated pages at the same public path as their relative path, starting from the `docs/` folder. To add a page with the same name/path as a subdirectory, simply add a file named `index.md` or `index.mdx`.
+To edit documentation or add new pages, add `.md` files to the `docs/` folder in the repository root. Any files automatically result in generated pages at the same public path as their relative path, starting from the `docs/` folder. To add a page with the same name/path as a subdirectory, simply add a file named `index.md`.
+
+More information is available on authoring at the [docs page for it](/internal/community/authoring).
 
 ### File Format
 

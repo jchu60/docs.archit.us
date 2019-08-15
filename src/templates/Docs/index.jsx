@@ -45,22 +45,19 @@ function DocsPageTemplate({
   const { githubRoot } = data.site.siteMetadata;
   const showOverview = (isOrphan || overview) && children.length > 0;
   const contentRoot = data.mdx;
+  const showTOC = !noTOC && !isOrphan && isDefined(contentRoot);
   return (
     <Layout title={shortTitle} navRoot={navRoot}>
       <article
         className={classNames("container docs-root--content", {
-          "with-toc": !noTOC
+          "with-toc": showTOC
         })}
       >
         {!noBreadcrumb ? <Breadcrumb data={breadcrumb} /> : null}
         <h1>{title}</h1>
         <ContentWrapper
-          noTOC={!!noTOC}
-          tableOfContents={
-            !noTOC && !isOrphan && isDefined(contentRoot)
-              ? contentRoot.tableOfContents
-              : null
-          }
+          noTOC={!showTOC}
+          tableOfContents={showTOC ? contentRoot.tableOfContents : null}
         >
           {!isOrphan && isDefined(contentRoot) && (
             <Mdx content={contentRoot.body} />
