@@ -56,7 +56,7 @@ Each card is configured individually, representing a collection of individual se
   "width": 5,
   "settings": [
     {
-      "key": "gulag_command",
+      "id": "gulag_command",
       "label": "Command",
       "input_type": "string",
       "default": "gulag"
@@ -76,7 +76,7 @@ In order to be consumed on both the backend and the frontend, each Setting objec
 
 | Field             | Type                                                             | Description                                                                                                                                                                                                                                                 |
 | ----------------- | ---------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| key               | string                                                           | internal **unique** key used to access the setting across the application                                                                                                                                                                                   |
+| id               | string                                                           | internal **unique** (among all settings) key used to access the setting across the application                                                                                                                                                                                   |
 | label             | string                                                           | display text shown to the left of each setting _(Fewer than 25 characters)_                                                                                                                                                                                 |
 | input_type        | string enum                                                      | type of input component used on the frontend. One of `["string", "numeric", "string_auto_complete", "string_highlighted", "switch", "string_array_auto_complete"]`                                                                                                 |
 | default           | any                                                              | initial value of the setting used for newly initialized guilds                                                                                                                                                                                              |
@@ -85,12 +85,15 @@ In order to be consumed on both the backend and the frontend, each Setting objec
 | properties?       | object                                                           | key-value pairs passed as props to the input component                                                                                                                                                                                                      |
 | validation_steps? | array of Union<string, [validation](#validation-object) objects> | chain of validation steps necessary for the setting value to pass, ran on both the frontend and backend, unless otherwise specified (see [object information](#validation-object)). If a string, then the value represents the `key` of the individual step |
 | cli?              | [cli object](#cli-object)                                        | if non-null, then includes the individual setting in the list of settings that can be edited in the Discord client using the `!settings`/`?settings` command                                                                                                |
+#### Values
+
+The values for each field are stored in a separate object, which is a flat dictionary mapping entry IDs to their corresponding value.  This allows the client or server to update the values of the settings without resending the entire schema.
 
 ##### Setting Example
 
 ```json
 {
-  "key": "starboard_threshold",
+  "id": "starboard_threshold",
   "label": "Starboard Threshold",
   "input_type": "numeric",
   "default": 5,
