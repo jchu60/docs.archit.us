@@ -10,7 +10,7 @@ title: Auto Responses
   3. Begins with `^` and ends with `$`: matches a regex
      - Implement in future release?
      - How to prevent catastrophic backtracking/ReDoS?
-       - Look into implementing with [`rure` library](https://pypi.org/project/rure/)
+       - Look into implementing with [rure library](https://pypi.org/project/rure/)
      - `^.*aba.*$`
        - Makes it opt-in to have "glue" instead of opt-out for better default performance
      - Don't really need to escape anything
