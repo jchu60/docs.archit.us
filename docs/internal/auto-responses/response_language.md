@@ -2,6 +2,8 @@
 title: Auto Response Language
 ---
 
+I wrote this page, give me credit
+
 ### Example
 
 This should be updated to show a graphical tree instead of this garbage
