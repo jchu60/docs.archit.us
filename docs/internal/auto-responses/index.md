@@ -27,7 +27,7 @@ title: Auto Responses
 
 #### Fragments
 
-Fragment string: `<@54435432534524423> dsfadfsddfdsaf` becomes:
+Fragment string: `<@54435432534524423> dsfadfsddfdsaa` becomes:
 
 ```json
 [ 
@@ -37,7 +37,7 @@ Fragment string: `<@54435432534524423> dsfadfsddfdsaf` becomes:
    },
    { 
       "type": "fragment",
-      "text": " dsfadfsddfdsaf"
+      "text": " dsfadfsddfdsaa"
    }
 ]
 ```
