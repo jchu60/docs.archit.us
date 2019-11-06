@@ -375,9 +375,11 @@ function attachHistory(subtree, metadataMap) {
     let authors = [];
     let logins = new Set();
     metadata.forEach(({ author: { user } }) => {
-      if (!logins.has(user.login)) {
-        logins.add(user.login);
-        authors.push(user);
+      if (user != null) {
+        if (!logins.has(user.login)) {
+          logins.add(user.login);
+          authors.push(user);
+        }
       }
     });
 
