@@ -7,9 +7,9 @@ title: Guilds List
 | Field  | Type                                          | Description                                                                   |
 | ------ | --------------------------------------------- | ----------------------------------------------------------------------------- |
 | features | array of [guild feature](https://discordapp.com/developers/docs/resources/guild#guild-object-guild-features) strings | enabled guild features |
-| name | string | name of the guild|
+| name | string | name of the guild |
 | owner? | boolean | whether or not the user is the owner of the guild |
-| icon | ?string | [icon hash](https://discordapp.com/developers/docs/reference#image-formatting)
+| icon | ?string | [icon hash](https://discordapp.com/developers/docs/reference#image-formatting) of the guild |
 | id | snowflake | the id of the guild |
 | permissions? | integer | total permissions for the user in the guild (does not include channel overrides) |
 | has_architus | boolean | whether Architus is a member of the guild |
@@ -38,5 +38,5 @@ title: Guilds List
 
 <Route method="GET" path="/guilds" auth />
 
-Returns a list of [guild](#guild-object) objects.
+Returns a list of [guild](#guild-object) objects that the user is a member of.
 
