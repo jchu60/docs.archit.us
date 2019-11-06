@@ -55,11 +55,12 @@ Only `text` fragments will be used for the mode assignment heuristic and the sen
 | id      | hoar frost | unique [hoar frost ID](../general/#hoar-frost) for the auto response          |
 | trigger | string | **original** trigger from command/added response |
 | trigger_regex | regex | derived regular expression from (escaped) trigger text |
+| trigger_punctuation | tuple | list of punctuation that a sensitive trigger cares about |
 | response | string | response text to use upon invokation |
 | response_ast | json string | lexed and parsed response |
 | mode | string enum          | type of matching mode to use. One of `["naive", "punctuated", "regex"]`              |
-| author | snowflake | user id of the author |
-| guild | snowflake | guild id of the owning guild |
+| author_id | snowflake | user id of the author |
+| guild_id | snowflake | guild id of the owning guild |
 | count | integer | number of times the auto response has been invoked |
 
 **Somehow display priority on the frontend**
