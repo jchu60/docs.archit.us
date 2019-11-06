@@ -1,5 +1,5 @@
 ---
-title: Api Reference
+title: API Reference
 ---
 
 Restful endpoints for viewing and modifying auto responses.
@@ -8,13 +8,13 @@ Restful endpoints for viewing and modifying auto responses.
 
 <Route method="GET" path="/responses/{guild_id}" auth />
 
-Returns a list of [auto response](index/#auto-response-object) objects.
+Returns a list of [auto response](../#auto-response-object) objects.
 
 ## Create a New Auto Response
 
 <Route method="POST" path="/responses/{guild_id}" auth />
 
-Returns an [auto response](index/#auto-response-object) object on success.  Will fire some type of gateway event.
+Returns an [auto response](../#auto-response-object) object on success.  Will fire some type of gateway event.
 
 ###### Json Params
 | Field  | Type                                          | Description                                                                   |
@@ -32,7 +32,7 @@ Returns `204 No Content` on success. Requires ownership or admin.  Will fire som
 
 <Route method="PATCH" path="/responses/{guild_id}/{auto_response.id}" auth />
 
-Modify the given auto response. Requires ownership or an admin. Returns the updated [auto response](index/#auto-response-object) object on success.  Will fire some type of gateway event.
+Modify the given auto response. Requires ownership or an admin. Returns the updated [auto response](../#auto-response-object) object on success.  Will fire some type of gateway event.
 
 ###### Json Params
 | Field  | Type                                          | Description                                                                   |
