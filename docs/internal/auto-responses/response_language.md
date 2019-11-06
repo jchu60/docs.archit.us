@@ -55,6 +55,9 @@ hello [adj] [this is a list, with nested stuff [owl], [[member], [author]]]
 ### Grammar
 [this should link to develop once it's merged](https://github.com/architus/architus/blob/docker/lib/response_grammar/Response.g4)
 
+<Collapse>
+  <ExternalSnippet src="https://raw.githubusercontent.com/architus/architus/docker/lib/response_grammar/Response.g4" />
+</Collapse>
 
 ### How to Update the Parser
 `antlr4 -Dlanguage=Python3 Response.g4`
