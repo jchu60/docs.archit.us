@@ -1,9 +1,9 @@
 ---
-title: Identify
+title: User
 ---
 
 ## User Object
-Same as discord [user](https://discordapp.com/developers/docs/resources/user#user-object-user-structure) object.
+Same as discord [user](https://discordapp.com/developers/docs/resources/user#user-object) object.
 
 ###### User Example
 ```
@@ -18,8 +18,14 @@ Same as discord [user](https://discordapp.com/developers/docs/resources/user#use
 }
 ```
 
-## Identify User
+## Identify Current User
 
 <Route method="GET" path="/identify" auth />
+
+Return the [user](#user-object) currently logged in.
+
+## Get User by ID
+
+<Route method="GET" path="/user/{user.id}" />
 
 Return a [user](#user-object) object.
