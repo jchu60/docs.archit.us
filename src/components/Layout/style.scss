@@ -11,11 +11,14 @@
     position: relative;
 }
 
+$collapse-breakpoint: md;
+$minimize-breakpoint: lg;
+$full-width: 325px;
+$minimized-width: 285px;
 .docs-root {
     @extend %base-horizontal-container;
 
     $this: &;
-    $collapse-breakpoint: sm;
     position: relative;
 
     & > * {
@@ -72,9 +75,14 @@
             flex-grow: 0;
         }
 
-        @include respond-above($collapse-breakpoint) {
-            margin-left: 325px;
-            max-width: calc(100% - 325px);
+        @include respond-above($minimize-breakpoint) {
+            margin-left: $full-width;
+            max-width: calc(100% - #{$full-width});
+        }
+
+        @include respond-between($collapse-breakpoint, $minimize-breakpoint) {
+            margin-left: $minimized-width;
+            max-width: calc(100% - #{$minimized-width});
         }
 
         @include respond-below($collapse-breakpoint) {
@@ -88,7 +96,7 @@
         @include transitions("transform, opacity");
 
         height: 100%;
-        width: 325px;
+        width: $full-width;
         position: fixed;
         z-index: 1;
         top: 0;
@@ -101,12 +109,54 @@
         overflow-x: hidden;
         overflow-y: auto;
 
+        @include respond-below($minimize-breakpoint) {
+            width: $minimized-width;
+        }
+
         @include respond-below($collapse-breakpoint) {
             height: 100%;
             z-index: 1010;
             transform: translateX(-100%);
             opacity: 0;
-            width: 350px;
+            width: $full-width;
+        }
+
+        @media (max-width: $full-width) {
+            width: 100%;
+        }
+    }
+}
+
+.drawer-expand {
+    position: absolute;
+    display: block;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    pointer-events: none;
+
+    @include respond-above($collapse-breakpoint) {
+        display: none !important;
+    }
+
+    &--button {
+        @extend %button-blank;
+        pointer-events: all;
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        width: 48px;
+        height: 48px;
+        background-color: $-primary;
+        border-radius: 20rem;
+        color: white;
+        z-index: 20000;
+        box-shadow: $drop-shadow;
+
+        span {
+            position: relative;
+            top: -1px;
         }
     }
 }

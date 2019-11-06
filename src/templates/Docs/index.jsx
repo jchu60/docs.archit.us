@@ -2,7 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { graphql } from "gatsby";
-import { isDefined } from "utility";
+import { isDefined, addMissingUnit, multiplyDimension } from "utility";
+import moment from "moment";
 
 import Breadcrumb from "components/Breadcrumb";
 import Layout from "components/Layout";
@@ -10,6 +11,7 @@ import Mdx from "components/Mdx";
 import TableOfContents from "components/TableOfContents";
 import Link from "components/Link";
 import Icon from "components/Icon";
+import Tooltip from "components/Tooltip";
 
 import "./style.scss";
 
@@ -21,7 +23,12 @@ export const pageQuery = graphql`
     }
     site {
       siteMetadata {
-        githubRoot
+        github {
+          owner
+          name
+          branch
+          docsRoot
+        }
       }
     }
   }
@@ -39,13 +46,16 @@ function DocsPageTemplate({
     noBreadcrumb,
     originalPath,
     overview,
-    children
+    children,
+    history
   }
 }) {
-  const { githubRoot } = data.site.siteMetadata;
+  const { owner, name, branch, docsRoot } = data.site.siteMetadata.github;
+  const githubRoot = `https://github.com/${owner}/${name}/blob/${branch}/${docsRoot}`;
   const showOverview = (isOrphan || overview) && children.length > 0;
   const contentRoot = data.mdx;
   const showTOC = !noTOC && !isOrphan && isDefined(contentRoot);
+  const link = githubRoot + originalPath;
   return (
     <Layout title={shortTitle} navRoot={navRoot}>
       <article
@@ -77,10 +87,19 @@ function DocsPageTemplate({
           {!isOrphan && (
             <>
               <hr />
-              <Link href={`${githubRoot}/${originalPath}`}>
-                <Icon name="pencil-alt" className="mr-2" />
-                Edit this page on GitHub
-              </Link>
+              <div className="metadata">
+                <Authors authors={history.authors} />
+                <span className="metadata--text">
+                  <span className="modified-time">
+                    Last modified{" "}
+                    {moment(new Date(history.lastModified)).fromNow()}
+                  </span>
+                  <Link href={link} className="edit-link">
+                    <Icon name="pencil-alt" className="mr-2" />
+                    Edit this page on GitHub
+                  </Link>
+                </span>
+              </div>
             </>
           )}
         </ContentWrapper>
@@ -91,6 +110,14 @@ function DocsPageTemplate({
 
 export default DocsPageTemplate;
 
+const authorsPropTypes = PropTypes.arrayOf(
+  PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    avatarUrl: PropTypes.string.isRequired,
+    login: PropTypes.string.isRequired,
+    url: PropTypes.string.isRequired
+  })
+).isRequired;
 DocsPageTemplate.propTypes = {
   data: PropTypes.object.isRequired,
   pageContext: PropTypes.shape({
@@ -106,7 +133,11 @@ DocsPageTemplate.propTypes = {
     noBreadcrumb: PropTypes.bool,
     children: PropTypes.array,
     originalPath: PropTypes.string,
-    overview: PropTypes.bool
+    overview: PropTypes.bool,
+    history: PropTypes.shape({
+      lastModified: PropTypes.string.isRequired,
+      authors: authorsPropTypes
+    })
   }).isRequired
 };
 
@@ -140,4 +171,49 @@ ContentWrapper.propTypes = {
     PropTypes.node,
     PropTypes.arrayOf(PropTypes.node)
   ]).isRequired
+};
+
+function Authors({ authors }) {
+  const first = authors.slice(0, Math.min(authors.length, 3));
+  const hasMore = authors.length > 3;
+  const additional = authors.length - 3;
+  return (
+    <div className="authors">
+      {hasMore && (
+        <div className="authors--more">
+          <Tooltip text={`And ${additional} more`} bottom>
+            <div>
+              <More amount={additional} fontSize="1rem" />
+            </div>
+          </Tooltip>
+        </div>
+      )}
+      {first.map(({ name, avatarUrl, login, url }) => (
+        <Link className="authors--icon" href={url} key={login}>
+          <Tooltip text={name} bottom>
+            <div>
+              <img src={avatarUrl}></img>
+            </div>
+          </Tooltip>
+        </Link>
+      ))}
+    </div>
+  );
+}
+
+Authors.propTypes = {
+  authors: authorsPropTypes
+};
+
+function More({ amount, fontSize: baseFontSize }) {
+  const text = `${amount}`;
+  let fontSize = addMissingUnit(baseFontSize);
+  if (text.length >= 3) fontSize = multiplyDimension(baseFontSize, 0.9);
+  else if (text.length >= 4) style = multiplyDimension(baseFontSize, 0.75);
+  return <span style={{ fontSize }}>{text}</span>;
+}
+
+More.propTypes = {
+  amount: PropTypes.number,
+  fontSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 };

@@ -71,3 +71,6 @@ yarn-error.log
 # Other files
 .vscode/
 desktop.ini
+
+# Secrets
+.env.development

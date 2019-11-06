@@ -1,6 +1,7 @@
 import React from "react";
 import { graphql, useStaticQuery } from "gatsby";
 import PropTypes from "prop-types";
+import classNames from "classnames";
 
 import { Navbar, Container, Nav } from "react-bootstrap";
 import Link from "components/Link";
@@ -32,7 +33,7 @@ function Header({ sticky, leftChildren, ...rest }) {
     >
       <Container fluid>
         {leftChildren}
-        <Brand />
+        <Brand className="mr-auto mr-md-3" />
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
@@ -68,8 +69,8 @@ Header.defaultProps = {
   sticky: true
 };
 
-const Brand = props => (
-  <Link className="nav-link brand" href="/" {...props}>
+const Brand = ({ className, ...rest }) => (
+  <Link className={classNames("nav-link brand", className)} href="/" {...rest}>
     <LogoSvg />
   </Link>
 );

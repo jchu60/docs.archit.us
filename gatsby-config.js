@@ -1,6 +1,10 @@
 const themeColor = "#6496c4";
 const bgColor = "#496D8F";
 
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`
+});
+
 module.exports = {
   siteMetadata: {
     title: `Architus Docs`,
@@ -9,7 +13,13 @@ module.exports = {
     siteUrl: `https://docs.archit.us`,
     themeColor,
     msTileColor: "#2b5797",
-    githubRoot: "https://github.com/architus/docs.archit.us/tree/master/docs"
+    github: {
+      owner: "architus",
+      name: "docs.archit.us",
+      docsRoot: "docs/",
+      // TODO introspect?
+      branch: "master"
+    }
   },
   pathPrefix: "/",
   plugins: [
@@ -25,6 +35,18 @@ module.exports = {
       options: {
         path: `${__dirname}/data/`,
         name: "data"
+      }
+    },
+    {
+      resolve: "gatsby-source-graphql",
+      options: {
+        typeName: "GitHub",
+        fieldName: "github",
+        url: "https://api.github.com/graphql",
+        headers: {
+          Authorization: `Bearer ${process.env.GITHUB_TOKEN}`
+        },
+        fetchOptions: {}
       }
     },
     {

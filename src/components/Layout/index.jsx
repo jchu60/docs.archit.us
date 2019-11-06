@@ -5,6 +5,7 @@ import classNames from "classnames";
 import Header from "components/Header";
 import Footer from "components/Footer";
 import SideNav from "components/SideNav";
+import Icon from "components/Icon";
 import SEO from "components/SEO";
 import { Navbar } from "react-bootstrap";
 
@@ -30,21 +31,18 @@ function Layout({
   return (
     <>
       <SEO title={title} />
-      <Header
-        {...headerProps}
-        leftChildren={
-          <Navbar.Toggle
-            className="mr-2 mr-sm-3 d-md-none"
-            onClick={expandClick}
-          />
-        }
-      />
+      <Header {...headerProps} />
       <div className={classNames("docs-root", { "show-drawer": showDrawer })}>
         {noDrawer ? null : (
           <div className="docs-root--nav">
             <SideNav navRoot={navRoot} />
           </div>
         )}
+        <div className="drawer-expand">
+          <button className="drawer-expand--button" onClick={expandClick}>
+            {showDrawer ? <Icon name="times" /> : <Icon name="bars" />}
+          </button>
+        </div>
         <button className="docs-root--overlay-button" onClick={closeDrawer} />
         <main className="docs-root--main">
           <div children={children} />

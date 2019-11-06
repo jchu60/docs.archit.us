@@ -13,6 +13,10 @@
     padding-top: 3rem;
     padding-bottom: 4rem;
 
+    @include respond-below(xs) {
+        padding-bottom: 2.5rem;
+    }
+
     h1 {
         font-weight: 600 !important;
     }
@@ -60,6 +64,8 @@
     }
 
     .docs-content {
+        overflow-wrap: break-word;
+
         & > hr {
             opacity: 0.4;
             margin-top: 4rem;
@@ -181,7 +187,8 @@
             position: relative;
         }
 
-        ul, ol {
+        ul,
+        ol {
             li > p {
                 margin-bottom: 0;
             }
@@ -296,5 +303,101 @@
             border: none !important;
             border-radius: 0 !important;
         }
+    }
+}
+
+.metadata {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+
+    @include respond-below(xs) {
+        margin-top: 1.25rem;
+        margin-left: 0.25rem;
+    }
+
+    &--text {
+        color: rgba($-dark, 0.55);
+        font-size: 0.85rem;
+
+        .modified-time {
+            @include respond-below(xs) {
+                display: block;
+            }
+        }
+
+        .edit-link {
+            @include respond-above(xs) {
+                margin-left: 1rem;
+            }
+
+            @include respond-below(xs) {
+                display: block;
+                margin-top: 0.5rem;
+            }
+        }
+    }
+}
+
+.authors {
+    display: inline-flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: flex-start;
+    margin-right: 0.8rem;
+
+    %author-base {
+        width: 32px;
+        height: 32px;
+        margin: 0;
+        display: flex;
+        padding: 0;
+        z-index: 0;
+        position: relative;
+        box-shadow: 0 0 0 2px $-light;
+        border-radius: 128px;
+        border-bottom: none !important;
+
+        div {
+            width: 32px;
+            height: 32px;
+            margin: 0;
+            display: flex;
+            padding: 0;
+            overflow: hidden;
+            position: relative;
+            mask-image: radial-gradient(white, black);
+            align-items: center;
+            border-radius: 128px;
+            justify-content: center;
+        }
+    }
+
+    a {
+        @extend %author-base;
+        border-bottom: none !important;
+
+        img {
+            width: 100%;
+            height: 100%;
+            max-width: 100%;
+            background-size: cover;
+            background-color: $-light;
+            background-repeat: no-repeat;
+        }
+
+        &:not(:first-child) {
+            margin-right: -8px;
+        }
+    }
+
+    &--more {
+        @extend %author-base;
+        background-color: $light-250;
+        align-items: center;
+        justify-content: center;
+        color: $-dark !important;
+        border-bottom: none !important;
     }
 }

@@ -72,7 +72,8 @@ exports.createPages = ({ graphql, actions, reporter }) => {
     overview
     childrenOrder
   `;
-  return graphql(
+
+  const fetchPages = graphql(
     `
       query loadPagesQuery($limit: Int!) {
         allFile(
@@ -94,92 +95,175 @@ exports.createPages = ({ graphql, actions, reporter }) => {
             }
           }
         }
+        site {
+          siteMetadata {
+            github {
+              owner
+              name
+              docsRoot
+              branch
+            }
+          }
+        }
       }
     `,
     { limit: 1000 }
-  ).then(result => {
+  );
+
+  const fetchGithubMetadata = fetchPages.then(result => {
     if (result.errors) {
       activity.end();
       throw result.errors;
     }
 
     activity.end();
-    activity = reporter.activityTimer(`walking navigation tree`);
+    activity = reporter.activityTimer(`fetching github metadata`);
     activity.start();
 
-    // Walk the navigation tree and add each docs page node
-    const navTree = {
-      children: [],
-      // Default root node
-      slug: "",
-      title: "Documentation",
-      isRoot: true,
-      invisible: true
-    };
-    result.data.allFile.edges.forEach(
-      ({
-        node: {
-          relativePath,
-          childMdx: { frontmatter, id }
+    const { data } = result;
+    const { owner, name, docsRoot } = data.site.siteMetadata.github;
+    const paths = data.allFile.edges.map(({ node }) => node.relativePath);
+    const query = `
+      query githubMetadataQuery($owner: String!, $name: String!, $limit: Int!) {
+        github {
+          repository(owner: $owner, name: $name) {
+            object(expression: "master") {
+              ... on GitHub_Commit {
+                ${paths.map(
+                  (p, i) => `f${i.toString()}: history(
+                  first: $limit,
+                  path: "${docsRoot + p}"
+                ) {
+                  nodes {
+                    committedDate
+                    author {
+                      user {
+                        name
+                        avatarUrl
+                        login
+                        url
+                      }
+                    }
+                  }
+                }`
+                )}
+              }
+            }
+          }
         }
-      }) =>
-        walkTree(
-          {
+      }
+    `;
+    return graphql(query, { owner, name, limit: 100 });
+  });
+
+  return Promise.all([fetchPages, fetchGithubMetadata]).then(
+    ([pageResult, githubResult]) => {
+      activity.end();
+      activity = reporter.activityTimer(`walking navigation tree`);
+      activity.start();
+
+      // Walk the navigation tree and add each docs page node
+      const navTree = {
+        children: [],
+        // Default root node
+        slug: "",
+        title: "Documentation",
+        isRoot: true,
+        invisible: true
+      };
+      pageResult.data.allFile.edges.forEach(
+        ({
+          node: {
             relativePath,
-            id,
-            ...frontmatter
-          },
-          navTree
-        )
-    );
+            childMdx: { frontmatter, id }
+          }
+        }) =>
+          walkTree(
+            {
+              relativePath,
+              id,
+              ...frontmatter
+            },
+            navTree
+          )
+      );
 
-    activity.end();
-    activity = reporter.activityTimer(`adding defaults to nav tree nodes`);
-    activity.start();
-    addDefaults(navTree);
+      activity.end();
+      activity = reporter.activityTimer(`adding defaults to nav tree nodes`);
+      activity.start();
+      addDefaults(navTree);
 
-    activity.end();
-    activity = reporter.activityTimer(`separating nav roots`);
-    activity.start();
-    const roots = collectRoots(navTree);
+      if (!githubResult.errors) {
+        activity.end();
+        activity = reporter.activityTimer(
+          `attaching github metadata to doc pages`
+        );
+        activity.start();
 
-    activity.end();
-    activity = reporter.activityTimer(`assembling breadcrumbs`);
-    activity.start();
-    roots.forEach(root => assembleBreadcrumbs(root, []));
+        // GraphQL result object
+        const nodes = githubResult.data.github.repository.object;
 
-    activity.end();
-    activity = reporter.activityTimer(`ordering children`);
-    activity.start();
-    roots.forEach(root => orderChildren(root, 0));
+        // Map object to array with indices
+        let array = new Array(pageResult.data.allFile.edges.length);
+        const entries = Object.entries(nodes);
+        for (const [key, node] of entries) {
+          const decodedKey = parseInt(key.substring(1));
+          array[decodedKey] = node.nodes;
+        }
 
-    activity.end();
-    activity = reporter.activityTimer(`dynamically generating docs pages`);
-    activity.start();
-    function createSubtreePages(subtree, root) {
-      if (!subtree.invisible) {
-        createPage({
-          path: subtree.path,
-          component: DocsPageTemplate,
-          context: { ..._.omit(subtree, "path"), navRoot: root }
+        // Assemble path -> metadata map
+        const paths = pageResult.data.allFile.edges.map(({ node }) => node.relativePath);
+        let map = new Object();
+        array.forEach((v, i) => {
+          map[paths[i]] = v;
         });
 
-        const debugMessage = `docs page @ '${subtree.path}' ${
-          subtree.invisible
-            ? ""
-            : subtree.isOrphan
-            ? "(orphan)"
-            : `=> ${subtree.id}`
-        }`;
-        debug(reporter, debugMessage);
+        attachHistory(navTree, map);
       }
 
-      subtree.children.forEach(child => createSubtreePages(child, root));
-    }
-    roots.forEach(root => createSubtreePages(root, root));
+      activity.end();
+      activity = reporter.activityTimer(`separating nav roots`);
+      activity.start();
+      const roots = collectRoots(navTree);
 
-    activity.end();
-  });
+      activity.end();
+      activity = reporter.activityTimer(`assembling breadcrumbs`);
+      activity.start();
+      roots.forEach(root => assembleBreadcrumbs(root, []));
+
+      activity.end();
+      activity = reporter.activityTimer(`ordering children`);
+      activity.start();
+      roots.forEach(root => orderChildren(root, 0));
+
+      activity.end();
+      activity = reporter.activityTimer(`dynamically generating docs pages`);
+      activity.start();
+      function createSubtreePages(subtree, root) {
+        if (!subtree.invisible) {
+          createPage({
+            path: subtree.path,
+            component: DocsPageTemplate,
+            context: { ..._.omit(subtree, "path"), navRoot: root }
+          });
+
+          const debugMessage = `docs page @ '${subtree.path}' ${
+            subtree.invisible
+              ? ""
+              : subtree.isOrphan
+              ? "(orphan)"
+              : `=> ${subtree.id}`
+          }`;
+          debug(reporter, debugMessage);
+        }
+
+        subtree.children.forEach(child => createSubtreePages(child, root));
+      }
+      roots.forEach(root => createSubtreePages(root, root));
+
+      activity.end();
+    }
+  );
 };
 
 exports.onCreateWebpackConfig = ({ actions }) => {
@@ -271,11 +355,39 @@ function addDefaults(subtree) {
   // originalPath = relativePath
   if (subtree.relativePath != null) subtree.originalPath = subtree.relativePath;
 
+  // history default
+  subtree.history = null;
+
   delete subtree.overrideBreadcrumb;
   delete subtree.overrideNav;
   delete subtree.relativePath;
 
   subtree.children.forEach(addDefaults);
+}
+
+function attachHistory(subtree, metadataMap) {
+  if (metadataMap.hasOwnProperty(subtree.originalPath)) {
+    const metadata = metadataMap[subtree.originalPath];
+    const lastModified =
+      metadata.length >= 0 ? new Date(metadata[0].committedDate) : new Date();
+
+    // Build authors list
+    let authors = [];
+    let logins = new Set();
+    metadata.forEach(({ author: { user } }) => {
+      if (!logins.has(user.login)) {
+        logins.add(user.login);
+        authors.push(user);
+      }
+    });
+
+    subtree.history = {
+      lastModified: lastModified.toString(),
+      authors
+    };
+  }
+
+  subtree.children.forEach(s => attachHistory(s, metadataMap));
 }
 
 function collectRoots(navTree) {
