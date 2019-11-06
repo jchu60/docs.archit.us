@@ -7,7 +7,6 @@ import Footer from "components/Footer";
 import SideNav from "components/SideNav";
 import Icon from "components/Icon";
 import SEO from "components/SEO";
-import { Navbar } from "react-bootstrap";
 
 import "scss/main.scss";
 import "./style.scss";
