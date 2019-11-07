@@ -4,6 +4,7 @@ import Container from "components/Container";
 import Route from "components/Route";
 import Link from "components/Link";
 import Collapse from "components/Collapse";
+import ExternalSnippet from "components/ExternalSnippet";
 import createHeading from "components/Heading";
 
 const components = {
@@ -11,6 +12,7 @@ const components = {
   Container,
   Route,
   Collapse,
+  ExternalSnippet,
   a: Link,
   h1: createHeading({ component: "h1" }),
   h2: createHeading({ component: "h2" }),

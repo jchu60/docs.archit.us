@@ -201,7 +201,7 @@ Each of the following functions works with Discord entities, and examines whethe
 
 ## Example Schema
 
-<Collapse>
+<Collapse unwrap>
 
 `embed:internal/settings/example-schema.json`
 
