@@ -8,7 +8,7 @@ Same as discord [guild](https://discordapp.com/developers/docs/resources/guild#g
 | Field  | Type                                          | Description                                                                   |
 | ------ | --------------------------------------------- | ----------------------------------------------------------------------------- |
 | has_architus | boolean | whether Architus is a member of the guild |
-| architus_admin | booloan | whether the user is an Architus admin in the guild |
+| architus_admin | boolean | whether the user is an Architus admin in the guild |
 
 ###### Guild Example
 ```

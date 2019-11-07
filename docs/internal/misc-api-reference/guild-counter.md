@@ -6,7 +6,7 @@ title: Guild Counter
 
 <Route method="GET" path="/guild_count" />
 
-Return number of guilds Architus is a member of and the sum of their members.
+Return number of guilds in which Architus is a member and the sum of their members.
 
 ###### Example Response
 ```

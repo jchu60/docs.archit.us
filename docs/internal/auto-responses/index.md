@@ -10,7 +10,7 @@ title: Auto Responses
   3. Begins with `^` and ends with `$`: matches a regex
      - Implement in future release?
      - How to prevent catastrophic backtracking/ReDoS?
-       - Look into implementing with [rure library](https://pypi.org/project/rure/)
+       - Look into implementing with [rure library](https://pypi.org/project/rure/) or maybe google's [re2](https://pypi.org/project/re2/)
      - `^.*aba.*$`
        - Makes it opt-in to have "glue" instead of opt-out for better default performance
      - Don't really need to escape anything
@@ -55,8 +55,8 @@ Only `text` fragments will be used for the mode assignment heuristic and the sen
 | id      | hoar frost | unique [hoar frost ID](../general/#hoar-frost) for the auto response          |
 | trigger | string | **original** trigger from command/added response |
 | trigger_regex | regex | derived regular expression from (escaped) trigger text |
-| trigger_punctuation | tuple | list of punctuation that a sensitive trigger cares about |
-| response | string | response text to use upon invokation |
+| trigger_punctuation | array | list of punctuation that a sensitive trigger cares about |
+| response | string | **original** response from command/added response |
 | response_ast | json string | lexed and parsed response |
 | mode | string enum          | type of matching mode to use. One of `["naive", "punctuated", "regex"]`              |
 | author_id | snowflake | user id of the author |
@@ -83,12 +83,16 @@ Consider implementing internal maximum length of trigger restriction to prevent 
 
 Have priority be a function of mode and author (admin or not)
 
+- This is irrelevant if collisions are impossible
+
 ### UI Context view
 
 Include info about previous conflicts & previous triggers (integration with logs)
 
 ### Command Conflicting
 
-Include alert on website; link to commands that were overshadowed by the current command (directed graph). Can't use attribute on auto response object. Consider using another table?
+~~Include alert on website; link to commands that were overshadowed by the current command (directed graph). Can't use attribute on auto response object. Consider using another table?~~
+
+Check for collisions when trigger regex is generated? [potential resource](https://qntm.org/greenery). This option might require a limit on responses per guild depending on how expensive it is to check.
 
 **Todo: determine this**
