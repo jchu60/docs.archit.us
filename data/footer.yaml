@@ -1,0 +1,13 @@
+links:
+  - href: https://status.archit.us/
+    text: Status
+  - href: /
+    text: Usage Documentation
+  - href: /internal/
+    text: Internal Documentation
+  - href: https://storybook.archit.us/
+    text: Storybook Documentation
+  - href: https://archit.us/
+    text: Main App
+  - href: https://develop.archit.us/
+    text: Main App (Canary)

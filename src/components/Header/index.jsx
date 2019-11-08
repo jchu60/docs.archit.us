@@ -10,17 +10,20 @@ import LogoSvg from "assets/logo.svg";
 import "./style.scss";
 
 function Header({ sticky, leftChildren, ...rest }) {
-  const links = useStaticQuery(graphql`
+  const { links, rightLinks } = useStaticQuery(graphql`
     query HeaderLinks {
       file(name: { eq: "header" }, extension: { in: ["yaml", "yml"] }) {
         childDataYaml {
           links {
             ...Links
           }
+          rightLinks {
+            ...Links
+          }
         }
       }
     }
-  `).file.childDataYaml.links;
+  `).file.childDataYaml;
 
   return (
     <Navbar
@@ -40,6 +43,16 @@ function Header({ sticky, leftChildren, ...rest }) {
             {links.map(({ href, ...rest }) => (
               <Nav.Link
                 as={Link}
+                href={href}
+                {...rest}
+                key={href}
+                partiallyActive={false}
+              />
+            ))}
+          </Nav>
+          <Nav className="right-links">
+            {rightLinks.map(({ href, ...rest }) => (
+              <Link
                 href={href}
                 {...rest}
                 key={href}

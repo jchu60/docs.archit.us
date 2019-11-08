@@ -6,6 +6,7 @@ import Link from "components/Link";
 import Route from "components/Route";
 import Alert from "components/Alert";
 import Collapse from "components/Collapse";
+import Overview from "components/Overview"
 import Container from "components/Container";
 import createHeading from "components/Heading";
 import ExternalSnippet from "components/ExternalSnippet";
@@ -18,6 +19,7 @@ const components = {
   Route,
   Alert,
   Collapse,
+  Overview,
   Container,
   ExternalSnippet,
 

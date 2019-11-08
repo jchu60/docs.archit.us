@@ -6,3 +6,9 @@ links:
   - href: "https://archit.us/"
     newTab: false
     text: Main App
+
+rightLinks:
+  - href: "https://discord.gg/svrRrSe"
+    icon: discord
+  - href: "https://github.com/architus"
+    icon: github

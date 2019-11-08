@@ -34,7 +34,6 @@ exports.sourceNodes = ({ actions, reporter }) => {
       overrideNav: String
       noTOC: Boolean
       isRoot: Boolean
-      overview: Boolean
       noBreadcrumb: Boolean
       childrenOrder: [String]
       links: [Link]
@@ -47,6 +46,7 @@ exports.sourceNodes = ({ actions, reporter }) => {
     }
     type DataYaml implements Node {
       links: [Link]
+      rightLinks: [Link]
     }
   `;
   createTypes(linkSchema);
@@ -69,7 +69,6 @@ exports.createPages = ({ graphql, actions, reporter }) => {
     noBreadcrumb
     noTOC
     isRoot
-    overview
     childrenOrder
   `;
 

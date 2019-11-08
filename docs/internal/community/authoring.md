@@ -19,13 +19,27 @@ overrideBreadcrumb: Breadcrumb segment title (falls back to shortTitle)
 // Switches
 noTOC: Disables a table of contents on the right side
 noBreadcrumb: Disables the breadcrumb bar at the top
-overview: Whether this page should show a "In this section" segment
 isRoot: Whether this page should form the root of a subtree (appear as its own top-level heading in the side nav)
 // Misc
 childrenOrder: Used to specify explicit ordering of direct children pages (by slug)
 ```
 
-Page content can be specified using standard markdown format:
+Page content can be specified using standard markdown format, with additional [MDX elements](#mdx-elements) available to enhance docs layout and semantics.
+
+### Page Generation
+
+Docs pages are generated for each path segment in the entire navigation tree created by all docs `.md` pages. This means that if, for example, there were 2 markdown files in the `/docs` folder:
+
+```
+/docs/
+├── pathA/
+│   └── pathB/
+│       └── index.md
+└── index.md
+```
+
+Then, there would be **three generated docs pages**: `/`, `/pathA`, and `pathB`. In this case, `pathB` would be designated as an *orphan page* because it doesn't have a corresponding markdown file for content. In this mode, it will only contain an auto-generated title from the path segment as well as an [In This Section `<Overview>`](#overview) component.
+
 
 ## Headings
 
@@ -63,10 +77,10 @@ Page content can be specified using standard markdown format:
 <Demo>
 
 ```md
-> Blockquote
+> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent elementum egestas pretium. Proin laoreet arcu et scelerisque facilisis. In hac habitasse platea dictumst. Curabitur ut eleifend dui. Morbi eu congue ipsum. Proin fermentum dui hendrerit, mattis ligula id, pharetra lacus. Pellentesque sodales nibh et auctor maximus. Donec sed mauris odio. 
 ```
 
-> Blockquote
+> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent elementum egestas pretium. Proin laoreet arcu et scelerisque facilisis. In hac habitasse platea dictumst. Curabitur ut eleifend dui. Morbi eu congue ipsum. Proin fermentum dui hendrerit, mattis ligula id, pharetra lacus. Pellentesque sodales nibh et auctor maximus. Donec sed mauris odio. 
 
 </Demo>
 
@@ -150,6 +164,96 @@ To add new ones, a component can be authored and then included in the [MDX scope
 <Route method="METHOD" path="/route/{parameter}/segment" auth />
 </Demo>
 
+### Overview
+
+The `<Overview>` component can be used to provide an overview of a page's children in the navigation tree.
+
+<Demo>
+
+```jsx
+<Overview />
+```
+
+<div className="seamless-image">
+
+![In This Section](./in-this-section.png)
+
+</div>
+</Demo>
+
+### Alerts
+
+Alerts are a block-level wrapper element that can be used to give emphasis or semantic information to a block of content depending on the *type* of alert used.
+
+<Demo>
+
+```jsx
+<Alert type="info">
+
+**Informative** content here, such as general tips or bits of info
+
+</Alert>
+```
+
+<Alert type="info">
+
+**Informative** content here, such as general tips or bits of info
+
+</Alert>
+
+</Demo>
+<Demo>
+
+```jsx
+<Alert type="warning">
+
+**Cautious** content here, such as general warnings against bad practices or incorrect usage 
+
+</Alert>
+```
+
+<Alert type="warning">
+
+**Cautious** content here, such as general warnings against bad practices or incorrect usage 
+
+</Alert>
+
+</Demo>
+<Demo>
+
+```jsx
+<Alert type="error">
+
+**Error** content here, such as important scenarios to avoid or errors that might occur in the process
+
+</Alert>
+```
+
+<Alert type="error">
+
+**Error** content here, such as important scenarios to avoid or errors that might occur in the process
+
+</Alert>
+
+</Demo>
+<Demo>
+
+```jsx
+<Alert type="success">
+
+**Success** content here, such as success scenarios or ways to tell if an action was successful
+
+</Alert>
+```
+
+<Alert type="success">
+
+**Success** content here, such as success scenarios or ways to tell if an action was successful
+
+</Alert>
+
+</Demo>
+
 ### Collapse
 
 <Demo>
@@ -190,11 +294,13 @@ function resolveTypeClass(name) {
 </Collapse>
 </Demo>
 
-### Internal Snippet
+### Snippets
+
+#### Internal Snippet
 
 Snippets from the local repository can be embedded on the site (either inside a `<Collapse>` component or outside) via the following syntax:
 
-#### Inside Collapse
+##### Inside Collapse
 
 <Demo>
 
@@ -213,7 +319,7 @@ Snippets from the local repository can be embedded on the site (either inside a 
 </Collapse>
 </Demo>
 
-#### Outside Collapse
+##### Outside Collapse
 
 <Demo>
 
@@ -225,7 +331,7 @@ Snippets from the local repository can be embedded on the site (either inside a 
 
 </Demo>
 
-### External Snippet
+#### External Snippet
 
 Snippets from online sources can be asynchronously loaded onto the page upon render. This means that they can be updated independently of the module build. 
 
@@ -239,7 +345,7 @@ import "prismjs/components/prism-python.js";
 
 </Alert>
 
-#### Inside Collapse
+##### Inside Collapse
 
 <Demo>
 
@@ -259,7 +365,7 @@ import "prismjs/components/prism-python.js";
 
 </Demo>
 
-#### Outside Collapse
+##### Outside Collapse
 
 <Demo>
 
@@ -273,4 +379,3 @@ import "prismjs/components/prism-python.js";
 
 <ExternalSnippet src="https://gist.githubusercontent.com/jazevedo620/a28cdc92a624c290ccf91541b418bdae/raw/1bfef7f4fb49df08d3685611354b71bd9424d4a6/app.py" language="python" />
 </Demo>
-

@@ -183,3 +183,14 @@ input[type="text"] {
 
 @include generate-color-classes(($dark-shades), bg, background-color);
 @include generate-color-classes(($light-shades), bg, background-color);
+
+.seamless-image {
+    .gatsby-resp-image-wrapper {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        overflow: hidden;
+        margin-left: 0 !important;
+    }
+}

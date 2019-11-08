@@ -5,13 +5,14 @@ import { graphql } from "gatsby";
 import { isDefined, addMissingUnit, multiplyDimension } from "utility";
 import moment from "moment";
 
-import Breadcrumb from "components/Breadcrumb";
-import Layout from "components/Layout";
 import Mdx from "components/Mdx";
-import TableOfContents from "components/TableOfContents";
 import Link from "components/Link";
 import Icon from "components/Icon";
+import Layout from "components/Layout";
 import Tooltip from "components/Tooltip";
+import Overview from "components/Overview";
+import Breadcrumb from "components/Breadcrumb";
+import TableOfContents from "components/TableOfContents";
 
 import "./style.scss";
 
@@ -46,14 +47,13 @@ function DocsPageTemplate({
     noTOC,
     noBreadcrumb,
     originalPath,
-    overview,
     children,
     history
   }
 }) {
   const { owner, name, branch, docsRoot } = data.site.siteMetadata.github;
   const githubRoot = `https://github.com/${owner}/${name}/blob/${branch}/${docsRoot}`;
-  const showOverview = (isOrphan || overview) && children.length > 0;
+  const showOverview = isOrphan && children.length > 0;
   const contentRoot = data.mdx;
   const hasContent = isDefined(contentRoot);
   const showTOC = !noTOC && !isOrphan && hasContent;
@@ -75,39 +75,30 @@ function DocsPageTemplate({
           noTOC={!showTOC}
           tableOfContents={showTOC ? contentRoot.tableOfContents : null}
         >
-          {!isOrphan && isDefined(contentRoot) && (
-            <Mdx content={contentRoot.body} />
-          )}
-          {showOverview && (
-            <>
-              <h2>In this section</h2>
-              <ul>
-                {children.map(({ title, path, slug }) => (
-                  <li key={slug}>
-                    <Link href={path}>{title}</Link>
-                  </li>
-                ))}
-              </ul>
-            </>
-          )}
-          {!isOrphan && (
-            <>
-              <hr />
-              <div className="metadata">
-                <Authors authors={history.authors} />
-                <span className="metadata--text">
-                  <span className="modified-time">
-                    Last modified{" "}
-                    {moment(new Date(history.lastModified)).fromNow()}
+          <Overview.PageContext.Provider value={children}>
+            {!isOrphan && isDefined(contentRoot) && (
+              <Mdx content={contentRoot.body} />
+            )}
+            {showOverview && <Overview />}
+            {!isOrphan && (
+              <>
+                <hr />
+                <div className="metadata">
+                  <Authors authors={history.authors} />
+                  <span className="metadata--text">
+                    <span className="modified-time">
+                      Last modified{" "}
+                      {moment(new Date(history.lastModified)).fromNow()}
+                    </span>
+                    <Link href={link} className="edit-link">
+                      <Icon name="pencil-alt" className="mr-2" />
+                      Edit this page on GitHub
+                    </Link>
                   </span>
-                  <Link href={link} className="edit-link">
-                    <Icon name="pencil-alt" className="mr-2" />
-                    Edit this page on GitHub
-                  </Link>
-                </span>
-              </div>
-            </>
-          )}
+                </div>
+              </>
+            )}
+          </Overview.PageContext.Provider>
         </ContentWrapper>
       </article>
     </Layout>
