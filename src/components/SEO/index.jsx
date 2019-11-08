@@ -76,6 +76,10 @@ function SEO({ description, lang, meta, title }) {
           property: `og:description`,
           content: metaDescription
         },
+        {
+          property: `og:site_name`,
+          content: globalTitle
+        },
         // Twitter
         {
           name: "twitter:card",

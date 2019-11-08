@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useMemo } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { graphql } from "gatsby";
-import { isDefined, addMissingUnit, multiplyDimension } from "utility";
+import {
+  isDefined,
+  addMissingUnit,
+  multiplyDimension,
+  isEmptyOrNil
+} from "utility";
 import moment from "moment";
 
 import Mdx from "components/Mdx";
@@ -22,6 +27,7 @@ export const pageQuery = graphql`
       body
       tableOfContents(maxDepth: 4)
       excerpt(pruneLength: 250)
+      mdxAST
     }
     site {
       siteMetadata {
@@ -58,11 +64,18 @@ function DocsPageTemplate({
   const hasContent = isDefined(contentRoot);
   const showTOC = !noTOC && !isOrphan && hasContent;
   const link = githubRoot + originalPath;
+
+  // Find lead text
+  const lead = useMemo(() => hasContent && findLead(contentRoot.mdxAST), [
+    contentRoot.mdxAST
+  ]);
+  console.log(lead);
+
   return (
     <Layout
       title={shortTitle}
       navRoot={navRoot}
-      description={hasContent ? contentRoot.excerpt : null}
+      description={isEmptyOrNil(lead) ? null : lead}
     >
       <article
         className={classNames("container docs-root--content", {
@@ -214,3 +227,40 @@ More.propTypes = {
   amount: PropTypes.number,
   fontSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 };
+
+// ? =================
+// ? Utility functions
+// ? =================
+
+function aggregateText(node) {
+  function walkNode(node, accumulator) {
+    if (node.type === "text") {
+      accumulator.current += node.value;
+    } else if (isDefined(node.children)) {
+      node.children.forEach(n => walkNode(n, accumulator));
+    }
+    return accumulator;
+  }
+  return walkNode(node, { current: "" }).current;
+}
+
+function findLead(ast) {
+  function findText(node, resultWrapper) {
+    for (let child of node.children) {
+      if (isDefined(resultWrapper.current)) break;
+      else if (child.type === "paragraph") {
+        if (isDefined(child.children)) {
+          const content = aggregateText(child);
+          if (content.length >= 20) {
+            resultWrapper.current = content;
+            break;
+          }
+        }
+      } else {
+        findText(child, resultWrapper);
+      }
+    }
+    return resultWrapper;
+  }
+  return findText(ast, { current: null }).current;
+}

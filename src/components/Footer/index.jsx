@@ -22,8 +22,8 @@ function Footer() {
     <div className="footer">
       <ul className="footer--inner">
         {links.map(({ href, ...rest }) => (
-          <li>
-            <Link key={href} href={href} {...rest} />
+          <li key={href}>
+            <Link href={href} {...rest} />
           </li>
         ))}
       </ul>
