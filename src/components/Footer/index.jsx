@@ -13,7 +13,7 @@ function Footer() {
     <div className="footer">
       <div className="footer--inner">
         <Row>
-          <Col sm={12} lg={6}>
+          <Col sm={6}>
             <FooterPanel header="About" className="about">
               <p>
                 Architus is a multipurpose Discord bot empowering both admins
@@ -22,13 +22,13 @@ function Footer() {
               </p>
             </FooterPanel>
           </Col>
-          <Col sm={6} lg={3}>
+          <Col sm={2}>
             <FooterPanel header="Links">
               <Link href="https://status.archit.us/">Status</Link>
               <Link href="/">Docs</Link>
             </FooterPanel>
           </Col>
-          <Col sm={6} lg={3}>
+          <Col sm={4}>
             <FooterPanel header="Connect">
               <Link href="https://github.com/architus">
                 <Icon name="github" className="icon" />

@@ -22,7 +22,7 @@
         margin: 0 auto;
     }
 
-    @include respond-below(md) {
+    @include respond-below(xs) {
         text-align: center;
 
         hr {
@@ -69,7 +69,7 @@
     }
 
     .row > :not(:last-child) {
-        @include respond-below(md) {
+        @include respond-below(sm) {
             margin-bottom: 2.5rem;
         }
     }

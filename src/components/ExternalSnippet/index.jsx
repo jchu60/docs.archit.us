@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import { useEffectOnce, isDefined } from "utility";
 import Prism from "prismjs";
+import "../../languages";
 
 import { Spinner } from "react-bootstrap";
 
@@ -37,7 +38,10 @@ function ExternalSnippet({ src, language, prismLanguage }) {
     <div className="gatsby-highlight">
       {isLoaded ? (
         <pre className={`language-${language}`}>
-          <code className={`language-${language}`}>{highlighted}</code>
+          <code
+            className={`language-${language}`}
+            dangerouslySetInnerHTML={{ __html: highlighted }}
+          />
         </pre>
       ) : (
         <div className="highlighted-placeholder">

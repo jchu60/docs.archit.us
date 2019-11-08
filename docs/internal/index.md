@@ -6,11 +6,11 @@ noBreadcrumb: true
 overrideNav: Implementation Docs
 ---
 
-<div style={{ marginTop: "-1rem" }} />
+This folder contains implementation documentation for the architus ecosystem, including the microservice-based backend application as well as the React-based web dashboard. The entire site was built in Gatsby.js, React, and MDX, and the source can be found [on GitHub](https://github.com/architus/docs.archit.us).
+
+<!-- <div style={{ marginTop: "-1rem" }} /> -->
 
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Farchitus%2Fdocs.archit.us.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Farchitus%2Fdocs.archit.us?ref=badge_shield) [![Build Status](https://travis-ci.org/architus/docs.archit.us.svg?branch=master)](https://travis-ci.org/architus/docs.archit.us) [![Website Uptime](https://img.shields.io/uptimerobot/ratio/7/m783218822-e416787a37a1f22b540d0654.svg?label=website%20uptime)](https://status.archit.us/) [![Netlify Status](https://api.netlify.com/api/v1/badges/8ee5067a-c5a8-4309-9167-2cfe8b8d4cb3/deploy-status)](https://app.netlify.com/sites/architus-docs/deploys) [![Github](https://img.shields.io/badge/GitHub-docs.archit.us-green)](https://github.com/architus/docs.archit.us) [![Discord Server](https://img.shields.io/discord/607637793107345431?color=7289DA&logo=discord&logoColor=white)](https://discord.gg/FpyhED)
-
-> Implementation documentation for the architus ecosystem, including the microservice-based backend application as well as the React-based web dashboard. Built in Gatsby.js, React, and MDX
 
 ## 🔗 Quick Links
 

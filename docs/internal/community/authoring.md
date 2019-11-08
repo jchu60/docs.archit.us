@@ -2,6 +2,8 @@
 title: Authoring
 ---
 
+Docs.archit.us is made possible through contributors made by project maintainers and community members. Each page corresponds to a Markdown file and can be edited via GitHub to then appear on the public site once the build completes.
+
 This site contains both public-facing usage documentation and internal implementation documentation intended for contributors. As such, the pages are divided into two navigation trees: those under `/docs/internal/` and the remainder under the docs root (`/docs/`). Each appears separately on the side nav to the left.
 
 ## File format
@@ -27,6 +29,8 @@ Page content can be specified using standard markdown format:
 
 ## Headings
 
+<Demo>
+
 ```md
 # h1 - Lorem ipsum
 
@@ -41,30 +45,35 @@ Page content can be specified using standard markdown format:
 ###### h6 - Lorem ipsum
 ```
 
-# h1 - Lorem ipsum
-
-## h2 - Lorem ipsum
-
-### h3 - Lorem ipsum
-
-#### h4 - Lorem ipsum
-
-##### h5 - Lorem ipsum
-
-###### h6 - Lorem ipsum
+<div>
+{/* These are html elements to prevent them from being added to ToC */}
+<h1 style={{marginTop: 0}}>h1 - Lorem ipsum</h1>
+<h2>h2 - Lorem ipsum</h2>
+<h3>h3 - Lorem ipsum</h3>
+<h4>h4 - Lorem ipsum</h4>
+<h5>h5 - Lorem ipsum</h5>
+<h6>h6 - Lorem ipsum</h6>
+</div>
+</Demo>
 
 ## Elements
 
 ### Blockquote
 
+<Demo>
+
 ```md
 > Blockquote
 ```
 
 > Blockquote
+
+</Demo>
 
 ### Lists
 
+<Demo>
+
 ```md
 - Unordered
 - list
@@ -72,6 +81,9 @@ Page content can be specified using standard markdown format:
 
 - Unordered
 - list
+
+</Demo>
+<Demo>
 
 ```md
 1. Ordered
@@ -81,19 +93,45 @@ Page content can be specified using standard markdown format:
 1. Ordered
 2. list
 
-### Code block
+</Demo>
+
+### Code Block
+
+<Demo>
 
 ~~~md
-```language
-code block
+```py
+async def all_guilds(self):
+    """Return information about all guilds that the bot is in, including their admins"""
+    guilds = []
+    for shard, shard_store in self.store.items():
+        guilds += shard_store.get('guilds', ())
+    return guilds
 ```
 ~~~
 
-```md
-`inline` code block
+```py
+async def all_guilds(self):
+    """Return information about all guilds that the bot is in, including their admins"""
+    guilds = []
+    for shard, shard_store in self.store.items():
+        guilds += shard_store.get('guilds', ())
+    return guilds
 ```
 
-`inline` code block
+</Demo>
+
+#### Inline Code Block
+
+<Demo>
+
+```md
+`src/manager/app.py` is the main application file for the shard manager
+```
+
+`src/manager/app.py` is the main application file for the shard manager
+
+</Demo>
 
 ## MDX elements
 
@@ -103,16 +141,22 @@ To add new ones, a component can be authored and then included in the [MDX scope
 
 ### Route
 
+<Demo>
+
 ```jsx
 <Route method="METHOD" path="/route/{parameter}/segment" auth />
 ```
 
 <Route method="METHOD" path="/route/{parameter}/segment" auth />
+</Demo>
 
 ### Collapse
 
+<Demo>
+
 ~~~jsx
 <Collapse>
+
 ```js
 function resolveTypeClass(name) {
   let foundClass = "fas"; // default
@@ -125,22 +169,108 @@ function resolveTypeClass(name) {
   return foundClass;
 }
 ```
+
+</Collapse>
+~~~
+<Collapse>
+
+```js
+function resolveTypeClass(name) {
+  let foundClass = "fas"; // default
+  for (var typeClass in typeResolutionMap) {
+    if (typeResolutionMap[typeClass].includes(name)) {
+      foundClass = typeClass;
+      break;
+    }
+  }
+  return foundClass;
+}
+```
+
+</Collapse>
+</Demo>
+
+### Internal Snippet
+
+Snippets from the local repository can be embedded on the site (either inside a `<Collapse>` component or outside) via the following syntax:
+
+#### Inside Collapse
+
+<Demo>
+
+~~~md
+<Collapse>
+
+`embed:internal/community/example-include.py`
+
 </Collapse>
 ~~~
 
 <Collapse>
 
-```js
-function resolveTypeClass(name) {
-  let foundClass = "fas"; // default
-  for (var typeClass in typeResolutionMap) {
-    if (typeResolutionMap[typeClass].includes(name)) {
-      foundClass = typeClass;
-      break;
-    }
-  }
-  return foundClass;
-}
-```
+`embed:internal/community/example-include.py`
 
 </Collapse>
+</Demo>
+
+#### Outside Collapse
+
+<Demo>
+
+```md
+`embed:internal/community/example-include.py`
+```
+
+`embed:internal/community/example-include.py`
+
+</Demo>
+
+### External Snippet
+
+Snippets from online sources can be asynchronously loaded onto the page upon render. This means that they can be updated independently of the module build. 
+
+<Alert type="warning">
+
+Without static syntax highlighting, extra steps must be taken to enable proper highlighting at runtime. This comes in the form of adding language imports to `/src/languages.js`. For example, to enable python, the following line must be added to `languages.js`:
+
+```js
+import "prismjs/components/prism-python.js";
+```
+
+</Alert>
+
+#### Inside Collapse
+
+<Demo>
+
+```jsx
+<Collapse>
+  <ExternalSnippet
+    src={"https://gist.githubusercontent.com/jazevedo620/a28cdc92a624c290ccf91541b418bdae/"
+       + "raw/1bfef7f4fb49df08d3685611354b71bd9424d4a6/app.py"}
+    language="python"
+  />
+</Collapse>
+```
+
+<Collapse>
+<ExternalSnippet src="https://gist.githubusercontent.com/jazevedo620/a28cdc92a624c290ccf91541b418bdae/raw/1bfef7f4fb49df08d3685611354b71bd9424d4a6/app.py" language="python" />
+</Collapse>
+
+</Demo>
+
+#### Outside Collapse
+
+<Demo>
+
+```jsx
+<ExternalSnippet
+  src={"https://gist.githubusercontent.com/jazevedo620/a28cdc92a624c290ccf91541b418bdae/"
+     + "raw/1bfef7f4fb49df08d3685611354b71bd9424d4a6/app.py"}
+  language="python"
+/>
+```
+
+<ExternalSnippet src="https://gist.githubusercontent.com/jazevedo620/a28cdc92a624c290ccf91541b418bdae/raw/1bfef7f4fb49df08d3685611354b71bd9424d4a6/app.py" language="python" />
+</Demo>
+

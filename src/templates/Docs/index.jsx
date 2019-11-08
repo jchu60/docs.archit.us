@@ -20,6 +20,7 @@ export const pageQuery = graphql`
     mdx(id: { eq: $id }) {
       body
       tableOfContents(maxDepth: 4)
+      excerpt(pruneLength: 250)
     }
     site {
       siteMetadata {
@@ -54,10 +55,15 @@ function DocsPageTemplate({
   const githubRoot = `https://github.com/${owner}/${name}/blob/${branch}/${docsRoot}`;
   const showOverview = (isOrphan || overview) && children.length > 0;
   const contentRoot = data.mdx;
-  const showTOC = !noTOC && !isOrphan && isDefined(contentRoot);
+  const hasContent = isDefined(contentRoot);
+  const showTOC = !noTOC && !isOrphan && hasContent;
   const link = githubRoot + originalPath;
   return (
-    <Layout title={shortTitle} navRoot={navRoot}>
+    <Layout
+      title={shortTitle}
+      navRoot={navRoot}
+      description={hasContent ? contentRoot.excerpt : null}
+    >
       <article
         className={classNames("container docs-root--content", {
           "with-toc": showTOC

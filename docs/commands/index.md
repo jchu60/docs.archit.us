@@ -2,6 +2,8 @@
 title: Commands
 ---
 
+Architus commands are the primary way of interacting with the bot through the Discord client itself. Note that custom commands can be set using the [auto response feature](./features/auto-responses);
+
 ## Auto Responses
 
 * `set` - Sets a custom command

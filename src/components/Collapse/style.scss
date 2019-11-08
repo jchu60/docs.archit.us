@@ -5,6 +5,7 @@
 .docs-collapse {
     $this: &;
     position: relative;
+    margin-bottom: 1rem;
 
     &--button {
         @extend %button-blank;
@@ -18,7 +19,6 @@
 
         box-shadow: $drop-shadow-0;
         background-color: $light-500;
-        margin-bottom: 1rem;
         padding: 0.75rem 1.25rem;
         transform: translateY(0);
 

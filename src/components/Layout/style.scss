@@ -141,13 +141,14 @@ $minimized-width: 285px;
     }
 
     &--button {
+        $size: 56px;
         @extend %button-blank;
         pointer-events: all;
         position: fixed;
         bottom: 24px;
         right: 24px;
-        width: 48px;
-        height: 48px;
+        width: $size;
+        height: $size;
         background-color: $-primary;
         border-radius: 20rem;
         color: white;

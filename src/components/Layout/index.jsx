@@ -18,7 +18,8 @@ function Layout({
   footerProps,
   footer,
   navRoot,
-  noDrawer
+  noDrawer,
+  description
 }) {
   // Nav drawer logic
   const [showDrawer, setShowDrawer] = useState(false);
@@ -29,7 +30,7 @@ function Layout({
 
   return (
     <>
-      <SEO title={title} />
+      <SEO title={title} description={description} />
       <Header {...headerProps} />
       <div className={classNames("docs-root", { "show-drawer": showDrawer })}>
         {noDrawer ? null : (
@@ -68,13 +69,15 @@ Layout.propTypes = {
     PropTypes.arrayOf(PropTypes.node)
   ]),
   navRoot: PropTypes.object,
-  noDrawer: PropTypes.bool
+  noDrawer: PropTypes.bool,
+  description: PropTypes.string
 };
 
 Layout.defaultProps = {
   headerProps: {},
   footerProps: {},
-  noDrawer: false
+  noDrawer: false,
+  description: null
 };
 
 Layout.displayName = "Layout";

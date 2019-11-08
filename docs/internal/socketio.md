@@ -3,6 +3,8 @@ title: Socket.io Communication
 shortTitle: Socket.io
 ---
 
+Archit.us uses the [Socket.io](https://socket.io/) library to support realtime duplex communication with the backend API server for features such as entity requests/updates and high-volume log viewing.
+
 ## Rationale
 
 In order to implement major portions of the architus app, there exists a need for a secure communication channel between the server and client that supports **server pushes** and differing levels of permission.

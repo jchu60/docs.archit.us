@@ -4,6 +4,9 @@ export {
   faLink,
   faPencilAlt,
   faTimes,
-  faBars
+  faBars,
+  faExclamationCircle,
+  faExclamationTriangle,
+  faCheckCircle
 } from "@fortawesome/free-solid-svg-icons";
 export { faGithub, faDiscord } from "@fortawesome/free-brands-svg-icons";

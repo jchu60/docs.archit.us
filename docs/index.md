@@ -5,7 +5,7 @@ noBreadcrumb: true
 isRoot: true
 ---
 
-This site contains documentation on the architus bot and its companion web app.
+This site contains support documentation on the architus bot and its companion web app, including documentation about features, commands, and tutorials on common use cases.
 
 ## 🚀 Get Started
 

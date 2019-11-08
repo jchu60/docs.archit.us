@@ -369,7 +369,7 @@ function attachHistory(subtree, metadataMap) {
   if (metadataMap.hasOwnProperty(subtree.originalPath)) {
     const metadata = metadataMap[subtree.originalPath];
     const lastModified =
-      metadata.length >= 0 ? new Date(metadata[0].committedDate) : new Date();
+      metadata.length >= 0 && metadata[0] != null ? new Date(metadata[0].committedDate) : new Date();
 
     // Build authors list
     let authors = [];

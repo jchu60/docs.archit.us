@@ -2,7 +2,7 @@
 title: Settings
 ---
 
-Architus bot settings are dynamically rendered, consumed, and validated based off of a JSON schema as detailed below.
+The Settings tab is the place for server administrators to configure the way Architus interacts with their server, allowing them to set specific limits/assignments/etc. for various modules of the bot. To make this possible, settings are dynamically rendered, consumed, and validated based off of a JSON schema as detailed below.
 
 ## Get Guild Settings
 
@@ -201,8 +201,10 @@ Each of the following functions works with Discord entities, and examines whethe
 
 ## Example Schema
 
+**Note that this is out of date**
+
 <Collapse unwrap>
 
-`embed:internal/settings/example-schema.json`
+`embed:internal/modules/settings/example-schema.json`
 
 </Collapse>
