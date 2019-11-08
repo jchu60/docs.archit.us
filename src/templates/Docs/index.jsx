@@ -21,6 +21,8 @@ import TableOfContents from "components/TableOfContents";
 
 import "./style.scss";
 
+const LEAD_LENGTH = 200;
+
 export const pageQuery = graphql`
   query($id: String) {
     mdx(id: { eq: $id }) {
@@ -66,7 +68,7 @@ function DocsPageTemplate({
   const link = githubRoot + originalPath;
 
   // Find lead text
-  const lead = useMemo(() => hasContent && findLead(contentRoot.mdxAST), [
+  const lead = useMemo(() => hasContent && trimLead(findLead(contentRoot.mdxAST), LEAD_LENGTH), [
     contentRoot.mdxAST
   ]);
   console.log(lead);
@@ -263,4 +265,9 @@ function findLead(ast) {
     return resultWrapper;
   }
   return findText(ast, { current: null }).current;
+}
+
+function trimLead(text, length) {
+  if (text.length <= length + 3) return text;
+  else return text.slice(0, length - 3) + "...";
 }
