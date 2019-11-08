@@ -153,7 +153,9 @@ To auto-generate docs pages, the site uses [MDX](https://github.com/mdx-js/mdx) 
 
 To add new ones, a component can be authored and then included in the [MDX scope](https://github.com/architus/docs.archit.us/blob/master/src/components/Mdx/mdx_scope.js) file.
 
-### Route
+### Routes
+
+#### Restful API Routes
 
 <Demo>
 
@@ -162,6 +164,40 @@ To add new ones, a component can be authored and then included in the [MDX scope
 ```
 
 <Route method="METHOD" path="/route/{parameter}/segment" auth />
+</Demo>
+
+#### Gateway API Routes
+
+<Demo>
+
+```jsx
+<GatewayRoute
+  eventName="request_elevation"
+  room="<SID>"
+  sentFrom="client"
+  requiresElevation
+  payload={{
+    token: {
+      type: "string",
+      description: "Authentication Token"
+    }
+  }}
+/>
+```
+
+<GatewayRoute
+  eventName="request_elevation"
+  room="<SID>"
+  sentFrom="client"
+  requiresElevation
+  payload={{
+    token: {
+      type: "string",
+      description: "Authentication Token"
+    }
+  }}
+/>
+
 </Demo>
 
 ### Overview
@@ -176,9 +212,66 @@ The `<Overview>` component can be used to provide an overview of a page's childr
 
 <div className="seamless-image">
 
-![In This Section](./in-this-section.png)
+<h2>In This Section</h2>
+
+- [Auto Responses](/internal/modules/auto-responses/)
+- [Settings](/internal/modules/settings/)
 
 </div>
+</Demo>
+
+### Demo
+
+The Demo component can be used to show a source/result relationship, which is prevalent throughout the authoring page to demonstrate MDX/markdown features.
+
+<Demo>
+
+```jsx
+<Demo>
+
+~~~md
+## Lorem ipsum
+
+Etiam blandit diam sit amet pharetra pellentesque. Integer auctor nisl et sodales
+imperdiet. Integer vitae tincidunt augue. Duis condimentum lectus at tincidunt
+vehicula. Maecenas ultricies erat id nunc tempus, malesuada accumsan justo
+dignissim. Nam interdum vitae arcu et pharetra. Integer eget faucibus arcu.
+~~~
+
+<div>
+
+## Lorem ipsum
+
+Etiam blandit diam sit amet pharetra pellentesque. Integer auctor nisl et sodales
+imperdiet. Integer vitae tincidunt augue. Duis condimentum lectus at tincidunt
+vehicula. Maecenas ultricies erat id nunc tempus, malesuada accumsan justo
+dignissim. Nam interdum vitae arcu et pharetra. Integer eget faucibus arcu.
+
+</div>
+</Demo>
+```
+
+<Demo>
+
+~~~md
+## Lorem ipsum
+
+Etiam blandit diam sit amet pharetra pellentesque. Integer auctor nisl et sodales
+imperdiet. Integer vitae tincidunt augue. Duis condimentum lectus at tincidunt
+vehicula. Maecenas ultricies erat id nunc tempus, malesuada accumsan justo
+dignissim. Nam interdum vitae arcu et pharetra. Integer eget faucibus arcu.
+~~~
+
+<div>
+<h2 style={{marginTop: 0}}>Lorem ipsum</h2>
+
+Etiam blandit diam sit amet pharetra pellentesque. Integer auctor nisl et sodales
+imperdiet. Integer vitae tincidunt augue. Duis condimentum lectus at tincidunt
+vehicula. Maecenas ultricies erat id nunc tempus, malesuada accumsan justo
+dignissim. Nam interdum vitae arcu et pharetra. Integer eget faucibus arcu.
+
+</div>
+</Demo>
 </Demo>
 
 ### Alerts
@@ -207,14 +300,14 @@ Alerts are a block-level wrapper element that can be used to give emphasis or se
 ```jsx
 <Alert type="warning">
 
-**Cautious** content here, such as general warnings against bad practices or incorrect usage 
+**Cautious** content here, such as general warnings against bad practices or incorrect usage
 
 </Alert>
 ```
 
 <Alert type="warning">
 
-**Cautious** content here, such as general warnings against bad practices or incorrect usage 
+**Cautious** content here, such as general warnings against bad practices or incorrect usage
 
 </Alert>
 
@@ -224,7 +317,8 @@ Alerts are a block-level wrapper element that can be used to give emphasis or se
 ```jsx
 <Alert type="error">
 
-**Error** content here, such as important scenarios to avoid or errors that might occur in the process
+**Error** content here, such as important scenarios to avoid or errors that might occur in the
+process
 
 </Alert>
 ```
@@ -241,7 +335,8 @@ Alerts are a block-level wrapper element that can be used to give emphasis or se
 ```jsx
 <Alert type="success">
 
-**Success** content here, such as success scenarios or ways to tell if an action was successful
+**Success** content here, such as success scenarios or ways to tell if an action was
+successful
 
 </Alert>
 ```
@@ -261,35 +356,20 @@ Alerts are a block-level wrapper element that can be used to give emphasis or se
 ~~~jsx
 <Collapse>
 
-```js
-function resolveTypeClass(name) {
-  let foundClass = "fas"; // default
-  for (var typeClass in typeResolutionMap) {
-    if (typeResolutionMap[typeClass].includes(name)) {
-      foundClass = typeClass;
-      break;
-    }
-  }
-  return foundClass;
-}
-```
+# Lorem ipsum
+
+Etiam blandit diam sit amet pharetra pellentesque. Integer auctor nisl et sodales
+imperdiet. Integer vitae tincidunt augue. Duis condimentum lectus at tincidunt
+vehicula. Maecenas ultricies erat id nunc tempus, malesuada accumsan justo dignissim.
+Nam interdum vitae arcu et pharetra. Integer eget faucibus arcu.
 
 </Collapse>
 ~~~
 <Collapse>
 
-```js
-function resolveTypeClass(name) {
-  let foundClass = "fas"; // default
-  for (var typeClass in typeResolutionMap) {
-    if (typeResolutionMap[typeClass].includes(name)) {
-      foundClass = typeClass;
-      break;
-    }
-  }
-  return foundClass;
-}
-```
+<h1>Lorem ipsum</h1>
+
+Etiam blandit diam sit amet pharetra pellentesque. Integer auctor nisl et sodales imperdiet. Integer vitae tincidunt augue. Duis condimentum lectus at tincidunt vehicula. Maecenas ultricies erat id nunc tempus, malesuada accumsan justo dignissim. Nam interdum vitae arcu et pharetra. Integer eget faucibus arcu.
 
 </Collapse>
 </Demo>
@@ -300,7 +380,7 @@ function resolveTypeClass(name) {
 
 Snippets from the local repository can be embedded on the site (either inside a `<Collapse>` component or outside) via the following syntax:
 
-##### Inside Collapse
+##### Within Collapse
 
 <Demo>
 
@@ -319,7 +399,7 @@ Snippets from the local repository can be embedded on the site (either inside a 
 </Collapse>
 </Demo>
 
-##### Outside Collapse
+##### Standalone
 
 <Demo>
 
@@ -345,7 +425,7 @@ import "prismjs/components/prism-python.js";
 
 </Alert>
 
-##### Inside Collapse
+##### Within Collapse
 
 <Demo>
 
@@ -365,7 +445,7 @@ import "prismjs/components/prism-python.js";
 
 </Demo>
 
-##### Outside Collapse
+##### Standalone
 
 <Demo>
 

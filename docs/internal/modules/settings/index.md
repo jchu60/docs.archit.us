@@ -201,8 +201,11 @@ Each of the following functions works with Discord entities, and examines whethe
 
 ## Example Schema
 
-**Note that this is out of date**
+<Alert type="warning">
 
+Note that this is out of date
+
+</Alert>
 <Collapse unwrap>
 
 `embed:internal/modules/settings/example-schema.json`

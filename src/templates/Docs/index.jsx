@@ -68,10 +68,10 @@ function DocsPageTemplate({
   const link = githubRoot + originalPath;
 
   // Find lead text
-  const lead = useMemo(() => hasContent && trimLead(findLead(contentRoot.mdxAST), LEAD_LENGTH), [
-    contentRoot.mdxAST
-  ]);
-  console.log(lead);
+  const lead = useMemo(
+    () => hasContent && trimLead(findLead(contentRoot.mdxAST), LEAD_LENGTH),
+    [contentRoot.mdxAST]
+  );
 
   return (
     <Layout
