@@ -70,7 +70,7 @@ function SEO({ description, lang, meta, title }) {
         },
         {
           property: "og:image",
-          content: "/img/card.png"
+          content: "/img/logo_hex.png"
         },
         {
           property: `og:description`,
