@@ -19,6 +19,10 @@ module.exports = {
       docsRoot: "docs/",
       // TODO introspect?
       branch: "master"
+    },
+    api: {
+      restVersion: "v1 RESTful API",
+      gatewayVersion: "v1 Gateway API"
     }
   },
   pathPrefix: "/",

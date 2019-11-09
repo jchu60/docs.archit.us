@@ -69,15 +69,15 @@ Have websocket servers subscribe to as many topics as they currently need (based
 
 ### Unauthenticated Room Events
 
-`<SID>`
+<GatewayRoute eventName="request_elevation" room="<SID>" sentFrom="client" payload={{token: {type: "string", description: "Authentication Token"}}} />
 
-- `request_elevation`
-  - Payload: token
-  - Result in: successful or not
-    - Success: server is going to
-      - Make new authenticated room based off JWT credentials/permissions and SID
-      - Places user into room
-      - Websocket server manages what messages are received as server pushes and relevant req/res authorization based on JWT and other context
+#### Result
+
+- Result in: successful or not
+  - Success: server is going to
+    - Make new authenticated room based off JWT credentials/permissions and SID
+    - Places user into room
+    - Websocket server manages what messages are received as server pushes and relevant req/res authorization based on JWT and other context
 
 - `interpret`
   - Front page Discord mock interpreting

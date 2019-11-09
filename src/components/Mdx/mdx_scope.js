@@ -16,12 +16,13 @@ const components = {
   Icon,
   Demo,
   Link,
-  Route,
   Alert,
   Collapse,
   Overview,
   Container,
   ExternalSnippet,
+  Route: Route.Restful,
+  GatewayRoute: Route.Gateway,
 
   // Markdown components
   a: Link,
