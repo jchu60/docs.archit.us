@@ -15,10 +15,16 @@
 
     @include respond-below(xs) {
         padding-bottom: 2.5rem;
+        padding-right: 1.25rem;
+        padding-left: 1.25rem;
     }
 
     h1 {
         font-weight: 600 !important;
+
+        @include respond-below(sm) {
+            font-size: 2rem;
+        }
     }
 
     a:not(.btn) {
@@ -108,6 +114,10 @@
     h2 {
         font-size: 1.8rem;
         margin-top: 1.75rem;
+
+        @include respond-below(sm) {
+            font-size: 1.7rem;
+        }
     }
 
     p + .anchor-wrapper h3 {
@@ -158,14 +168,24 @@
         font-family: $font-family-sans-serif;
     }
 
-    p, ul, ol {
+    p,
+    ul,
+    ol {
         @include dark-fg($adjust: -15%);
         @include light-fg($adjust: 10%);
     }
 
     blockquote {
-        @include dark-border(rgba($-light, 0.1), $border: 0.4rem solid, $side: left);
-        @include light-border(rgba($-dark, 0.1), $border: 0.4rem solid, $side: left);
+        @include dark-border(
+            rgba($-light, 0.1),
+            $border: 0.4rem solid,
+            $side: left
+        );
+        @include light-border(
+            rgba($-dark, 0.1),
+            $border: 0.4rem solid,
+            $side: left
+        );
 
         padding: 0 0 0 1.25rem;
         margin-top: 1.75rem;
@@ -282,7 +302,7 @@
 
         tr:nth-child(2n) {
             @include dark-bg($dark-350);
-            @include light-bg( $light-350);
+            @include light-bg($light-350);
         }
 
         tr:nth-child(2n + 1) {
@@ -299,8 +319,16 @@
             th {
                 @include dark-fade-fg;
                 @include light-fade-fg;
-                @include dark-border(rgba($dark-000, 0.4), $border: solid 1px, $side: bottom);
-                @include light-border(rgba($light-000, 0.4), $border: solid 1px, $side: bottom);
+                @include dark-border(
+                    rgba($dark-000, 0.4),
+                    $border: solid 1px,
+                    $side: bottom
+                );
+                @include light-border(
+                    rgba($light-000, 0.4),
+                    $border: solid 1px,
+                    $side: bottom
+                );
 
                 padding: 8px;
                 font-size: 0.9rem;

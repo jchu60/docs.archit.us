@@ -99,12 +99,14 @@ function DocsPageTemplate({
               <>
                 <hr />
                 <div className="metadata">
-                  <Authors authors={history.authors} />
+                  {isDefined(history) && <Authors authors={history.authors} />}
                   <span className="metadata--text">
-                    <span className="modified-time">
-                      Last modified{" "}
-                      {moment(new Date(history.lastModified)).fromNow()}
-                    </span>
+                    {isDefined(history) && (
+                      <span className="modified-time">
+                        Last modified{" "}
+                        {moment(new Date(history.lastModified)).fromNow()}
+                      </span>
+                    )}
                     <Link href={link} className="edit-link">
                       <Icon name="pencil-alt" className="mr-2" />
                       Edit this page on GitHub

@@ -10,5 +10,6 @@ links:
 rightLinks:
   - href: "https://discord.gg/svrRrSe"
     icon: discord
+    class: d-none d-sm-block
   - href: "https://github.com/architus"
     icon: github

@@ -30,23 +30,22 @@ function Layout({
   ]);
   const closeDrawer = useCallback(() => setShowDrawer(false));
   useEffectOnce(() => {
-    if (isDefined(window.docsearch)) {
+    function loadDocsearch() {
       window.docsearch({
         apiKey: process.env.GATSBY_ALGOLIA_KEY,
         indexName: "archit",
         inputSelector: "#docs-search-box",
         debug: true
       });
-    } else {
+    }
+
+    if (!isDefined(process.env.GATSBY_ALGOLIA_KEY)) return;
+    if (isDefined(window.docsearch)) loadDocsearch();
+    else {
       const retryTimer = useInterval(() => {
         if (isDefined(window.docsearch)) {
           clearInterval(retryTimer);
-          window.docsearch({
-            apiKey: process.env.GATSBY_ALGOLIA_KEY,
-            indexName: "archit",
-            inputSelector: "#docs-search-box",
-            debug: true
-          });
+          loadDocsearch();
         }
       }, 1000);
     }
