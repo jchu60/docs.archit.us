@@ -11,6 +11,7 @@ export {
   faArrowRight,
   faLock,
   faMoon,
-  faSun
+  faSun,
+  faSearch
 } from "@fortawesome/free-solid-svg-icons";
 export { faGithub, faDiscord } from "@fortawesome/free-brands-svg-icons";

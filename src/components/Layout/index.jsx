@@ -1,8 +1,10 @@
 import React, { useState, useCallback } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
+import { useEffectOnce, isDefined } from "utility";
 
 import Header from "components/Header";
+import Helmet from "react-helmet";
 import Footer from "components/Footer";
 import SideNav from "components/SideNav";
 import Icon from "components/Icon";
@@ -27,11 +29,39 @@ function Layout({
     showDrawer
   ]);
   const closeDrawer = useCallback(() => setShowDrawer(false));
+  useEffectOnce(() => {
+    if (isDefined(window.docsearch)) {
+      window.docsearch({
+        apiKey: process.env.GATSBY_ALGOLIA_KEY,
+        indexName: "archit",
+        inputSelector: "#docs-search-box",
+        debug: true
+      });
+    } else {
+      const retryTimer = useInterval(() => {
+        if (isDefined(window.docsearch)) {
+          clearInterval(retryTimer);
+          window.docsearch({
+            apiKey: process.env.GATSBY_ALGOLIA_KEY,
+            indexName: "archit",
+            inputSelector: "#docs-search-box",
+            debug: true
+          });
+        }
+      }, 1000);
+    }
+  });
 
   return (
     <>
       <SEO title={title} description={description} />
       <Header {...headerProps} />
+      <Helmet>
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css"
+        />
+      </Helmet>
       <div className={classNames("docs-root", { "show-drawer": showDrawer })}>
         {noDrawer ? null : (
           <div className="docs-root--nav">

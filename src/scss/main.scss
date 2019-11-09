@@ -111,6 +111,10 @@ body,
     min-height: 100vh;
 }
 
+main {
+    overflow-x: hidden;
+}
+
 #gatsby-focus-wrapper {
     display: flex;
     flex-direction: column;

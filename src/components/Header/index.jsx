@@ -44,18 +44,29 @@ function Header({ sticky, leftChildren, ...rest }) {
         <Brand className="mr-auto mr-md-3" />
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="mr-auto">
-            {links.map(({ href, ...rest }) => (
-              <Nav.Link
-                as={Link}
-                href={href}
-                {...rest}
-                key={href}
-                partiallyActive={false}
+          <div className="search-nav-wrapper">
+            <Nav className="mr-auto">
+              {links.map(({ href, ...rest }) => (
+                <Nav.Link
+                  as={Link}
+                  href={href}
+                  {...rest}
+                  key={href}
+                  partiallyActive={false}
+                />
+              ))}
+            </Nav>
+            <div className="search">
+              <Icon name="search" className="search--icon" />
+              <input
+                className="search--input"
+                id="docs-search-box"
+                placeholder="Search docs.archit.us"
               />
-            ))}
-          </Nav>
+            </div>
+          </div>
           <Nav className="right-links">
+            <span className="nav-divider"></span>
             {rightLinks.map(({ href, ...rest }) => (
               <Link href={href} {...rest} key={href} partiallyActive={false} />
             ))}
