@@ -11,7 +11,8 @@ The Guild Count endpoint allows for static retrieval of usage statistics about t
 Return number of guilds in which Architus is a member and the sum of their members.
 
 ###### Example Response
-```
+
+```json
 {
   "guild_count": 46,
   "user_count": 4094

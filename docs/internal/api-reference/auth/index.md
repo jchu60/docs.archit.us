@@ -39,7 +39,7 @@ Exchange discord user token, retrieved from [login](#get-authorization-token) fo
 
 ###### Response Example
 
-```
+```json
 {
   "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ8.eyJhY2Nlc3NfdG9rZW4iOiJNM05EV1puVEl1Qmk2cG4wNFFmeUNHUG10MGpFTF0iLCJleHBpcmVzZ2luIjo2MDQ4MDAsInJlZnJlc2hfdG9rZW4iOiJXWFo1SUFCRHpWOENEQWR6Y21VVVRiTjg0SURIOXgiLCJ1c2VybmFtZSI6ImpvaG55YnVyZCIsImRpc2NyaW1pbmF0b3IiOiIxMDIyIiwiYXZhdGFyIjoiOWNlNWEwMDY1NDhmMWQlM2U1YzhmYjkxYTRkNjc3ZTQiLCJpZCI6IjIxNDAzNzEzNDQ3NzIzMDA4MCK9.2vEM3IjRPAfytMCdPq0gOIoe_lCwZ6MG7OF8WT73Bju",
   "expires_in": 604800,

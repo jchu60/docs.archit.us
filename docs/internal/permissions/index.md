@@ -37,6 +37,7 @@ The default role, `@everyone`, always holds the default base permissions for eve
 Architus permissions are only additive. Therefore a user's permissions are always exactly the union of their personal permissions and the permissions of every role that they have:
 
 ###### Psuedo Code
+
 ```py
 permissions = member.permissions
 for role in member.roles:

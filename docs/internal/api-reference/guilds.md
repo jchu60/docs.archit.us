@@ -17,7 +17,7 @@ Same as discord [guild](https://discordapp.com/developers/docs/resources/guild#g
 
 ###### Guild Example
 
-```
+```json
 {
   "features": [
     "ANIMATED_ICON",

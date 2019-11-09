@@ -7,6 +7,8 @@ export {
   faBars,
   faExclamationCircle,
   faExclamationTriangle,
-  faCheckCircle
+  faCheckCircle,
+  faArrowRight,
+  faLock
 } from "@fortawesome/free-solid-svg-icons";
 export { faGithub, faDiscord } from "@fortawesome/free-brands-svg-icons";

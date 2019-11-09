@@ -10,7 +10,7 @@ Same as discord [user](https://discordapp.com/developers/docs/resources/user#use
 
 ###### User Example
 
-```
+```json
 {
   "username": "johnyburd",
   "locale": "en-US",

@@ -18,7 +18,7 @@ function createHeading({ component: Component, rightLink = false }) {
       </a>
     );
     return (
-      <div className="anchor-wrapper">
+      <div className={classNames("anchor-wrapper", `anchor--${Component}`)}>
         <a className="anchor" name={id}>
           {" "}
         </a>

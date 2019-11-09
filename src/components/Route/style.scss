@@ -1,5 +1,6 @@
 @import "../../scss/colors";
 @import "../../scss/theme";
+@import "../../scss/fonts";
 
 .route {
     $this: &;
@@ -23,6 +24,7 @@
         background-color: $light-500;
         border-radius: 4px;
         margin-left: -0.45rem;
+        font-size: 1.2rem !important;
     }
 
     &--method {
@@ -54,50 +56,175 @@
         color: $-info;
     }
 
-    &--gateway-wrapper {
-        border-radius: 4px;
-        background-color: $light-300 !important;
-        border: 1px solid rgba($-dark, 0.15);
-        box-shadow: $drop-shadow;
+    #{$this}--label {
+        margin-top: 0;
+        margin-bottom: 0.2rem;
+        font-size: 0.8em;
+        color: rgba($-dark, 0.5);
+        font-weight: 600;
+        font-family: $font-family-sans-serif;
+    }
+
+    &--event-name, &--room {
+        margin-top: 0 !important;
+        margin-bottom: 1rem !important;
+        font-size: 1.2em;
+        color: color-adjust($-primary, -20%) !important;
     }
 
     &--event-name {
         color: color-adjust($-primary, -20%) !important;
     }
 
-    &--sent-from {
-        color: color-adjust($-secondary, -30%) !important;
+    &--room {
+        color: rgba($-dark, 0.8) !important;
     }
 
-    &--gateway-row {
+    &--gateway-wrapper {
+        border: 1px solid rgba($-dark, 0.12);
+        border-left: 4px solid $-secondary;
+        border-radius: 8px;
+        background-color: $light-450 !important;
+        box-shadow: $drop-shadow;
+        position: relative;
+    }
+
+    &--gateway-metadata {
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+
+        & > div {
+            &:not(:last-child) {
+                margin-right: 2rem;
+            }
+        }
+    }
+
+    &--gateway-header {
+        $padding: 1.1rem;
+        padding: $padding $padding 0.3rem;
+        overflow-x: hidden;
+
+        #{$this}--gateway-elevation {
+            position: absolute;
+            top: $padding;
+            right: $padding;
+
+            #{$this}--auth {
+                margin-top: 0;
+                line-height: 1rem;
+                color: rgba($-primary, 0.9);
+            }
+
+            #{$this}--auth-icon {
+                font-size: 0.9em;
+                color: rgba($-primary, 0.4);
+                position: relative;
+                top: -2px;
+                margin-right: 0.8rem;
+            }
+        }
+    }
+
+    &__client {
+        #{$this}--gateway-wrapper {
+            border-left-color: $aqua-forest;
+        }
+
+        #{$this}--sent-from {
+            span {
+                color: $aqua-forest;
+            }
+
+            &::before,
+            &::after {
+                background-color: $aqua-forest;
+            }
+        }
+    }
+
+    &__server {
+        #{$this}--gateway-wrapper {
+            border-left-color: $olivine;
+        }
+
+        #{$this}--sent-from {
+            span {
+                color: $olivine;
+            }
+
+            &-icon {
+                svg {
+                    transform: rotate(180deg);
+                }
+            }
+
+            &::before,
+            &::after {
+                background-color: $olivine;
+            }
+        }
+    }
+
+    &--sent-from {
+        color: rgba($-dark, 0.5);
+        position: relative;
+        margin-bottom: 1.4rem;
+        margin-top: 0 !important;
+        display: inline-block;
+
+        &-icon {
+            font-size: 0.8em;
+            position: relative;
+            top: -4px;
+            margin-left: 6px;
+        }
+
+        $height: 4px;
+        $spacing: 8px;
+        &::before {
+            $width: 12px;
+
+            position: absolute;
+            left: -$width - $spacing;
+            top: calc(50% - #{$height / 2});
+            content: " ";
+            width: $width;
+            height: $height;
+        }
+
+        &::after {
+            $width: 40000px;
+            $spacing: 8px;
+
+            position: absolute;
+            right: -$width - ($spacing * 1.5);
+            top: calc(50% - #{$height / 2});
+            content: " ";
+            width: $width;
+            height: $height;
+            z-index: 2;
+            opacity: 0.5;
+        }
+    }
+
+    #{$this}--gateway-row {
         padding: 0.4rem 0.6rem;
-        color: rgba($-dark, 0.7);
-
-        #{$this}--auth {
-            padding: 0 !important;
-            margin: 0 !important;
-            font-style: italic;
-        }
-
-        & > * {
-            color: $-dark;
-            padding-left: 0.2rem;
-        }
-
-        & > span {
-            font-weight: 500;
-        }
-
-        &:not(:last-child) {
-            border-bottom: 1px solid rgba($-dark, 0.15);
-        }
-
-        code {
-            background-color: $light-400 !important;
-        }
 
         &.row__table {
             padding: 0 !important;
+
+            th:first-child,
+            td:first-child {
+                padding-left: 1rem;
+            }
+
+            th {
+                padding: 8px 0.75rem;
+            }
 
             .table-outer {
                 padding: 0 !important;

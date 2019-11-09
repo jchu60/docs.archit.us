@@ -2,6 +2,9 @@ import React from "react";
 import { graphql, useStaticQuery } from "gatsby";
 import PropTypes from "prop-types";
 import { splitFragments, isDefined } from "utility";
+import classNames from "classnames";
+
+import Icon from "components/Icon";
 
 import "./style.scss";
 
@@ -76,26 +79,41 @@ Route.Gateway = function({
   requiresElevation,
   version,
   payload,
-  sentFrom
+  sentFrom,
+  room
 }) {
   const { gatewayVersion } = useVersions();
   const derivedVersion = isDefined(version) ? version : gatewayVersion;
 
   return (
-    <div className="route route__gateway">
+    <div className={classNames("route route__gateway", `route__${sentFrom}`)}>
       <span className="route--version">{derivedVersion}</span>
       <div className="route--gateway-wrapper">
-        <div className="route--gateway-row">
-          Event name: <code className="route--event-name">{eventName}</code>
-        </div>
-        <div className="route--gateway-row">
-          Sent from: <span className="route--sent-from">{sentFrom}</span>
-        </div>
-        {requiresElevation && (
-          <div className="route--gateway-row">
-            <span className="route--auth">Requires elevation</span>
+        <div className="route--gateway-header">
+          <div className="route--gateway-metadata">
+            <div>
+              <h5 className="route--label">Event Name</h5>
+              <h4 className="route--event-name">{eventName}</h4>
+            </div>
+            <div>
+              <h5 className="route--label">Room</h5>
+              <h4 className="route--room">{room}</h4>
+            </div>
           </div>
-        )}
+          <h4 className="route--sent-from">
+            Sent from: <span className="route--sent-from-text">{sentFrom}</span>
+            <Icon name="arrow-right" className="route--sent-from-icon" />
+          </h4>
+          <h5 className="route--label">Payload Schema</h5>
+          {requiresElevation && (
+            <div className="route--gateway-elevation">
+              <span className="route--auth">
+                <Icon name="lock" className="route--auth-icon" />
+                Requires elevation
+              </span>
+            </div>
+          )}
+        </div>
         <div className="route--gateway-row row__table">
           <div className="table-responsive-lg table-outer">
             <table className="table table-striped">
@@ -128,7 +146,8 @@ Route.Gateway.propTypes = {
   requiresElevation: PropTypes.bool,
   version: PropTypes.string,
   payload: PropTypes.object,
-  sentFrom: PropTypes.oneOf(["client", "server"]).isRequired
+  sentFrom: PropTypes.oneOf(["client", "server"]).isRequired,
+  room: PropTypes.string
 };
 
 Route.Gateway.defaultProps = {
