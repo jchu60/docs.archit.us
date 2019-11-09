@@ -1,6 +1,7 @@
 @import "../../scss/colors";
 @import "../../scss/theme";
 @import "../../scss/fonts";
+@import "../../scss/media";
 
 .route {
     $this: &;
@@ -109,9 +110,16 @@
         overflow-x: hidden;
 
         #{$this}--gateway-elevation {
-            position: absolute;
-            top: $padding;
-            right: $padding;
+            @include respond-above(md) {
+                position: absolute;
+                top: $padding;
+                right: $padding;
+            }
+
+            @include respond-below(md) {
+                position: relative;
+                margin-bottom: 1rem;
+            }
 
             #{$this}--auth {
                 margin-top: 0;
@@ -172,7 +180,7 @@
     &--sent-from {
         color: rgba($-dark, 0.5);
         position: relative;
-        margin-bottom: 1.4rem;
+        margin-bottom: 1rem;
         margin-top: 0 !important;
         display: inline-block;
 

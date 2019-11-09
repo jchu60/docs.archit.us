@@ -104,7 +104,6 @@ Route.Gateway = function({
             Sent from: <span className="route--sent-from-text">{sentFrom}</span>
             <Icon name="arrow-right" className="route--sent-from-icon" />
           </h4>
-          <h5 className="route--label">Payload Schema</h5>
           {requiresElevation && (
             <div className="route--gateway-elevation">
               <span className="route--auth">
@@ -113,6 +112,7 @@ Route.Gateway = function({
               </span>
             </div>
           )}
+          <h5 className="route--label">Payload Schema</h5>
         </div>
         <div className="route--gateway-row row__table">
           <div className="table-responsive-lg table-outer">
