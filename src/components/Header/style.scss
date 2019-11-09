@@ -9,6 +9,7 @@
         bottom: 0.85rem;
     }
     box-shadow: $drop-shadow;
+    flex-wrap: nowrap !important;
 
     @include respond-above(sm) {
         height: 68px;
@@ -16,6 +17,10 @@
 
     .container-fluid {
         justify-content: flex-start !important;
+
+        @include respond-below(sm) {
+            flex-wrap: nowrap !important;
+        }
     }
 
     .nav-link {
@@ -37,6 +42,10 @@
         &:focus {
             background-color: rgba(white, 0.05);
         }
+
+        @include respond-below(sm) {
+            margin-left: -0.5rem;
+        }
     }
 
     .nav-divider {
@@ -46,7 +55,7 @@
         margin-top: 0.2rem;
         margin-bottom: 0.2rem;
 
-        @include respond-below(sm) {
+        @include respond-below(xs) {
             display: none;
         }
     }
@@ -54,7 +63,6 @@
     &-collapse {
         justify-content: space-between;
         flex-grow: 1;
-        // overflow-x: hidden;
     }
 
     .dark-mode-button {
@@ -63,6 +71,7 @@
 
     .right-links {
         flex-direction: row;
+        margin-right: -0.3rem;
 
         a,
         button {
@@ -82,14 +91,6 @@
                 position: relative;
                 top: -4px;
             }
-        }
-
-        @include respond-below(sm) {
-            margin-bottom: 0.25rem;
-        }
-
-        @include respond-above(sm) {
-            margin-right: -0.6rem;
         }
     }
 }
@@ -119,23 +120,47 @@
         height: 40px;
         fill: currentColor;
     }
+
+    &--text {
+        padding-top: 0.6rem;
+        padding-bottom: 0.7rem;
+        margin-left: 0.5rem;
+
+        @media (max-width: 480px) {
+            display: none;
+        }
+    }
 }
 
 .search {
-    position: relative;
+    $this: &;
     padding-right: 0.6rem;
     flex-grow: 1;
     max-width: 40%;
+    @include transitions("width, max-width");
 
-    @include respond-below(sm) {
-        margin-top: 0.5rem;
-        margin-bottom: 0.75rem;
+    @include respond-below(xs) {
         max-width: 100%;
+        margin-left: 0.6rem;
+        padding-right: 0.4rem;
     }
 
-    @include respond-between(sm, md) {
-        max-width: 100%;
-        min-width: 300px;
+    @include respond-above(xs) {
+        position: relative;
+    }
+
+    @include respond-between(xs, md) {
+        max-width: 40px;
+        width: 40px;
+
+        #{$this}--input:not(:focus)::placeholder {
+            color: transparent;
+        }
+
+        &:focus-within {
+            max-width: 200px;
+            width: 200px;
+        }
     }
 
     @include respond-above(1080) {
@@ -152,6 +177,12 @@
         border-radius: 6px;
         width: 100%;
 
+        @include respond-between(xs, md) {
+            &:not(:focus) {
+                background-color: transparent;
+            }
+        }
+
         &:focus {
             @include highlight-shadow($-light, 0.4);
         }
@@ -161,8 +192,12 @@
         }
     }
 
-    & > *:not(.search--icon) {
+    & > *:not(.search--icon-wrapper) {
         width: 100%;
+    }
+
+    &--icon-wrapper {
+        position: relative;
     }
 
     &--icon {
@@ -171,13 +206,35 @@
         position: absolute;
         top: calc(50% - #{$height / 2});
         left: 0.75rem;
+        pointer-events: none;
     }
 
     .algolia-autocomplete {
         display: inline-flex !important;
+
+        @include respond-below(xs) {
+            position: static !important;
+        }
+
         .ds-dropdown-menu {
-            min-width: 0 !important;
-            width: 100% !important;
+            &.ds-dropdown-menu.ds-dropdown-menu.ds-dropdown-menu {
+                @include respond-below(xs) {
+                    left: 0.5rem !important;
+                    right: 0.5rem !important;
+                }
+            }
+
+            @include respond-above(md) {
+                width: 100% !important;
+            }
+
+            @include respond-below(md) {
+                min-width: 400px !important;
+            }
+
+            @include respond-below(xs) {
+                min-width: 0 !important;
+            }
 
             &::before {
                 @include dark-bg($dark-400);
@@ -250,21 +307,25 @@
 }
 
 .search-nav-wrapper {
-    display: flex;
     flex-direction: row;
     align-items: stretch;
-    justify-content: space-between;
-    align-self: flex-end;
+    justify-content: flex-end;
     display: flex;
     flex-grow: 1;
     flex-shrink: 1;
-    // overflow-x: auto;
-
-    @include respond-below(sm) {
-        flex-direction: column;
-    }
 
     & > * {
         display: inline-flex;
     }
+
+    &:focus-within {
+        flex-shrink: 0;
+    }
+}
+
+.main-nav-wrapper {
+    flex-shrink: 1;
+    min-width: 0;
+    overflow-x: overlay;
+    @extend %custom-scrollbar;
 }

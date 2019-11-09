@@ -8,7 +8,8 @@ import Link from "components/Link";
 import Icon from "components/Icon";
 import { Navbar, Container, Nav } from "react-bootstrap";
 
-import LogoSvg from "assets/logo.svg";
+import LogoTextSvg from "assets/logo_text.svg";
+import LogoIconSvg from "assets/logo_icon.svg";
 import "./style.scss";
 
 function Header({ sticky, leftChildren, ...rest }) {
@@ -33,51 +34,50 @@ function Header({ sticky, leftChildren, ...rest }) {
   return (
     <Navbar
       bg="primary"
-      expand="md"
+      expand="sm"
       variant="dark"
       collapseOnSelect
       sticky={sticky ? "top" : null}
       {...rest}
     >
-      <Container fluid>
-        {leftChildren}
-        <Brand className="mr-auto mr-md-3" />
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <div className="search-nav-wrapper">
-            <Nav className="mr-auto">
-              {links.map(({ href, ...rest }) => (
-                <Nav.Link
-                  as={Link}
-                  href={href}
-                  {...rest}
-                  key={href}
-                  partiallyActive={false}
-                />
-              ))}
-            </Nav>
-            <div className="search">
-              <Icon name="search" className="search--icon" />
-              <input
-                className="search--input"
-                id="docs-search-box"
-                placeholder="Search docs.archit.us"
-              />
-            </div>
-          </div>
-          <Nav className="right-links">
-            <span className="nav-divider"></span>
-            {rightLinks.map(({ href, ...rest }) => (
-              <Link href={href} {...rest} key={href} partiallyActive={false} />
-            ))}
-            <span className="nav-divider"></span>
-            <button className="dark-mode-button" onClick={toggle}>
-              {!value && <Icon name="sun" />}
-              {value && <Icon name="moon" />}
-            </button>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
+      {leftChildren}
+      <Brand className="mr-auto mr-md-3" />
+      <div className="main-nav-wrapper d-none d-sm-flex">
+        <Nav className="mr-auto">
+          {links.map(({ href, ...rest }) => (
+            <Nav.Link
+              as={Link}
+              href={href}
+              {...rest}
+              key={href}
+              partiallyActive={false}
+            />
+          ))}
+        </Nav>
+      </div>
+      <div className="search-nav-wrapper">
+        <div className="search">
+          <span className="search--icon-wrapper">
+            <Icon name="search" className="search--icon" />
+          </span>
+          <input
+            className="search--input"
+            id="docs-search-box"
+            placeholder="Search docs.archit.us"
+          />
+        </div>
+        <Nav className="right-links">
+          <span className="nav-divider"></span>
+          {rightLinks.map(({ href, ...rest }) => (
+            <Link href={href} {...rest} key={href} partiallyActive={false} />
+          ))}
+          <span className="nav-divider"></span>
+          <button className="dark-mode-button" onClick={toggle}>
+            {!value && <Icon name="sun" />}
+            {value && <Icon name="moon" />}
+          </button>
+        </Nav>
+      </div>
     </Navbar>
   );
 }
@@ -98,11 +98,18 @@ Header.defaultProps = {
   sticky: true
 };
 
-const Brand = ({ className, ...rest }) => (
-  <Link className={classNames("nav-link brand", className)} href="/" {...rest}>
-    <LogoSvg />
-  </Link>
-);
+const Brand = ({ className, ...rest }) => {
+  return (
+    <Link
+      className={classNames("nav-link brand", className)}
+      href="/"
+      {...rest}
+    >
+      <LogoIconSvg className="brand--icon" />
+      <LogoTextSvg className="brand--text" />
+    </Link>
+  );
+};
 
 Header.Brand = Brand;
 

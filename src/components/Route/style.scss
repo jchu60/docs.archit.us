@@ -55,6 +55,11 @@
         margin-left: 0.2rem;
         padding: 0.5rem 0.6rem 0.45rem;
         display: inline-block;
+
+        @include respond-below(sm) {
+            display: inline-flex;
+            flex-direction: column;
+        }
     }
 
     &--path__param {
