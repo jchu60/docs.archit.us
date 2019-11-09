@@ -10,11 +10,11 @@ Logs are a major feature of Architus that expands on discord's audit log functio
 ###### Log Event Structure
 | Field               | Type        | Description                                                             |
 | ------------------- | ----------- | ----------------------------------------------------------------------- |
-| id                  | hoar frost  | unique [hoar frost ID](../../general/#hoar-frost) for the event         |
+| id                  | hoar frost  | unique [hoar frost ID](../../api-reference/#hoar-frost) for the event         |
 | reversible          | boolean     | can the action be reversed                                              |
 | action_number       | integer     | number corresponding to the [action type](#action-type)       |
 | agent_id            | ?snowflake  | snowflake of the user carrying out the action |
-| subject_id          | ?snowflake (or [hoar frost](../../general/#hoar-frost))  | id of the object being acted upon (if it still exists) |
+| subject_id          | ?snowflake (or [hoar frost](../../api-reference/#hoar-frost))  | id of the object being acted upon (if it still exists) |
 | old_data            | ?mixed (any JSON value) | data required to reconstruct the object |
 
 ## Action Type

@@ -50,7 +50,7 @@ Original trigger string: `<@54435432534524423> hello :)` becomes:
 
 | Field               | Type        | Description                                                             |
 | ------------------- | ----------- | ----------------------------------------------------------------------- |
-| id                  | hoar frost  | unique [hoar frost ID](../../general/#hoar-frost) for the auto response    |
+| id                  | hoar frost  | unique [hoar frost ID](../../api-reference/#hoar-frost) for the auto response    |
 | trigger             | string      | **original** trigger from command/added response                        |
 | trigger_regex       | regex       | derived regular expression from (escaped) trigger text                  |
 | trigger_punctuation | tuple       | list of punctuation that a sensitive trigger cares about                |
