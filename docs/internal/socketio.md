@@ -73,11 +73,23 @@ Have websocket servers subscribe to as many topics as they currently need (based
 
 #### Result
 
+<GatewayRoute eventName="request_elevation_return" room="<SID>" sentFrom="server" payload={{"result": {type: "boolean", description: "was successful"}}} />
+
 - Result in: successful or not
   - Success: server is going to
     - Make new authenticated room based off JWT credentials/permissions and SID
     - Places user into room
     - Websocket server manages what messages are received as server pushes and relevant req/res authorization based on JWT and other context
+
+<GatewayRoute eventName="mock_user_event" room="<SID>" sentFrom="client" payload={{
+    "guild_id": {type: "integer", description: "mock guild ID"},
+    "content": {type: "string", description: "idk"},
+    "message_id": {type: "integer", description: "mock message ID"},
+    "added_reactions": {type: "?array of strings", description: "array of reactions added to the mock message"},
+    "removed_reacions": {type: "?array of strings", description: "array of reactions removed from the mock message"},
+    "allowed_commands": {type: "?array of strings", description: "array of commands the client expects to execute"},
+    "silent": {type: "boolean", description: "a result of bad coding practices"}
+}} />
 
 - `interpret`
   - Front page Discord mock interpreting
