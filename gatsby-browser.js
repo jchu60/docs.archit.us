@@ -1,1 +1,1 @@
-import "./src/scss/prism-onelight.scss";
+import "./src/scss/prism-oneuniversal.scss";

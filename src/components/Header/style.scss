@@ -25,13 +25,9 @@
         border-radius: $border-radius-sm;
         margin-right: 1rem;
 
-        &:hover,
-        &:active {
+        &:hover {
             opacity: 0.8;
             background-color: rgba(white, 0.1);
-        }
-        &:active {
-            background-color: rgba(white, 0.2);
         }
         &.active-link {
             font-weight: 600;
@@ -42,13 +38,27 @@
         }
     }
 
+    .nav-divider {
+        border-left: 2px solid rgba($-light, 0.25);
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+        margin-top: 0.2rem;
+        margin-bottom: 0.2rem;
+    }
+
     &-collapse {
         justify-content: space-between;
         flex-grow: 1;
     }
 
+    .dark-mode-button {
+        @extend %button-blank;
+    }
+
     .right-links {
-        a {
+        flex-direction: row;
+
+        a, button {
             font-size: 1.5rem;
             @include transitions("color");
             color: rgba(white, 0.4);
@@ -58,19 +68,12 @@
                 color: white;
             }
 
-            padding-left: 1rem;
-            padding-right: 0.25rem;
+            padding-left: 0.6rem;
+            padding-right: 0.6rem;
 
             span {
                 position: relative;
                 top: -4px;
-            }
-
-            @include respond-below(md) {
-                padding-left: 0;
-                padding-right: 0;
-                padding-top: 0.5rem;
-                padding-top: 0.5rem;
             }
         }
     }

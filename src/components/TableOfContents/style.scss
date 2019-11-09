@@ -8,6 +8,8 @@
         font-size: 0.9rem;
         margin-bottom: 1rem;
         font-weight: bold;
+        @include light-fade-fg;
+        @include dark-fade-fg;
         color: rgba($-dark, 0.6);
         font-family: $font-family-sans-serif;
     }
@@ -41,7 +43,8 @@
         }
 
         a:not(:hover) {
-            color: rgba($-dark, 0.75);
+            @include light-fg(rgba($-dark, 0.75));
+            @include dark-fg(rgba($-light, 0.5));
             border-bottom: none;
         }
     }

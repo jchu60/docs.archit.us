@@ -101,11 +101,17 @@ $minimized-width: 285px;
         z-index: 1;
         top: 0;
         left: 0;
-        background-color: #111;
         padding-top: 60px;
 
-        background-color: $light-300;
-        border-right: 1px solid $light-200;
+        @include dark-bg($dark-250);
+        @include light-bg($light-300);
+        @include dark-border(transparent, $side: right);
+        @include light-border($light-200, $side: right);
+
+        @include dark {
+            box-shadow: $drop-shadow;
+        }
+
         overflow-x: hidden;
         overflow-y: auto;
 

@@ -2,9 +2,11 @@ import React from "react";
 import { graphql, useStaticQuery } from "gatsby";
 import PropTypes from "prop-types";
 import classNames from "classnames";
+import useDarkMode from "use-dark-mode";
 
-import { Navbar, Container, Nav } from "react-bootstrap";
 import Link from "components/Link";
+import Icon from "components/Icon";
+import { Navbar, Container, Nav } from "react-bootstrap";
 
 import LogoSvg from "assets/logo.svg";
 import "./style.scss";
@@ -24,6 +26,9 @@ function Header({ sticky, leftChildren, ...rest }) {
       }
     }
   `).file.childDataYaml;
+
+  // Dark/light theme selection
+  const { value, toggle } = useDarkMode(false);
 
   return (
     <Navbar
@@ -52,13 +57,13 @@ function Header({ sticky, leftChildren, ...rest }) {
           </Nav>
           <Nav className="right-links">
             {rightLinks.map(({ href, ...rest }) => (
-              <Link
-                href={href}
-                {...rest}
-                key={href}
-                partiallyActive={false}
-              />
+              <Link href={href} {...rest} key={href} partiallyActive={false} />
             ))}
+            <span className="nav-divider"></span>
+            <button className="dark-mode-button" onClick={toggle}>
+              {!value && <Icon name="sun" />}
+              {value && <Icon name="moon" />}
+            </button>
           </Nav>
         </Navbar.Collapse>
       </Container>

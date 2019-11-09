@@ -17,7 +17,6 @@ module.exports = {
       owner: "architus",
       name: "docs.archit.us",
       docsRoot: "docs/",
-      // TODO introspect?
       branch: "master"
     },
     api: {
@@ -116,6 +115,7 @@ module.exports = {
     `gatsby-plugin-sitemap`,
     `gatsby-plugin-sass`,
     `gatsby-plugin-catch-links`,
-    `gatsby-plugin-react-svg`
+    `gatsby-plugin-react-svg`,
+    `gatsby-plugin-use-dark-mode`
   ]
 };

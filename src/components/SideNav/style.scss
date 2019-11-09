@@ -23,19 +23,38 @@
     }
 }
 
-$dark-primary: darken($-primary, 10%);
-$very-dark-primary: darken($-primary, 20%);
+$dark-heavy-primary: lighten($-primary, 5%);
+$dark-very-heavy-primary: lighten($-primary, 10%);
+$light-heavy-primary: darken($-primary, 10%);
+$light-very-heavy-primary: darken($-primary, 20%);
+
+%heavy-primary-bg {
+    @include dark { background-color: $dark-heavy-primary; }
+    @include light { background-color: $light-heavy-primary; }
+}
+
+%heavy-primary-fg {
+    @include dark { color: $dark-heavy-primary !important; }
+    @include light { color: $light-heavy-primary !important; }
+}
+
+%very-heavy-primary-fg {
+    @include dark { color: $dark-very-heavy-primary; }
+    @include light { color: $light-very-heavy-primary; }
+}
 
 .side-nav {
     $this: &;
 
     h5 {
+        @include light-semi-fade-fg;
+        @include dark-semi-fade-fg;
+
         padding-left: 1.75rem;
         padding-right: 1.5rem;
         padding-top: 2.25rem;
         padding-bottom: 1rem;
 
-        color: rgba($-dark, 0.75);
         font-size: 0.95rem;
         font-weight: normal;
         text-transform: uppercase;
@@ -63,8 +82,9 @@ $very-dark-primary: darken($-primary, 20%);
         @extend %base;
         @extend %top-level;
         @include transitions("color, background-color");
+        @include dark-fg;
+        @include light-fg;
 
-        color: $-dark;
         text-transform: capitalize;
         display: block;
         position: relative;
@@ -90,20 +110,23 @@ $very-dark-primary: darken($-primary, 20%);
         }
 
         &::after {
+            @extend %heavy-primary-bg;
+
             opacity: 0;
             transform: translateX(-92px);
             width: 0px;
-            background: $dark-primary;
             border-radius: 4px;
         }
 
         &:hover {
+            @extend %very-heavy-primary-fg;
+
             background-color: rgba($-primary, 0.1);
-            color: $very-dark-primary;
 
             &::before {
+                @extend %heavy-primary-bg;
+
                 transform: scale(1);
-                background: $dark-primary;
             }
         }
 
@@ -116,7 +139,7 @@ $very-dark-primary: darken($-primary, 20%);
 
         &.active-link,
         &.partially-active-link {
-            color: $dark-primary !important;
+            @extend %heavy-primary-fg;
             font-weight: bold;
         }
     }
@@ -124,13 +147,14 @@ $very-dark-primary: darken($-primary, 20%);
     &--expander {
         @extend %button-blank;
         @include transitions("background-color");
+        @include dark-fade-fg;
+        @include light-fade-fg;
 
         position: absolute;
         top: 0;
         bottom: 0;
         right: 0;
         width: 48px;
-        color: rgba($-dark, 0.5);
         font-size: 0.55rem;
 
         &:hover {
@@ -157,13 +181,17 @@ $very-dark-primary: darken($-primary, 20%);
         }
 
         &.is-last {
-            border-bottom: 1px solid rgba($-dark, 0.15);
+            @include dark-border(rgba($-light, 0.1), $side: bottom);
+            @include light-border(rgba($-dark, 0.15), $side: bottom);
         }
 
         & > div > a.with-children {
-            border-top: 1px solid rgba($-dark, 0.15);
+            @include dark-semi-fade-fg;
+            @include light-semi-fade-fg;
+            @include dark-border(rgba($-light, 0.1), $side: top);
+            @include light-border(rgba($-dark, 0.15), $side: top);
+
             text-transform: uppercase;
-            color: rgba($-dark, 0.9);
             letter-spacing: 0.075em;
         }
 

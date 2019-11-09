@@ -10,6 +10,10 @@
     &--button {
         @extend %button-blank;
         @include transitions("box-shadow, transform");
+        @include dark-bg($dark-500);
+        @include light-bg($light-500);
+        @include light-fg;
+        @include dark-fg;
 
         width: 100%;
         display: flex;
@@ -18,23 +22,23 @@
         align-items: center;
 
         box-shadow: $drop-shadow-0;
-        background-color: $light-500;
         padding: 0.75rem 1.25rem;
         transform: translateY(0);
 
         h5 {
             margin: 0 !important;
             text-transform: none !important;
-            color: $-dark !important;
             font-size: 1.2rem !important;
             font-weight: 500 !important;
             letter-spacing: 0 !important;
         }
 
         span {
+            @include light-fade-fg;
+            @include dark-fade-fg;
+
             font-size: 75%;
             transform: translateY(-4px);
-            color: rgba($-dark, 0.6);
 
             svg {
                 transform: rotate(90deg);

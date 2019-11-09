@@ -1,61 +1,64 @@
 @import "./colors";
 
-code[class*='language-'],
-pre[class*='language-'] {
-    color: #383a42;
+// Light theme
+
+code[class*="language-"],
+pre[class*="language-"] {
+    @include dark-fg(#abb2bf);
+    @include light-fg(#383a42);
+
     background: none;
-    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
     text-align: left;
     white-space: pre;
     word-spacing: normal;
     word-break: normal;
     word-wrap: normal;
     line-height: 1.5;
-    -moz-tab-size: 4;
-    -o-tab-size: 4;
     tab-size: 4;
-    -webkit-hyphens: none;
-    -moz-hyphens: none;
-    -ms-hyphens: none;
     hyphens: none;
 }
 
-pre[class*='language-']::-moz-selection,
-pre[class*='language-'] ::-moz-selection,
-code[class*='language-']::-moz-selection,
-code[class*='language-'] ::-moz-selection {
+pre[class*="language-"]::-moz-selection,
+pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection,
+code[class*="language-"] ::-moz-selection {
+    @include dark-bg($dark-500, 30%);
+    @include light-bg($light-100);
+
     text-shadow: none;
-    background: $light-100;
 }
 
-pre[class*='language-']::selection,
-pre[class*='language-'] ::selection,
-code[class*='language-']::selection,
-code[class*='language-'] ::selection {
+pre[class*="language-"]::selection,
+pre[class*="language-"] ::selection,
+code[class*="language-"]::selection,
+code[class*="language-"] ::selection {
+    @include dark-bg($dark-500, 30%);
+    @include light-bg($light-100);
+
     text-shadow: none;
-    background: $light-250;
 }
 
 @media print {
-    code[class*='language-'],
-    pre[class*='language-'] {
+    code[class*="language-"],
+    pre[class*="language-"] {
         text-shadow: none;
     }
 }
 /* Code blocks */
-pre[class*='language-'] {
+pre[class*="language-"] {
     padding: 1em;
     margin: 0.5em 0;
     overflow: auto;
 }
 
-:not(pre) > code[class*='language-'],
-pre[class*='language-'] {
-    background: $light-350;
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+    @extend %code-bg;
 }
 
 /* Inline code */
-:not(pre) > code[class*='language-'] {
+:not(pre) > code[class*="language-"] {
     padding: 0.1em;
     border-radius: 0.3em;
     white-space: normal;
@@ -65,16 +68,19 @@ pre[class*='language-'] {
 .token.prolog,
 .token.doctype,
 .token.cdata {
-    color: #a0a1a7;
+    @include dark-fg(#5c6370);
+    @include light-fg(#a0a1a7);
 }
 
 .token.punctuation {
-    color: #383a42;
+    @include dark-fg(#abb2bf);
+    @include light-fg(#383a42);
 }
 
 .token.selector,
 .token.tag {
-    color: #e2574e;
+    @include dark-fg(#e06c75);
+    @include light-fg(#e2574e);
 }
 
 .token.property,
@@ -84,7 +90,8 @@ pre[class*='language-'] {
 .token.symbol,
 .token.attr-name,
 .token.deleted {
-    color: #976715;
+    @include dark-fg(#d19a66);
+    @include light-fg(#976715);
 }
 
 .token.string,
@@ -92,7 +99,8 @@ pre[class*='language-'] {
 .token.attr-value,
 .token.builtin,
 .token.inserted {
-    color: #53a053;
+    @include dark-fg(#98c379);
+    @include light-fg(#53a053);
 }
 
 .token.operator,
@@ -100,22 +108,26 @@ pre[class*='language-'] {
 .token.url,
 .language-css .token.string,
 .style .token.string {
-    color: #1485ba;
+    @include dark-fg(#56b6c2);
+    @include light-fg(#1485ba);
 }
 
 .token.atrule,
 .token.keyword {
-    color: #a42ea2;
+    @include dark-fg(#c678dd);
+    @include light-fg(#a42ea2);
 }
 
 .token.function {
-    color: #447bef;
+    @include dark-fg(#61afef);
+    @include light-fg(#447bef);
 }
 
 .token.regex,
 .token.important,
 .token.variable {
-    color: #a42ea2;
+    @include dark-fg(#c678dd);
+    @include light-fg(#a42ea2);
 }
 
 .token.important,

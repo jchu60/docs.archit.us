@@ -25,3 +25,94 @@
 
     @return rgba($r, $g, $b, $a);
 }
+
+@mixin theme-property($property, $value, $theme, $important: false) {
+    @if $important == false {
+        .#{$theme}-mode & {
+            #{$property}: $value;
+        }
+    } @else {
+        .#{$theme}-mode & {
+            #{$property}: $value !important;
+        }
+    }
+}
+
+@mixin light($property: null, $value: null, $important: false) {
+    @if $property == null {
+        .light-mode & {
+            @content;
+        }
+    } @else {
+        @if $important == false {
+            .light-mode & {
+                #{$property}: $value;
+            }
+        } @else {
+            .light-mode & {
+                #{$property}: $value !important;
+            }
+        }
+    }
+}
+
+@mixin dark($property: null, $value: null, $important: false) {
+    @if $property == null {
+        .dark-mode & {
+            @content;
+        }
+    } @else {
+        @if $important == false {
+            .dark-mode & {
+                #{$property}: $value;
+            }
+        } @else {
+            .dark-mode & {
+                #{$property}: $value !important;
+            }
+        }
+    }
+}
+
+@mixin theme-bg($theme, $color, $adjust: 0%, $important: false) {
+    @include theme-property(
+        background-color,
+        color-adjust($color, $adjust),
+        $theme,
+        $important
+    );
+}
+
+@mixin theme-fg($theme, $color, $adjust: 0%, $important: false) {
+    @include theme-property(
+        color,
+        color-adjust($color, $adjust),
+        $theme,
+        $important
+    );
+}
+
+@mixin theme-border(
+    $theme,
+    $color,
+    $adjust: 0%,
+    $border: 1px solid,
+    $side: null,
+    $important: false
+) {
+    @if $side == null {
+        @include theme-property(
+            border,
+            $border color-adjust($color, $adjust),
+            $theme,
+            $important
+        );
+    } @else {
+        @include theme-property(
+            border-#{$side},
+            $border color-adjust($color, $adjust),
+            $theme,
+            $important
+        );
+    }
+}

@@ -56,7 +56,8 @@ h6,
 }
 
 hr {
-    border-top: 1px solid rgba($-dark, 0.25);
+    @include dark-border(rgba($-light, 0.25), $side: top);
+    @include light-border(rgba($-dark, 0.25), $side: top);
 }
 
 .btn-discord {
@@ -96,6 +97,13 @@ button,
     border-top: 2px solid $-primary;
 }
 
+#___gatsby {
+    @include dark-fg;
+    @include light-fg;
+    @include dark-bg;
+    @include light-bg;
+}
+
 html,
 body,
 #___gatsby,
@@ -114,16 +122,6 @@ body,
     & > .docs-root {
         flex-grow: 1;
     }
-}
-
-:not(pre) > code {
-    color: $-primary;
-    display: inline-block;
-    background-color: $one-light-bg;
-    border-radius: 4px;
-    border: 1px solid #1b273333;
-    padding: 0.1em 0.35em 0.05em;
-    font-size: 87.5%;
 }
 
 .badge {

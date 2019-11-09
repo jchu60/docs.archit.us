@@ -16,10 +16,13 @@ title: Primary page title (appears in <h1> at top) [Required]
 shortTitle: Secondary page title (appears in tab title; falls back to title)
 overrideNav: Side nav title (falls back to title)
 overrideBreadcrumb: Breadcrumb segment title (falls back to shortTitle)
+
 // Switches
 noTOC: Disables a table of contents on the right side
 noBreadcrumb: Disables the breadcrumb bar at the top
-isRoot: Whether this page should form the root of a subtree (appear as its own top-level heading in the side nav)
+isRoot: Whether this page should form the root of a subtree
+  (appear as its own top-level heading in the side nav)
+
 // Misc
 childrenOrder: Used to specify explicit ordering of direct children pages (by slug)
 ```
@@ -38,7 +41,7 @@ Docs pages are generated for each path segment in the entire navigation tree cre
 └── index.md
 ```
 
-Then, there would be **three generated docs pages**: `/`, `/pathA`, and `pathB`. In this case, `pathB` would be designated as an *orphan page* because it doesn't have a corresponding markdown file for content. In this mode, it will only contain an auto-generated title from the path segment as well as an [In This Section `<Overview>`](#overview) component.
+Then, there would be **three generated docs pages**: `/`, `/pathA/`, and `/pathA/pathB/`. In this case, `/pathA/` would be designated as an *orphan page* because it doesn't have a corresponding markdown file for content. In this mode, it will only contain an auto-generated title from the path segment as well as an [In This Section `<Overview>`](#overview) component.
 
 
 ## Headings
@@ -77,7 +80,10 @@ Then, there would be **three generated docs pages**: `/`, `/pathA`, and `pathB`.
 <Demo>
 
 ```md
-> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent elementum egestas pretium. Proin laoreet arcu et scelerisque facilisis. In hac habitasse platea dictumst. Curabitur ut eleifend dui. Morbi eu congue ipsum. Proin fermentum dui hendrerit, mattis ligula id, pharetra lacus. Pellentesque sodales nibh et auctor maximus. Donec sed mauris odio. 
+> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent elementum egestas pretium.
+> Proin laoreet arcu et scelerisque facilisis. In hac habitasse platea dictumst. Curabitur ut
+> eleifend dui. Morbi eu congue ipsum. Proin fermentum dui hendrerit, mattis ligula id,
+> pharetra lacus. Pellentesque sodales nibh et auctor maximus. Donec sed mauris odio. 
 ```
 
 > Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent elementum egestas pretium. Proin laoreet arcu et scelerisque facilisis. In hac habitasse platea dictumst. Curabitur ut eleifend dui. Morbi eu congue ipsum. Proin fermentum dui hendrerit, mattis ligula id, pharetra lacus. Pellentesque sodales nibh et auctor maximus. Donec sed mauris odio. 

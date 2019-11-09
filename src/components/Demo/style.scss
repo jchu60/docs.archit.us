@@ -12,10 +12,12 @@ $label-offset-bottom: 2rem;
     margin-bottom: 2rem;
 
     &--inner:nth-child(1) {
-        border: 1px solid rgba($-dark, 0.3);
-        border-bottom: none;
+        @extend %code-bg;
+        @include dark-border(transparent);
+        @include light-border(rgba($-dark, 0.3));
+
+        border-bottom: none !important;
         position: relative;
-        background-color: $one-light-bg;
         border-top-right-radius: 0.5rem;
         border-top-left-radius: 0.5rem;
         padding-bottom: $label-offset-top;
@@ -28,8 +30,15 @@ $label-offset-bottom: 2rem;
             position: relative;
             overflow-y: visible !important;
             margin: 0 !important;
+
             pre {
-                @include scrollbar(blend($-dark, $light-400, 0.7), 12px);
+                @include light {
+                    @include scrollbar(blend($light-main-bg, $-dark, 0.3), $scrollbar-width);
+                }
+
+                @include dark {
+                    @include scrollbar(blend($dark-main-bg, $-light, 0.3), $scrollbar-width);
+                }
             }
         }
 
@@ -44,13 +53,23 @@ $label-offset-bottom: 2rem;
             height: $height;
             width: $width;
             content: " ";
-            background-color: $light-500;
-            // box-shadow: $drop-shadow;
-            border: 1px solid rgba($-dark, 0.3);
             border-radius: 8rem;
+
+            @include light {
+                border: 1px solid rgba($-dark, 0.3);
+                background-color: $light-500;
+            }
+
+            @include dark {
+                box-shadow: $drop-shadow;
+                background-color: lighten($dark-500, 10%);
+            }
         }
 
         &:after {
+            @include light-fade-fg;
+            @include dark-fade-fg;
+
             $text-offset-x: 16px;
             $text-offset-y: 0.05rem;
             position: absolute;
@@ -63,26 +82,27 @@ $label-offset-bottom: 2rem;
             font-weight: bold;
             letter-spacing: 1px;
             font-size: 0.9rem;
-            color: rgba($-dark, 0.7);
             text-transform: uppercase;
         }
     }
 
     &--inner:nth-child(2) {
+        @include dark-bg($dark-500);
+        @include light-bg($light-450);
         border: 1px solid rgba($-dark, 0.3);
         border-top: 1px solid rgba($-dark, 0.1);
         padding: $content-padding;
         padding-top: $label-offset-bottom;
         border-bottom-right-radius: 0.5rem;
         border-bottom-left-radius: 0.5rem;
-        background-color: $light-450;
 
         & > * {
             margin-top: 0 !important;
             margin-bottom: 0 !important;
         }
 
-        .gatsby-highlight, p:last-child {
+        .gatsby-highlight,
+        p:last-child {
             margin-bottom: 0 !important;
         }
     }
