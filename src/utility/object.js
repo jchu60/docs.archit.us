@@ -13,3 +13,7 @@ export function isNil(object) {
 export function isDefined(object) {
   return !isNil(object);
 }
+
+export function isIterable(obj) {
+  return isDefined(obj) && typeof obj[Symbol.iterator] === "function";
+}

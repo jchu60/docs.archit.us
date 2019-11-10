@@ -6,7 +6,8 @@ import {
   isDefined,
   addMissingUnit,
   multiplyDimension,
-  isEmptyOrNil
+  isEmptyOrNil,
+  isIterable
 } from "utility";
 import moment from "moment";
 
@@ -250,26 +251,31 @@ function aggregateText(node) {
 
 function findLead(ast) {
   function findText(node, resultWrapper) {
-    for (let child of node.children) {
-      if (isDefined(resultWrapper.current)) break;
-      else if (child.type === "paragraph") {
-        if (isDefined(child.children)) {
-          const content = aggregateText(child);
-          if (content.length >= 20) {
-            resultWrapper.current = content;
-            break;
+    if (isIterable(node.children)) {
+      for (let child of node.children) {
+        if (isDefined(resultWrapper.current)) break;
+        else if (child.type === "paragraph") {
+          if (isDefined(child.children)) {
+            const content = aggregateText(child);
+            if (content.length >= 20) {
+              resultWrapper.current = content;
+              break;
+            }
           }
+        } else {
+          findText(child, resultWrapper);
         }
-      } else {
-        findText(child, resultWrapper);
       }
     }
     return resultWrapper;
   }
-  return findText(ast, { current: null }).current;
+  if (isDefined(ast)) {
+    return findText(ast, { current: null }).current;
+  }
 }
 
 function trimLead(text, length) {
+  if (isEmptyOrNil(text)) return "";
   if (text.length <= length + 3) return text;
   else return text.slice(0, length - 3) + "...";
 }
