@@ -83,7 +83,7 @@ This event potentially requires guild id for context and results in an entire li
   sentFrom="client"
   requiresElevation
   payload={{
-      "pool_type": {type: "string enum"}, description: "one of: ['member', 'channel', 'role', 'user', 'emoji', 'guild', auto-response', 'setting-value']",
+      "pool_type": {type: "string enum", description: "one of: ['member', 'channel', 'role', 'user', 'emoji', 'guild', auto-response', 'setting-value']"},
       "guild_id": {type: "?integer", description: "relevant guild ID if pool type is guild-specific"}
   }}
 />
@@ -96,7 +96,7 @@ This event potentially requires guild id for context and results in an entire li
   sentFrom="server"
   requiresElevation
   payload={{
-      "data": {type: "array<object>"}, description: "array of data entities"
+      "data": {type: "array<object>", description: "array of data entities"}
   }}
 />
 
@@ -110,7 +110,7 @@ This event also potentially requires guild id for context and results in a singl
   sentFrom="client"
   requiresElevation
   payload={{
-      "pool_type": {type: "string enum"}, description: "one of: ['member', 'channel', 'role', 'user', 'emoji', 'guild', auto-response', 'setting-value']",
+      "pool_type": {type: "string enum", description: "one of: ['member', 'channel', 'role', 'user', 'emoji', 'guild', auto-response', 'setting-value']"},
       "guild_id": {type: "?integer", description: "relevant guild ID if pool type is guild-specific"},
       "entity_id": {type: "string", description: "the ID of the entity being requested"}
   }}
@@ -124,7 +124,7 @@ This event also potentially requires guild id for context and results in a singl
   sentFrom="server"
   requiresElevation
   payload={{
-      "data": {type: "object"}, description: "data entitiy response"
+      "data": {type: "object", description: "data entitiy response"}
   }}
 />
 
