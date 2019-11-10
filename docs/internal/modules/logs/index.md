@@ -5,9 +5,9 @@ title: Logs
 Logs are a major feature of Architus that expands on discord's audit log functionality in a variety of ways. In addition to a much longer history, Architus tracks many more actions than the built in log. It also provides the abilty to rollback most actions and an improved viewing interface.
 
 
-### Log Event Object
+### Log Action Object
 
-###### Log Event Structure
+###### Log Action Structure
 | Field               | Type        | Description                                                             |
 | ------------------- | ----------- | ----------------------------------------------------------------------- |
 | id                  | hoar frost  | unique [hoar frost ID](../../api-reference/#hoar-frost) for the event         |
