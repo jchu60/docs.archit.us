@@ -5,6 +5,7 @@ import Demo from "components/Demo";
 import Link from "components/Link";
 import Route from "components/Route";
 import Alert from "components/Alert";
+import Iframe from "components/Iframe";
 import Collapse from "components/Collapse";
 import Overview from "components/Overview"
 import Container from "components/Container";
@@ -17,6 +18,7 @@ const components = {
   Demo,
   Link,
   Alert,
+  Iframe,
   Collapse,
   Overview,
   Container,

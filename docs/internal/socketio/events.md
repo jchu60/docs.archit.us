@@ -49,7 +49,7 @@ On receiving a valid authentication token, the server will create a new "elevate
 ## Mock Bot Event
 
 <GatewayRoute
-    eventName="mock_user_event"
+    eventName="mock_bot_event"
     room="<SID>"
     sentFrom="server"
     payload={{

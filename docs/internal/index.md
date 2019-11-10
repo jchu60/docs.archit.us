@@ -83,13 +83,10 @@ yarn run lint
 
 If you have an issue about the bot, the documentation website, or have any other questions, feel free to [create a new issue](https://github.com/architus/architus/issues/new) or join our discord server:
 
-<iframe
+<Iframe
   src="https://discordapp.com/widget?id=607637793107345431&theme=dark"
-  width="350"
   height="500"
-  allowtransparency="true"
-  frameborder="0"
-></iframe>
+/>
 
 ## 📜 License
 

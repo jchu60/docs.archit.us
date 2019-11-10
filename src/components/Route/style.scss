@@ -107,9 +107,8 @@
         @include dark-bg($dark-400);
         @include light-bg($light-450);
 
-        border: 1px solid rgba($-dark, 0.12);
         border-left: 4px solid $-secondary;
-        border-radius: 8px;
+        border-radius: 4px;
         box-shadow: $drop-shadow;
         position: relative;
     }

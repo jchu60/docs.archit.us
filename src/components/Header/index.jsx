@@ -29,7 +29,7 @@ function Header({ sticky, leftChildren, ...rest }) {
   `).file.childDataYaml;
 
   // Dark/light theme selection
-  const { value, toggle } = useDarkMode(false);
+  const { value, toggle } = useDarkMode(true);
 
   return (
     <Navbar
