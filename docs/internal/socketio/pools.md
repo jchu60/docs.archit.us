@@ -71,10 +71,85 @@ The sub-categories are divided into whether they are guild-specific or guild-agn
 
 ### Request Types
 
+#### Entire pool request
+
+This event potentially requires guild id for context and results in an entire list of data entities returned
+
+##### Request
+
+<GatewayRoute
+  eventName="pool_all_request"
+  room="<SID>_auth"
+  sentFrom="client"
+  requiresElevation
+  payload={{
+      "pool_type": {type: "string enum"}, description: "one of: ['member', 'channel', 'role', 'user', 'emoji', 'guild', auto-response', 'setting-value']",
+      "guild_id": {type: "?integer", description: "relevant guild ID if pool type is guild-specific"}
+  }}
+/>
+
+##### Response
+
+<GatewayRoute
+  eventName="pool_all_response"
+  room="<SID>_auth"
+  sentFrom="server"
+  requiresElevation
+  payload={{
+      "data": {type: "array<object>"}, description: "array of data entities"
+  }}
+/>
+
+#### Single entity request
+
+This event also potentially requires guild id for context and results in a single data entity as a result.
+
+<GatewayRoute
+  eventName="pool_request"
+  room="<SID>_auth"
+  sentFrom="client"
+  requiresElevation
+  payload={{
+      "pool_type": {type: "string enum"}, description: "one of: ['member', 'channel', 'role', 'user', 'emoji', 'guild', auto-response', 'setting-value']",
+      "guild_id": {type: "?integer", description: "relevant guild ID if pool type is guild-specific"},
+      "entity_id": {type: "string", description: "the ID of the entity being requested"}
+  }}
+/>
+
+##### Response
+
+<GatewayRoute
+  eventName="pool_response"
+  room="<SID>_auth"
+  sentFrom="server"
+  requiresElevation
+  payload={{
+      "data": {type: "object"}, description: "data entitiy response"
+  }}
+/>
+
+#### Member search request
+
+This event is a special case for member fuzzy search.
+
+> Consider generalizing to all entities? Are there sufficient use cases?
+
 ### Observing & Spectating
+
+Client receive all updates for entities in the guild they are currently spectating, whether they have seen the entity before or not. Because of this, newly added or edited entities can be added to an otherwise empty pool, and deleted entity updates can be safely dropped.
+
+More information about the spectating protocol can be found on the [socket.io implementation docs](/internal/socketio/#spectating).
 
 ### Update Scenarios
 
+Updating events are server push events and their payloads are incorporated into the local cache when received. With this, there are three possible update types:
+
+1. `add` - New entity added. Payload contains ID and newly created entity. This also cascades to linked entities (see [Foreign Keys](#foreign-keys)).
+2. `update` - Entity information updated. Payload contains ID and newly updated entity. This does not need to cascade, though the entire entity must be included to support the scenario where the client sees the entity for the first time.
+3. `remove` - Entity removed. Payload contains only the ID, though this change needs to cascade to linked entities.
+
 ### Foreign Keys
 
-Many entities reference other data entities, such as guilds containing references to members
+Many entities reference other data entities, such as guilds containing references to members. To prevent data duplication, entity IDs are used to perform this referencing in place of entire entities. This causes a cascading effect to be necessary upon entity updates (see [Update Scenarios](#update-scenarios)).
+
+> Consider using some type of dependency graph to encode this information for frontend/backend processing of dependency cascades
