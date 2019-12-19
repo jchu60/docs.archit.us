@@ -26,13 +26,13 @@ Logs are a major feature of Architus that expands on discord's audit log functio
 | 10 | CHANNEL_CREATE | new channel created |
 | 11 | CHANNEL_UPDATE | channel was updated |
 | 12 | CHANNEL_DELETE | channel was deleted |
-| 13 | CHANNEL_OVERWRITE_CREATE ||
-| 14 | CHANNEL_OVERWRITE_UPDATE ||
-| 15 | CHANNEL_OVERWRITE_DELETE ||
-| 20 | MEMBER_KICK ||
-| 21 | MEMBER_PRUNE ||
-| 22 | MEMBER_BAN_ADD ||
-| 23 | MEMBER_BAN_REMOVE ||
+| 13 | CHANNEL_OVERWRITE_CREATE | new channel overwrite created |
+| 14 | CHANNEL_OVERWRITE_UPDATE | channel overwrite was updated |
+| 15 | CHANNEL_OVERWRITE_DELETE | channel overwrite was deleted |
+| 20 | MEMBER_KICK | member was kicked |
+| 21 | MEMBER_PRUNE | members were pruned |
+| 22 | MEMBER_BAN_ADD | member was banned|
+| 23 | MEMBER_BAN_REMOVE | member was pardoned |
 | 24 | MEMBER_UPDATE ||
 | 25 | MEMBER_ROLE_UPDATE ||
 | 30 | ROLE_CREATE ||
@@ -48,16 +48,15 @@ Logs are a major feature of Architus that expands on discord's audit log functio
 | 61 | EMOJI_UPDATE ||
 | 62 | EMOJI_DELETE ||
 | 72 | MESSAGE_DELETE ||
-| ---- | ----------- | ---------------------- |
-| 3001 | MESSAGE_SEND | |
-| 3002 | MESSAGE_EDIT ||
-| 3003 | MESSAGE_DELETE ||
-| 3100 | REACTION_ADD||
-| 3101 | REACTION_REMOVE||
-| 3200 | AUTO_RESPONSE_ADD   ||
-| 3201 | AUTO_RESPONSE_REMOVE    ||
-| 3202 | AUTO_RESPONSE_EDIT  ||
-| 3203 | AUTO_RESPONSE_TRIGGER   ||
+| 3001 | MESSAGE_SEND | message was sent |
+| 3002 | MESSAGE_EDIT | message was edited|
+| 3003 | MESSAGE_DELETE | message was deleted |
+| 3100 | REACTION_ADD| reaction was added |
+| 3101 | REACTION_REMOVE| reaction was removed |
+| 3200 | AUTO_RESPONSE_ADD   | autoresponse was added|
+| 3201 | AUTO_RESPONSE_REMOVE    | autorespones was removed |
+| 3202 | AUTO_RESPONSE_EDIT  | autoresponse was edited |
+| 3203 | AUTO_RESPONSE_TRIGGER   | autoresponse was triggered |
 | 3300 | LOG_REVERT  ||
 | 3301 | LOG_ROLLBACK    ||
 | 3400 | EMOJI_MANAGER_TRIGGER   ||
