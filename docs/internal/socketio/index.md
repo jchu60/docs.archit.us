@@ -61,7 +61,7 @@ Have MQ filter as many unneeded events out as possible (faster than WS server):
 
 Have websocket servers subscribe to as many topics as they currently need (based on current connections/authenticated rooms and the guilds they need visibility to)
 
-```
+```text
 <guild_id>
 <guild_id>_logs
 ```

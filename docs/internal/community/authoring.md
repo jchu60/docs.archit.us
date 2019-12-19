@@ -33,7 +33,7 @@ Page content can be specified using standard markdown format, with additional [M
 
 Docs pages are generated for each path segment in the entire navigation tree created by all docs `.md` pages. This means that if, for example, there were 2 markdown files in the `/docs` folder:
 
-```
+```text
 /docs/
 ├── pathA/
 │   └── pathB/

@@ -13,11 +13,11 @@ This parser is then run upon auto response creation/updating to develop a syntax
 
 This should be updated to show a graphical tree instead of this garbage
 
-```
+```text
 hello [adj] [this is a list, with nested stuff [owl], [[member], [author]]]
 ```
 
-```
+```text
 (response
   hello
   (respObj [adj])
