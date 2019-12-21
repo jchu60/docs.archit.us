@@ -120,6 +120,7 @@ module.exports = {
     `gatsby-plugin-sass`,
     `gatsby-plugin-catch-links`,
     `gatsby-plugin-react-svg`,
-    `gatsby-plugin-use-dark-mode`
+    `gatsby-plugin-use-dark-mode`,
+    `gatsby-transformer-mdx-introspection`
   ]
 };

@@ -41,8 +41,7 @@ Docs pages are generated for each path segment in the entire navigation tree cre
 └── index.md
 ```
 
-Then, there would be **three generated docs pages**: `/`, `/pathA/`, and `/pathA/pathB/`. In this case, `/pathA/` would be designated as an *orphan page* because it doesn't have a corresponding markdown file for content. In this mode, it will only contain an auto-generated title from the path segment as well as an [In This Section `<Overview>`](#overview) component.
-
+Then, there would be **three generated docs pages**: `/`, `/pathA/`, and `/pathA/pathB/`. In this case, `/pathA/` would be designated as an _orphan page_ because it doesn't have a corresponding markdown file for content. In this mode, it will only contain an auto-generated title from the path segment as well as an [In This Section `<Overview>`](#overview) component.
 
 ## Headings
 
@@ -83,10 +82,10 @@ Then, there would be **three generated docs pages**: `/`, `/pathA/`, and `/pathA
 > Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent elementum egestas pretium.
 > Proin laoreet arcu et scelerisque facilisis. In hac habitasse platea dictumst. Curabitur ut
 > eleifend dui. Morbi eu congue ipsum. Proin fermentum dui hendrerit, mattis ligula id,
-> pharetra lacus. Pellentesque sodales nibh et auctor maximus. Donec sed mauris odio. 
+> pharetra lacus. Pellentesque sodales nibh et auctor maximus. Donec sed mauris odio.
 ```
 
-> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent elementum egestas pretium. Proin laoreet arcu et scelerisque facilisis. In hac habitasse platea dictumst. Curabitur ut eleifend dui. Morbi eu congue ipsum. Proin fermentum dui hendrerit, mattis ligula id, pharetra lacus. Pellentesque sodales nibh et auctor maximus. Donec sed mauris odio. 
+> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent elementum egestas pretium. Proin laoreet arcu et scelerisque facilisis. In hac habitasse platea dictumst. Curabitur ut eleifend dui. Morbi eu congue ipsum. Proin fermentum dui hendrerit, mattis ligula id, pharetra lacus. Pellentesque sodales nibh et auctor maximus. Donec sed mauris odio.
 
 </Demo>
 
@@ -119,7 +118,7 @@ Then, there would be **three generated docs pages**: `/`, `/pathA/`, and `/pathA
 
 <Demo>
 
-~~~md
+````md
 ```py
 async def all_guilds(self):
     """Return information about all guilds that the bot is in, including their admins"""
@@ -128,7 +127,7 @@ async def all_guilds(self):
         guilds += shard_store.get('guilds', ())
     return guilds
 ```
-~~~
+````
 
 ```py
 async def all_guilds(self):
@@ -169,7 +168,51 @@ To add new ones, a component can be authored and then included in the [MDX scope
 <Route method="METHOD" path="/route/{parameter}/segment" auth />
 ```
 
-<Route method="METHOD" path="/route/{parameter}/segment" auth />
+<Route
+  method="METHOD"
+  path="/route/{parameter}/segment"
+  auth
+  {...{
+    ["auth"]: false,
+    hi: true,
+    hello: false,
+    method() {},
+    method2(name) {
+      return name.toString();
+    },
+    method3: function(name) {
+      return name.toString() + "2";
+    },
+    method4: name => {
+      return name.toString() + "7";
+    },
+    method5: name => {
+      return (<span>i'm embedded :)</span>);
+    },
+    method6: name => {
+      return (<><div>This is so fancy</div><div>hi</div></>)
+    }
+  }}
+/>
+<div>
+  text content :)
+
+## **markdown** content `inside` :)
+
+  <span>
+    {[1,2,3].map(i => (<span>i.toString()</span>))}
+    {(() => {return <><div>iefe fragment woow</div><div>hi chat :)</div></>})()}
+    {"string"}
+    {' string 2 '}
+    {` string 3`}
+    {42}
+    {<span>It would be nice if this worked</span>}
+    <>Oh what about fragments</>
+    {}
+    {"     "}
+    <span>blank space</span>
+  </span>
+</div>
 </Demo>
 
 #### Gateway API Routes
@@ -192,11 +235,11 @@ To add new ones, a component can be authored and then included in the [MDX scope
 ```
 
 <GatewayRoute
-  eventName="request_elevation"
-  room="<SID>"
-  sentFrom="client"
-  requiresElevation
-  payload={{
+eventName="request_elevation"
+room="<SID>"
+sentFrom="client"
+requiresElevation
+payload={{
     token: {
       type: "string",
       description: "Authentication Token"
@@ -234,39 +277,31 @@ The Demo component can be used to show a source/result relationship, which is pr
 
 ```jsx
 <Demo>
-
-~~~md
-## Lorem ipsum
-
-Etiam blandit diam sit amet pharetra pellentesque. Integer auctor nisl et sodales
-imperdiet. Integer vitae tincidunt augue. Duis condimentum lectus at tincidunt
-vehicula. Maecenas ultricies erat id nunc tempus, malesuada accumsan justo
-dignissim. Nam interdum vitae arcu et pharetra. Integer eget faucibus arcu.
-~~~
-
-<div>
-
-## Lorem ipsum
-
-Etiam blandit diam sit amet pharetra pellentesque. Integer auctor nisl et sodales
-imperdiet. Integer vitae tincidunt augue. Duis condimentum lectus at tincidunt
-vehicula. Maecenas ultricies erat id nunc tempus, malesuada accumsan justo
-dignissim. Nam interdum vitae arcu et pharetra. Integer eget faucibus arcu.
-
-</div>
+  ~~~md ## Lorem ipsum Etiam blandit diam sit amet pharetra pellentesque.
+  Integer auctor nisl et sodales imperdiet. Integer vitae tincidunt augue. Duis
+  condimentum lectus at tincidunt vehicula. Maecenas ultricies erat id nunc
+  tempus, malesuada accumsan justo dignissim. Nam interdum vitae arcu et
+  pharetra. Integer eget faucibus arcu. ~~~
+  <div>
+    ## Lorem ipsum Etiam blandit diam sit amet pharetra pellentesque. Integer
+    auctor nisl et sodales imperdiet. Integer vitae tincidunt augue. Duis
+    condimentum lectus at tincidunt vehicula. Maecenas ultricies erat id nunc
+    tempus, malesuada accumsan justo dignissim. Nam interdum vitae arcu et
+    pharetra. Integer eget faucibus arcu.
+  </div>
 </Demo>
 ```
 
 <Demo>
 
-~~~md
+```md
 ## Lorem ipsum
 
 Etiam blandit diam sit amet pharetra pellentesque. Integer auctor nisl et sodales
 imperdiet. Integer vitae tincidunt augue. Duis condimentum lectus at tincidunt
 vehicula. Maecenas ultricies erat id nunc tempus, malesuada accumsan justo
 dignissim. Nam interdum vitae arcu et pharetra. Integer eget faucibus arcu.
-~~~
+```
 
 <div>
 <h2 style={{marginTop: 0}}>Lorem ipsum</h2>
@@ -282,15 +317,13 @@ dignissim. Nam interdum vitae arcu et pharetra. Integer eget faucibus arcu.
 
 ### Alerts
 
-Alerts are a block-level wrapper element that can be used to give emphasis or semantic information to a block of content depending on the *type* of alert used.
+Alerts are a block-level wrapper element that can be used to give emphasis or semantic information to a block of content depending on the _type_ of alert used.
 
 <Demo>
 
 ```jsx
 <Alert type="info">
-
-**Informative** content here, such as general tips or bits of info
-
+  **Informative** content here, such as general tips or bits of info
 </Alert>
 ```
 
@@ -305,9 +338,8 @@ Alerts are a block-level wrapper element that can be used to give emphasis or se
 
 ```jsx
 <Alert type="warning">
-
-**Cautious** content here, such as general warnings against bad practices or incorrect usage
-
+  **Cautious** content here, such as general warnings against bad practices or
+  incorrect usage
 </Alert>
 ```
 
@@ -322,10 +354,8 @@ Alerts are a block-level wrapper element that can be used to give emphasis or se
 
 ```jsx
 <Alert type="error">
-
-**Error** content here, such as important scenarios to avoid or errors that might occur in the
-process
-
+  **Error** content here, such as important scenarios to avoid or errors that
+  might occur in the process
 </Alert>
 ```
 
@@ -340,10 +370,8 @@ process
 
 ```jsx
 <Alert type="success">
-
-**Success** content here, such as success scenarios or ways to tell if an action was
-successful
-
+  **Success** content here, such as success scenarios or ways to tell if an
+  action was successful
 </Alert>
 ```
 
@@ -359,18 +387,16 @@ successful
 
 <Demo>
 
-~~~jsx
+```jsx
 <Collapse>
-
-# Lorem ipsum
-
-Etiam blandit diam sit amet pharetra pellentesque. Integer auctor nisl et sodales
-imperdiet. Integer vitae tincidunt augue. Duis condimentum lectus at tincidunt
-vehicula. Maecenas ultricies erat id nunc tempus, malesuada accumsan justo dignissim.
-Nam interdum vitae arcu et pharetra. Integer eget faucibus arcu.
-
+  # Lorem ipsum Etiam blandit diam sit amet pharetra pellentesque. Integer
+  auctor nisl et sodales imperdiet. Integer vitae tincidunt augue. Duis
+  condimentum lectus at tincidunt vehicula. Maecenas ultricies erat id nunc
+  tempus, malesuada accumsan justo dignissim. Nam interdum vitae arcu et
+  pharetra. Integer eget faucibus arcu.
 </Collapse>
-~~~
+```
+
 <Collapse>
 
 <h1>Lorem ipsum</h1>
@@ -390,13 +416,13 @@ Snippets from the local repository can be embedded on the site (either inside a 
 
 <Demo>
 
-~~~md
+```md
 <Collapse>
 
 `embed:internal/community/example-include.py`
 
 </Collapse>
-~~~
+```
 
 <Collapse>
 
@@ -419,7 +445,7 @@ Snippets from the local repository can be embedded on the site (either inside a 
 
 #### External Snippet
 
-Snippets from online sources can be asynchronously loaded onto the page upon render. This means that they can be updated independently of the module build. 
+Snippets from online sources can be asynchronously loaded onto the page upon render. This means that they can be updated independently of the module build.
 
 <Alert type="warning">
 
@@ -438,8 +464,10 @@ import "prismjs/components/prism-python.js";
 ```jsx
 <Collapse>
   <ExternalSnippet
-    src={"https://gist.githubusercontent.com/jazevedo620/a28cdc92a624c290ccf91541b418bdae/"
-       + "raw/1bfef7f4fb49df08d3685611354b71bd9424d4a6/app.py"}
+    src={
+      "https://gist.githubusercontent.com/jazevedo620/a28cdc92a624c290ccf91541b418bdae/" +
+      "raw/1bfef7f4fb49df08d3685611354b71bd9424d4a6/app.py"
+    }
     language="python"
   />
 </Collapse>
@@ -457,8 +485,10 @@ import "prismjs/components/prism-python.js";
 
 ```jsx
 <ExternalSnippet
-  src={"https://gist.githubusercontent.com/jazevedo620/a28cdc92a624c290ccf91541b418bdae/"
-     + "raw/1bfef7f4fb49df08d3685611354b71bd9424d4a6/app.py"}
+  src={
+    "https://gist.githubusercontent.com/jazevedo620/a28cdc92a624c290ccf91541b418bdae/" +
+    "raw/1bfef7f4fb49df08d3685611354b71bd9424d4a6/app.py"
+  }
   language="python"
 />
 ```
