@@ -62,14 +62,14 @@ Then, there would be **three generated docs pages**: `/`, `/pathA/`, and `/pathA
 ```
 
 <div>
-{/* These are html elements to prevent them from being added to ToC */}
-<h1 style={{marginTop: 0}}>h1 - Lorem ipsum</h1>
-<h2>h2 - Lorem ipsum</h2>
-<h3>h3 - Lorem ipsum</h3>
-<h4>h4 - Lorem ipsum</h4>
-<h5>h5 - Lorem ipsum</h5>
-<h6>h6 - Lorem ipsum</h6>
-</div>
+  {/* These are html elements to prevent them from being added to ToC */}
+  <h1 style={{marginTop: 0}}>h1 - Lorem ipsum</h1>
+  <h2>h2 - Lorem ipsum</h2>
+  <h3>h3 - Lorem ipsum</h3>
+  <h4>h4 - Lorem ipsum</h4>
+  <h5>h5 - Lorem ipsum</h5>
+  <h6>h6 - Lorem ipsum</h6>
+  </div>
 </Demo>
 
 ## Elements
@@ -118,7 +118,7 @@ Then, there would be **three generated docs pages**: `/`, `/pathA/`, and `/pathA
 
 <Demo>
 
-````md
+~~~md
 ```py
 async def all_guilds(self):
     """Return information about all guilds that the bot is in, including their admins"""
@@ -127,7 +127,7 @@ async def all_guilds(self):
         guilds += shard_store.get('guilds', ())
     return guilds
 ```
-````
+~~~
 
 ```py
 async def all_guilds(self):
@@ -191,11 +191,11 @@ To add new ones, a component can be authored and then included in the [MDX scope
 ```
 
 <GatewayRoute
-eventName="request_elevation"
-room="<SID>"
-sentFrom="client"
-requiresElevation
-payload={{
+  eventName="request_elevation"
+  room="<SID>"
+  sentFrom="client"
+  requiresElevation
+  payload={{
     token: {
       type: "string",
       description: "Authentication Token"
@@ -233,11 +233,15 @@ The Demo component can be used to show a source/result relationship, which is pr
 
 ```jsx
 <Demo>
-  ~~~md ## Lorem ipsum Etiam blandit diam sit amet pharetra pellentesque.
+  ~~~md
+  ## Lorem ipsum
+  
+  Etiam blandit diam sit amet pharetra pellentesque.
   Integer auctor nisl et sodales imperdiet. Integer vitae tincidunt augue. Duis
   condimentum lectus at tincidunt vehicula. Maecenas ultricies erat id nunc
   tempus, malesuada accumsan justo dignissim. Nam interdum vitae arcu et
-  pharetra. Integer eget faucibus arcu. ~~~
+  pharetra. Integer eget faucibus arcu.
+  ~~~
   <div>
     ## Lorem ipsum Etiam blandit diam sit amet pharetra pellentesque. Integer
     auctor nisl et sodales imperdiet. Integer vitae tincidunt augue. Duis
@@ -430,7 +434,7 @@ import "prismjs/components/prism-python.js";
 ```
 
 <Collapse>
-<ExternalSnippet src="https://gist.githubusercontent.com/jazevedo620/a28cdc92a624c290ccf91541b418bdae/raw/1bfef7f4fb49df08d3685611354b71bd9424d4a6/app.py" language="python" />
+  <ExternalSnippet src="https://gist.githubusercontent.com/jazevedo620/a28cdc92a624c290ccf91541b418bdae/raw/1bfef7f4fb49df08d3685611354b71bd9424d4a6/app.py" language="python" />
 </Collapse>
 
 </Demo>
