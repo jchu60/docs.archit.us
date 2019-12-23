@@ -243,7 +243,9 @@ The Demo component can be used to show a source/result relationship, which is pr
   pharetra. Integer eget faucibus arcu.
   ~~~
   <div>
-    ## Lorem ipsum Etiam blandit diam sit amet pharetra pellentesque. Integer
+    ## Lorem ipsum
+    
+    Etiam blandit diam sit amet pharetra pellentesque. Integer
     auctor nisl et sodales imperdiet. Integer vitae tincidunt augue. Duis
     condimentum lectus at tincidunt vehicula. Maecenas ultricies erat id nunc
     tempus, malesuada accumsan justo dignissim. Nam interdum vitae arcu et
