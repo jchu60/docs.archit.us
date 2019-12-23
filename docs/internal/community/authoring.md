@@ -351,7 +351,9 @@ Alerts are a block-level wrapper element that can be used to give emphasis or se
 
 ```jsx
 <Collapse>
-  # Lorem ipsum Etiam blandit diam sit amet pharetra pellentesque. Integer
+  # Lorem ipsum
+  
+  Etiam blandit diam sit amet pharetra pellentesque. Integer
   auctor nisl et sodales imperdiet. Integer vitae tincidunt augue. Duis
   condimentum lectus at tincidunt vehicula. Maecenas ultricies erat id nunc
   tempus, malesuada accumsan justo dignissim. Nam interdum vitae arcu et
