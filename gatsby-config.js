@@ -121,6 +121,11 @@ module.exports = {
     `gatsby-plugin-catch-links`,
     `gatsby-plugin-react-svg`,
     `gatsby-plugin-use-dark-mode`,
-    `gatsby-transformer-mdx-introspection`
+    {
+      resolve: "gatsby-transformer-mdx-introspection",
+      options: {
+        attachAST: true
+      }
+    }
   ]
 };

@@ -20,18 +20,11 @@ const debug = (reporter, text, mode = "info") =>
   );
 
 // Define custom graphql schema to enforce rigid type structures
-exports.sourceNodes = ({
-  actions,
-  reporter,
-  getNodesByType,
-  loadNodeContent,
-  createNodeId,
-  createContentDigest
-}) => {
+exports.createSchemaCustomization = ({ actions, reporter }) => {
   activity = reporter.activityTimer("implementing custom graphql schema");
   activity.start();
 
-  const { createTypes, createNode } = actions;
+  const { createTypes } = actions;
   const typeDefs = `
     type Frontmatter {
       title: String!
@@ -46,11 +39,6 @@ exports.sourceNodes = ({
     type Mdx implements Node {
       frontmatter: Frontmatter!
     }
-    type ApiRoute implements Node {
-      link: String!
-      index: Int!
-      type: String!
-    }
     type File implements Node {
       childMdx: Mdx
     }
@@ -63,77 +51,6 @@ exports.sourceNodes = ({
   createTypes(typeDefs);
 
   activity.end();
-  // activity = reporter.activityTimer(`parsing docs pages for API routes`);
-  // activity.start();
-
-  // const fileNodes = getNodesByType(`File`);
-  // const docNodes = fileNodes.filter(
-  //   ({ sourceInstanceName, extension }) =>
-  //     sourceInstanceName === "docs" && extension === "md"
-  // );
-  // return Promise.all(docNodes.map(node => loadNodeContent(node))).then(
-  //   nodeContent => {
-  //     function getTags(contents, tag, map) {
-  //       const regex = `(?:<${tag}>[\\s\\S]*?<\\/${tag}>)|(?:<${tag}[\\s\\S]*?\\/>)`;
-  //       const pattern = RegExp(regex, "g");
-  //       return contents
-  //         .map((content, i) => map(content.match(pattern), i))
-  //         .reduce((accum, i) => [...accum, ...i], []);
-  //     }
-
-  //     const tagNodeMatch = (matches, i) =>
-  //       matches == null
-  //         ? []
-  //         : matches.map((content, index) => ({
-  //             source: docNodes[i],
-  //             content,
-  //             index
-  //           }));
-  //     const gatewayRoutes = getTags(nodeContent, "GatewayRoute", tagNodeMatch);
-  //     const restRoutes = getTags(nodeContent, "Route", tagNodeMatch);
-
-  //     function createRouteNodes(routes, type) {
-  //       routes.forEach(({ source, content, index }) => {
-  //         const { relativePath } = source;
-  //         const link = addTrailingSlash(trimMarkdownPath(relativePath));
-  //         const nodeMeta = {
-  //           id: createNodeId(`api-route-${link}--${index}`),
-  //           parent: null,
-  //           children: [],
-  //           internal: {
-  //             type: `ApiRoute`,
-  //             mediaType: `text/x-markdown`,
-  //             content: content,
-  //             contentDigest: createContentDigest(content)
-  //           }
-  //         };
-  //         const nodeData = {
-  //           link,
-  //           index,
-  //           type
-  //         };
-  //         const node = Object.assign({}, nodeMeta, nodeData);
-  //         // createNode(node);
-  //       });
-  //     }
-
-  //     activity.end();
-  //     activity = reporter.activityTimer(
-  //       `creating API gateway route shadow mdx nodes`
-  //     );
-  //     activity.start();
-  //     createRouteNodes(gatewayRoutes, "gateway");
-
-  //     activity.end();
-  //     activity = reporter.activityTimer(
-  //       `creating API rest route shadow mdx nodes`
-  //     );
-  //     activity.start();
-  //     createRouteNodes(restRoutes, "rest");
-
-  //     activity.end();
-  //   }
-  // );
 };
 
 // Dynamically create documentation pages

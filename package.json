@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "author": "architus",
   "dependencies": {
+    "@babel/parser": "^7.7.7",
     "@fortawesome/fontawesome-svg-core": "^1.2.19",
     "@fortawesome/free-brands-svg-icons": "^5.9.0",
     "@fortawesome/free-solid-svg-icons": "^5.9.0",
@@ -36,6 +37,7 @@
     "gatsby-source-graphql": "^2.1.21",
     "gatsby-transformer-sharp": "^2.2.1",
     "gatsby-transformer-yaml": "^2.2.4",
+    "gray-matter": "^4.0.2",
     "lodash": "^4.17.15",
     "mdx": "^0.3.1",
     "moment": "^2.24.0",

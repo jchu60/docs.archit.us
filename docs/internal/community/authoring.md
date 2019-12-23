@@ -168,51 +168,7 @@ To add new ones, a component can be authored and then included in the [MDX scope
 <Route method="METHOD" path="/route/{parameter}/segment" auth />
 ```
 
-<Route
-  method="METHOD"
-  path="/route/{parameter}/segment"
-  auth
-  {...{
-    ["auth"]: false,
-    hi: true,
-    hello: false,
-    method() {},
-    method2(name) {
-      return name.toString();
-    },
-    method3: function(name) {
-      return name.toString() + "2";
-    },
-    method4: name => {
-      return name.toString() + "7";
-    },
-    method5: name => {
-      return (<span>i'm embedded :)</span>);
-    },
-    method6: name => {
-      return (<><div>This is so fancy</div><div>hi</div></>)
-    }
-  }}
-/>
-<div>
-  text content :)
-
-## **markdown** content `inside` :)
-
-  <span>
-    {[1,2,3].map(i => (<span>i.toString()</span>))}
-    {(() => {return <><div>iefe fragment woow</div><div>hi chat :)</div></>})()}
-    {"string"}
-    {' string 2 '}
-    {` string 3`}
-    {42}
-    {<span>It would be nice if this worked</span>}
-    <>Oh what about fragments</>
-    {}
-    {"     "}
-    <span>blank space</span>
-  </span>
-</div>
+<Route method="METHOD" path="/route/{parameter}/segment" auth />
 </Demo>
 
 #### Gateway API Routes
