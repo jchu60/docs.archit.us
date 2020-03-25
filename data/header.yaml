@@ -1,6 +1,8 @@
 links:
   - href: "/"
     text: Docs
+  - href: "/changelog/"
+    text: Changelog
   - href: "/internal/"
     text: Implementation Docs
   - href: "https://archit.us/"
